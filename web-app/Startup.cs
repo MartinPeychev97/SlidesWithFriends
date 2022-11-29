@@ -1,3 +1,4 @@
+using DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -37,6 +38,13 @@ namespace web_app
             });
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+            string connectionString = this.Configuration.GetConnectionString("DefaultConnection");
+            var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
+
+            services.AddDbContext<SlidesDbContext>(options =>
+                options.UseMySql(connectionString, serverVersion)
+                       .EnableDetailedErrors());
 
             services.AddMvc()
                     .AddViewLocalization(
