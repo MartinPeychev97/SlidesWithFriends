@@ -1,0 +1,25 @@
+﻿@using DAL.EntityModels.User
+@inject SignInManager<SlidesUser> SignInManager
+
+<ul>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li>
+            <a>Hello @User.Identity?.Name!</a>
+        </li>
+        <li>
+            <form asp-controller="User" asp-action="Logout">
+                <button type="submit">Logout</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li>
+            <a asp-controller="User" asp-action="Register">Register</a>
+        </li>
+        <li>
+            <a asp-controller="User" asp-action="Login">Login</a>
+        </li>
+    }
+</ul>

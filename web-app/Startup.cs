@@ -1,4 +1,5 @@
 using DAL;
+using DAL.EntityModels.User;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -45,6 +46,18 @@ namespace web_app
             services.AddDbContext<SlidesDbContext>(options =>
                 options.UseMySql(connectionString, serverVersion)
                        .EnableDetailedErrors());
+
+            services.AddDefaultIdentity<SlidesUser>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+                options.SignIn.RequireConfirmedEmail = false;
+            })
+                .AddEntityFrameworkStores<SlidesDbContext>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/User/Login";
+            });
 
             services.AddMvc()
                     .AddViewLocalization(
