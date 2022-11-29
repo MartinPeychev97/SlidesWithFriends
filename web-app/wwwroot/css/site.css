@@ -1,0 +1,44 @@
+﻿html, * {
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    width: 100%;
+    margin: 0 auto;
+}
+
+header {
+    height: 83px;
+    border-bottom: 1px solid #EDEDED;
+}
+
+h1 {
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+h2 {
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 28px;
+}
+
+h3 {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    text-transform: uppercase;
+}
+
+label, .search-text {
+    font-family: 'Roboto', sans-serif;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
