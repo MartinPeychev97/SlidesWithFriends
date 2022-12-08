@@ -28,6 +28,9 @@ namespace DAL.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("varchar(40)");
 
+                    b.Property<int>("Subscription")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("TestEntities");
@@ -36,12 +39,14 @@ namespace DAL.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "firstTestEntity"
+                            Name = "firstTestEntity",
+                            Subscription = 0
                         },
                         new
                         {
                             Id = 2,
-                            Name = "secondTestEntity"
+                            Name = "secondTestEntity",
+                            Subscription = 0
                         });
                 });
 
@@ -89,6 +94,9 @@ namespace DAL.Migrations
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");
+
+                    b.Property<int>("Subscription")
+                        .HasColumnType("int");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("tinyint(1)");
@@ -184,10 +192,12 @@ namespace DAL.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("varchar(255)");
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("varchar(255)");
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("longtext");
@@ -224,10 +234,12 @@ namespace DAL.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("varchar(255)");
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("varchar(255)");
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("longtext");
