@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BAL", "BAL\BAL.csproj", "{4
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{2542DB55-7698-43D4-8189-357258964E75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{3AFEFD05-EDDE-4A27-BD1B-5C232A2BAC24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{3AFEFD05-EDDE-4A27-BD1B-5C232A2BAC24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

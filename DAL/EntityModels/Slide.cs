@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DAL.EntityModels
+﻿namespace DAL.EntityModels
 {
     public class Slide
     {

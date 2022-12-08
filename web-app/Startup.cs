@@ -1,3 +1,4 @@
+using BAL.Services;
 using DAL;
 using DAL.EntityModels.User;
 using Microsoft.AspNetCore.Builder;
@@ -68,7 +69,10 @@ namespace web_app
             
             services.AddRazorPages();
 
-		}
+            services.AddTransient<ISlideService, SlideService>();
+            services.AddTransient<IPresentationService, PresentationService>();
+
+        }
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
