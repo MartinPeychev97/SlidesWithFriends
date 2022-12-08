@@ -3,9 +3,6 @@ using DAL.EntityModels.TestEntity;
 using DAL.EntityModels.User;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DAL
 {

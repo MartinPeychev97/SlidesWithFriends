@@ -17,14 +17,13 @@
             @foreach (var slide in Model.Slides)
             {
                 <div class="slide-preview">
-                    <p class="slide-number">@slide.Id</p>
+                    <p class="slide-number">@i</p>
                     <div class="slide-frame" onclick="showSlide(@slide.Id)">
                         <img class="slide-background"
                          src="https://slideswith.com/cdn-cgi/image/w=1900,h=1400,fit=scale-down,metadata=none,onerror=false/https://slideswith.com//backgrounds/background-20.jpg"
                          alt="" />
                         <div class="content">
-                            <p>@slide.Title</p>
-                            <p>@slide.Text</p>
+                            <h6>@slide.Title</h6>
                         </div>
                     </div>
                 </div>

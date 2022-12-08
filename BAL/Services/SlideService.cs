@@ -1,6 +1,5 @@
 ﻿using DAL;
 using DAL.EntityModels;
-using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace BAL.Services
@@ -29,10 +28,9 @@ namespace BAL.Services
             return slide.Id;
         }
 
-        public async Task<Slide> GetById(int id)
-        {
-            return await this.db.Slides.FindAsync(id);
-        }
+        public async Task<Slide> GetById(int id) =>
+            await this.db.Slides.FindAsync(id);
+        
 
         public async Task<bool> Remove(int id)
         {

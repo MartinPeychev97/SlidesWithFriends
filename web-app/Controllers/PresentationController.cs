@@ -13,6 +13,7 @@ namespace web_app.Controllers
             this.presentationService = presentationService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var presentation = await this.presentationService.GetById(id);

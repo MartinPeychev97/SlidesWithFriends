@@ -56,8 +56,13 @@
                 url: "@Url.Action("Remove", "Slide")",
                 dataType: "json",
                 data: {
-                    slideId: @Model.Id,
-                    presentationId: @Model.PresentationId
+                    id: @Model.Id,
+                },
+                success: function (result) {
+                    location.reload();
+                },
+                error: function(req, status, error){
+                    console.log(error, status, req)
                 }
             })
         })
@@ -71,6 +76,12 @@
                     title: $(".title").text(),
                     text: $(".text").text(),
                     presentationId: @Model.PresentationId
+                },
+                success: function (result) {
+                    location.reload();
+                },
+                error: function(req, status, error){
+                    console.log(error, status, req)
                 }
             })
         })
