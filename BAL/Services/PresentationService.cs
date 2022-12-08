@@ -1,5 +1,6 @@
 ﻿using DAL;
 using DAL.EntityModels;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,14 +15,9 @@ namespace BAL.Services
             this.db = db;
         }
 
-        public async Task<Presentation> GetById(int id)
-        {
-            var presentation = await this.db.Presentations.FindAsync(id);
-            var slides = this.db.Slides.Where(s => s.PresentationId == presentation.Id).ToList();
-
-            presentation.Slides = slides;
-
-            return presentation;
-        }
+        public async Task<Presentation> GetById(int id) =>
+            await this.db.Presentations
+                .Include(p => p.Slides)
+                .FirstOrDefaultAsync(p => p.Id == id);
     }
 }
