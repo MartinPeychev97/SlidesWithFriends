@@ -6,7 +6,7 @@
             <input type="text" value="@Model.Name" />
         </div>
 
-       
+
     </header>
 
     <div class="slides-container">
@@ -18,7 +18,7 @@
             {
                 <div class="slide-preview">
                     <p class="slide-number">@i</p>
-                    <div class="slide-frame" onclick="showSlide(@slide.Id)">
+                    <div id="slide-frame" class="slide-frame" slide-id="@slide.Id">
                         <img class="slide-background"
                          src="https://slideswith.com/cdn-cgi/image/w=1900,h=1400,fit=scale-down,metadata=none,onerror=false/https://slideswith.com//backgrounds/background-20.jpg"
                          alt="" />
@@ -30,7 +30,7 @@
                 i++;
             }
 
-            <div onclick="showSlide(0)" class="add-slide">
+            <div id="add-slide" class="add-slide" slide-id="0">
                 <div>
                     <svg xmlns="http://www.w3.org/2000/svg"
                          width="24"
@@ -54,25 +54,30 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            $(".slide-preview").click(function () {
+            $(document).on("click", ".slide-preview", function () {
                 $(".slide-preview").removeClass("active");
                 $(this).addClass("active");
             });
-        });
 
-        function showSlide(id) {
-            $.ajax({
-                type: 'GET',
-                url: '@Url.Action("SlideEditPartial", "Slide")',
-                contentType: 'application/html; charset=utf-8',
-                dataType: 'html',
-                data: { 
-                    slideId: id,
-                    presentationId: @Model.Id,
-                },
-            }).done(function (result) {
-                $('.slide-edit').html(result);
-            });
-        }
+            $(document).on("click", ".add-slide", function () {
+                $(".slide-preview").removeClass("active");
+            })
+
+            $(document).on("click", "#slide-frame, #add-slide", function () {
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("SlideEditPartial", "Slide")',
+                    contentType: 'application/html; charset=utf-8',
+                    dataType: 'html',
+                    data: {
+                        slideId: $(this).attr('slide-id'),
+                        presentationId: @Model.Id,
+                    },
+                }).done(function (result) {
+                    console.log(result)
+                    $('.slide-edit').html(result);
+                });
+            })
+        });
     </script>
 }

@@ -14,14 +14,6 @@ namespace web_app.Controllers
             this.slideService = slideService;
         }
 
-        [HttpPost]
-        public async Task<JsonResult> Add(string title, string text, int presentationId)
-        {
-            await this.slideService.Add(title, text, presentationId);
-
-            return new JsonResult(Ok());
-        }
-
         [HttpGet]
         public async Task<IActionResult> SlideEditPartial(int slideId, int presentationId)
         {
@@ -38,6 +30,14 @@ namespace web_app.Controllers
             }
 
             return PartialView("_SlideEdit", slide);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> Add(string title, string text, int presentationId)
+        {
+            await this.slideService.Add(title, text, presentationId);
+
+            return new JsonResult(Ok());
         }
 
         [HttpPost]
