@@ -42,42 +42,8 @@
 
 
 <script>
-    $(document).ready(function () {
-
-        $("#remove").click(function () {
-            $.ajax({
-                type: "POST",
-                url: "@Url.Action("Remove", "Slide")",
-                dataType: "json",
-                data: {
-                    id: @Model.Id,
-                },
-                success: function (data) {
-                    $(".slides-pane").load(" .slides-pane", function () {
-                        $(this).children().unwrap();
-                    });
-                    $('.slide-actions, .slide-frame').remove();
-                },
-            })
-        })
-
-        $("#add").click(function () {
-            $.ajax({
-                type: "POST",
-                url: "@Url.Action("Add", "Slide")",
-                dataType: "json",
-                data: {
-                    title: $(".title").text(),
-                    text: $(".text").text(),
-                    presentationId: @Model.PresentationId,
-                },
-                success: function (data) {
-                    $(".slides-pane").load(" .slides-pane", function () {
-                        $(this).children().unwrap();
-                    });
-                    $('.slide-actions, .slide-frame').remove();
-                },
-            })
-        })
-    })
+    var removeUrl = "@Url.Action("Remove", "Slide")";
+    var addUrl = "@Url.Action("Add", "Slide")";
+    var slideId = @Html.Raw(Json.Serialize(Model.Id));
 </script>
+<script src="~/js/slide/add-remove-slide.js"></script>

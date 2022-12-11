@@ -1,7 +1,7 @@
 ﻿using DAL.EntityModels;
 using System.Threading.Tasks;
 
-namespace BAL.Services
+namespace BAL.Interfaces
 {
     public interface ISlideService
     {

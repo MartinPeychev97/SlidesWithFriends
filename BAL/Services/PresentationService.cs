@@ -1,7 +1,7 @@
-﻿using DAL;
+﻿using BAL.Interfaces;
+using DAL;
 using DAL.EntityModels;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BAL.Services

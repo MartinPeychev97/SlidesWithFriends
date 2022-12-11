@@ -53,31 +53,9 @@
 
 @section Scripts {
     <script>
-        $(document).ready(function () {
-            $(document).on("click", ".slide-preview", function () {
-                $(".slide-preview").removeClass("active");
-                $(this).addClass("active");
-            });
-
-            $(document).on("click", ".add-slide", function () {
-                $(".slide-preview").removeClass("active");
-            })
-
-            $(document).on("click", "#slide-frame, #add-slide", function () {
-                $.ajax({
-                    type: 'GET',
-                    url: '@Url.Action("SlideEditPartial", "Slide")',
-                    contentType: 'application/html; charset=utf-8',
-                    dataType: 'html',
-                    data: {
-                        slideId: $(this).attr('slide-id'),
-                        presentationId: @Model.Id,
-                    },
-                }).done(function (result) {
-                    console.log(result)
-                    $('.slide-edit').html(result);
-                });
-            })
-        });
+        var slidePartialUrl = "@Url.Action("SlideEditPartial", "Slide")";
+        var presentationId = @Html.Raw(Json.Serialize(Model.Id));
     </script>
+    <script src="~/js/slide/slide.js"></script>
+    <script src="~/js/slide/get-slide-partial.js"></script>
 }

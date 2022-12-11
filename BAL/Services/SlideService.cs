@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using BAL.Interfaces;
+using DAL;
 using DAL.EntityModels;
 using System.Threading.Tasks;
 
