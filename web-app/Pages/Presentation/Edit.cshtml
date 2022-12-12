@@ -1,4 +1,4 @@
-﻿@model Presentation
+﻿@model PresentationEditViewModel
 
 <main class="editor">
     <header class="slide-header">
@@ -54,7 +54,7 @@
 @section Scripts {
     <script>
         var slidePartialUrl = "@Url.Action("SlideEditPartial", "Slide")";
-        var presentationId = @Html.Raw(Json.Serialize(Model.Id));
+        var presentationId = @ViewContext.RouteData.Values["id"];
     </script>
     <script src="~/js/slide/slide.js"></script>
     <script src="~/js/slide/get-slide-partial.js"></script>

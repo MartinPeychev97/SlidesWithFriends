@@ -2,6 +2,7 @@
 using DAL.EntityModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using web_app.ViewModels.Slide;
 
 namespace web_app.Controllers
 {
@@ -15,21 +16,27 @@ namespace web_app.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> SlideEditPartial(int slideId, int presentationId)
+        public async Task<IActionResult> SlideEditPartial(int slideId)
         {
-            var slide = await this.slideService.GetById(slideId);
-
             if (slideId == 0)
             {
-                return PartialView("_SlideEdit", new Slide
+                return PartialView("_SlideEdit", new SlideViewModel
                 {
                     Title = "Title",
                     Text = "Text",
-                    PresentationId = presentationId
                 });
             }
 
-            return PartialView("_SlideEdit", slide);
+            var slide = await this.slideService.GetById(slideId);
+            var slideViewModel = new SlideViewModel 
+            {
+                Id= slideId,
+                Title = slide.Title,
+                Text= slide.Text,
+            };
+
+           
+            return PartialView("_SlideEdit", slideViewModel);
         }
 
         [HttpPost]

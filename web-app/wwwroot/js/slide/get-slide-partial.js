@@ -7,7 +7,6 @@
             dataType: 'html',
             data: {
                 slideId: $(this).attr('slide-id'),
-                presentationId: presentationId,
             },
         }).done(function (result) {
             $('.slide-edit').html(result);
