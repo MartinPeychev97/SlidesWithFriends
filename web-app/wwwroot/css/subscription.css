@@ -23,29 +23,71 @@ body {
     color: #8464a3;
     min-height: 100vh;
 }
-
-#eight {
-    height: 100px;
-    line-height: 100px;
+/*containers*/
+#table {
+    align-content: center;
+    margin: auto;
+    text-align: center;
+    align-items:end;
 }
 
-#samel1 {
+.title {
+    color: #e40464;
+    font-weight: bolder;
+}
+
+.description {
+    font-weight: normal;
+    font-size: small;
+}
+.fineprint {
+    font-size: x-small;
+    font-weight: normal;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-shadow: 0px 0px 1px black;
+}
+
+.samel1 {
     display: inline;
     vertical-align: 11px;
+    color: #808080;
+    font-size:small;
+    font-weight:normal;
+    min-width:auto;
 }
 
-#samel2 {
+.samel2 {
     display: inline;
     margin-right: -9px;
+    color: black;
+    font-weight: bolder;
 }
 
-#samel3 {
+.samel3 {
     display: inline;
     vertical-align: 11px;
+    color: #808080;
+    font-size: small;
+    font-weight:normal;
 }
-#table{
-    margin-left:150px;
-    aspect-ratio: 1/1;
+
+#subbtn {
+    background: #e40464;
+    color: white;
+}
+
+li {
+    list-style: none;
+}
+i{
+}
+/*reject button*/
+.rejectbtn {
+    align-content: center;
+    margin:auto;
+    text-align:center;
+
 }
 #rejectbtn {
     color:white;
@@ -53,7 +95,6 @@ body {
     background-repeat: no-repeat;
     border: thin;
     clear:both;
-    margin-left:680px;
 }
 #rejectbtn:hover {
     background-color: dimgray;
