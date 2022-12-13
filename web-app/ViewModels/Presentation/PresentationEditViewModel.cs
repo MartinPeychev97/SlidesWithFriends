@@ -5,7 +5,7 @@ namespace web_app.ViewModels.Presentation
 {
     public class PresentationEditViewModel
     {
-        public int Id { get; set; } = 0;
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
