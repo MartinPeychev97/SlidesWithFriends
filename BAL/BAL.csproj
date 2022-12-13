@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Interfaces\Services\**" />
+    <Compile Remove="Interfaces\**" />
     <Compile Remove="Services\**" />
-    <EmbeddedResource Remove="Interfaces\Services\**" />
+    <EmbeddedResource Remove="Interfaces\**" />
     <EmbeddedResource Remove="Services\**" />
-    <None Remove="Interfaces\Services\**" />
+    <None Remove="Interfaces\**" />
     <None Remove="Services\**" />
   </ItemGroup>
 
@@ -20,10 +20,6 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
   </ItemGroup>
 
 </Project>
