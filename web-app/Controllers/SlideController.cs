@@ -33,6 +33,7 @@ namespace web_app.Controllers
                 Id= slideId,
                 Title = slide.Title,
                 Text= slide.Text,
+                PresentationBackground = slide.Presentation.Background
             };
 
            

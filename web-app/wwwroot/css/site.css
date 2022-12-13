@@ -1,4 +1,22 @@
-﻿html, * {
+﻿/* Settings */
+@import './settings/_settings-colors.css';
+
+/* Generic */
+@import './generic/_generic-normalize.css';
+
+/* Elements */
+@import './elements/index.css';
+
+/* Objects */
+@import './objects/index.css';
+
+/* Components */
+@import './components/index.css';
+
+/* Utilities */
+@import './utilities/index.css';
+
+html, * {
     font-family: 'Open Sans', sans-serif;
 }
 
