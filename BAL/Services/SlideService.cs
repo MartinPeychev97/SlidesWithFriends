@@ -14,12 +14,12 @@ namespace BAL.Services
             this.db = db;
         }
 
-        public async Task<int> Add(string title, string text, int presentationId)
+        public async Task<int> Add(int presentationId)
         {
             Slide slide = new Slide 
             {
-                Title= title,
-                Text = text,
+                Title= "Title Slide",
+                Text = "Super cool slide text",
                 PresentationId = presentationId
             };
 
@@ -27,6 +27,18 @@ namespace BAL.Services
             await this.db.SaveChangesAsync();
 
             return slide.Id;
+        }
+
+        public async Task<Slide> Edit(int id, string title, string text)
+        {
+            var slite = await this.db.Slides.FindAsync(id);
+
+            slite.Title = title;
+            slite.Text = text;
+
+            await this.db.SaveChangesAsync();
+
+            return slite;
         }
 
         public async Task<Slide> GetById(int id) =>
