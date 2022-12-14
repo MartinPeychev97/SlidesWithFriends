@@ -1,0 +1,23 @@
+﻿.u-display-none {
+    display: none;
+}
+
+.u-opacity {
+    opacity: 1;
+}
+
+.u-opacity--lg {
+    opacity: 0.8;
+}
+
+.u-opacity--md {
+    opacity: 0.5;
+}
+
+.u-opacity--sm {
+    opacity: 0.2;
+}
+
+.u-opacity-none {
+    opacity: 0;
+}

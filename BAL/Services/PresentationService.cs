@@ -1,7 +1,9 @@
 ﻿using BAL.Interfaces;
+using Common.InputModels.Presentation;
 using DAL;
 using DAL.EntityModels;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Threading.Tasks;
 
 namespace BAL.Services
@@ -19,5 +21,19 @@ namespace BAL.Services
             await this.db.Presentations
                 .Include(p => p.Slides)
                 .FirstOrDefaultAsync(p => p.Id == id);
+
+        public async Task EditBackground(PresentationBackgroundInputModel model)
+        {
+            var presentation = await this.GetById(model.PresentationId);
+
+            if (presentation == null)
+            {
+                throw new ArgumentNullException("Presentation does not exist");
+            }
+
+            presentation.Background = model.Background;
+
+            await this.db.SaveChangesAsync();
+        }
     }
 }

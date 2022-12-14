@@ -5,6 +5,8 @@ namespace web_app.ViewModels.Presentation
 {
     public class PresentationEditViewModel
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public IEnumerable<SlideViewModel> Slides { get; set; }

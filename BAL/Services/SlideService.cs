@@ -1,6 +1,7 @@
 ﻿using BAL.Interfaces;
 using DAL;
 using DAL.EntityModels;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace BAL.Services
@@ -42,7 +43,7 @@ namespace BAL.Services
         }
 
         public async Task<Slide> GetById(int id) =>
-            await this.db.Slides.FindAsync(id);
+            await this.db.Slides.Include(x => x.Presentation).FirstOrDefaultAsync(x => x.Id == id);
         
 
         public async Task<bool> Remove(int id)

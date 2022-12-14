@@ -1,0 +1,6 @@
+﻿.o-centered-container {
+    display: flex;
+    justify-content: center;
+    flex-flow: column wrap;
+    align-items: center;
+}
