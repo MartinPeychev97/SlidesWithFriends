@@ -5,10 +5,12 @@ namespace BAL.Interfaces
 {
     public interface ISlideService
     {
-        Task<int> Add(string title, string text, int presentationId);
+        Task<int> Add(int presentationId);
 
         Task<bool> Remove(int slideId);
 
         Task<Slide> GetById(int id);
+
+        Task<Slide> Edit(int id, string title, string text);
     }
 }

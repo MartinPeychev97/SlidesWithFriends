@@ -1,5 +1,4 @@
 ﻿using BAL.Interfaces;
-using DAL.EntityModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using web_app.ViewModels.Slide;
@@ -16,21 +15,12 @@ namespace web_app.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> SlideEditPartial(int slideId)
+        public async Task<IActionResult> GetById([FromQuery]int id)
         {
-            if (slideId == 0)
-            {
-                return PartialView("_SlideEdit", new SlideViewModel
-                {
-                    Title = "Title",
-                    Text = "Text",
-                });
-            }
-
-            var slide = await this.slideService.GetById(slideId);
+            var slide = await this.slideService.GetById(id);
             var slideViewModel = new SlideViewModel 
             {
-                Id= slideId,
+                Id= id,
                 Title = slide.Title,
                 Text= slide.Text,
                 PresentationBackground = slide.Presentation.Background
@@ -41,17 +31,25 @@ namespace web_app.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> Add(string title, string text, int presentationId)
+        public async Task<JsonResult> Add(int presentationId)
         {
-            await this.slideService.Add(title, text, presentationId);
+            var id = await this.slideService.Add(presentationId);
 
-            return new JsonResult(Ok());
+            return new JsonResult(Ok(new {Id = id}));
         }
 
         [HttpPost]
         public async Task<JsonResult> Remove(int id)
         {
             await this.slideService.Remove(id);
+
+            return new JsonResult(Ok());
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> Edit(int id, string title, string text)
+        {
+            await this.slideService.Edit(id, title, text);
 
             return new JsonResult(Ok());
         }

@@ -21,9 +21,9 @@
             }
             @foreach (var slide in Model.Slides)
             {
-                <div class="slide-preview">
+                <div id="slide-frame" class="slide-preview" slide-id="@slide.Id">
                     <p class="slide-number">@i</p>
-                    <div id="slide-frame" class="slide-frame" slide-id="@slide.Id">
+                    <div  class="slide-frame" >
                         <img class="slide-background"
                          src="https://slideswith.com/cdn-cgi/image/w=1900,h=1400,fit=scale-down,metadata=none,onerror=false/https://slideswith.com//backgrounds/background-20.jpg"
                          alt="" />
@@ -35,7 +35,7 @@
                 i++;
             }
 
-            <div id="add-slide" class="add-slide" slide-id="0">
+            <div id="add-slide" class="add-slide">
                 <div>
                     <svg xmlns="http://www.w3.org/2000/svg"
                          width="24"
@@ -61,9 +61,10 @@
     <script type="module" src="~/js/features/colour-picker.js" id="colour-picker-script" data-presentationId=@Model.Id data-url="@Url.Action("EditBackground","Presentation")"></script>
 
     <script>
-        var slidePartialUrl = "@Url.Action("SlideEditPartial", "Slide")";
+        var slidePartialUrl = "@Url.Action("GetById", "Slide")";
+        var addUrl = "@Url.Action("Add", "Slide")";
         var presentationId = @ViewContext.RouteData.Values["id"];
     </script>
     <script src="~/js/slide/slide.js"></script>
-    <script src="~/js/slide/get-slide-partial.js"></script>
+    <script src="~/js/slide/add-slide.js"></script>
 }
