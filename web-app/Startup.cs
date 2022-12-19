@@ -1,5 +1,6 @@
 using DAL;
 using DAL.EntityModels.User;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +33,20 @@ namespace web_app
 		
 		public void ConfigureServices(IServiceCollection services)
 		{
+            services.AddAuthentication(option =>
+            {
+                option.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+
+            })
+                .AddCookie(option =>
+                {
+                    option.LoginPath = "/User/Login";
+                })
+                .AddGoogle(option =>
+                {
+                    option.ClientId = "794446576679-m1hvn02bpilrfbe7n9uf0sfvcrj4f61p.apps.googleusercontent.com";
+                    option.ClientSecret = "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";
+                });
            
             services.Configure<RazorViewEngineOptions>(o =>
             {
@@ -54,10 +69,10 @@ namespace web_app
             })
                 .AddEntityFrameworkStores<SlidesDbContext>();
 
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.LoginPath = "/User/Login";
-            });
+            //services.ConfigureApplicationCookie(options =>
+            //{
+            //    options.LoginPath = "/User/Login";
+            //});
 
             services.AddMvc()
                     .AddViewLocalization(

@@ -1,14 +1,16 @@
-﻿using DAL.EntityModels.User;
+﻿using DAL;
+using DAL.EntityModels.User;
+using DAL.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 using web_app.ViewModels.User;
-using DAL.Enums;
-using DAL;
-using System.Linq;
 
 namespace web_app.Controllers
 {
+    [AllowAnonymous]
     public class UserController : Controller
     {
         private readonly SlidesDbContext db;
@@ -106,8 +108,10 @@ namespace web_app.Controllers
             var user = db.Users.Where(x => x.UserName == User.Identity.Name).FirstOrDefault();
             user.Subscription = subscriptionType;
             db.SaveChanges();
-           
+
             return RedirectToAction("Subscription", "User");
         }
+
+       
     }
 }
