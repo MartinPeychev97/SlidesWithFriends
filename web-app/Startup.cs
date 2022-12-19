@@ -1,3 +1,5 @@
+using BAL.Interfaces;
+using BAL.Services;
 using DAL;
 using DAL.EntityModels.User;
 using Microsoft.AspNetCore.Builder;
@@ -11,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using RandomNameGeneratorLibrary;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -68,6 +71,8 @@ namespace web_app
             
             services.AddRazorPages();
 
+            services.AddSingleton<PlaceNameGenerator>();
+            services.AddTransient<IUserService, UserService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -6,6 +6,8 @@ using web_app.ViewModels.User;
 using DAL.Enums;
 using DAL;
 using System.Linq;
+using BAL.Interfaces;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace web_app.Controllers
 {
@@ -14,23 +16,27 @@ namespace web_app.Controllers
         private readonly SlidesDbContext db;
         private readonly SignInManager<SlidesUser> signInManager;
         private readonly UserManager<SlidesUser> userManager;
+        private readonly IUserService _userService;
 
         public UserController(
             SlidesDbContext db,
             UserManager<SlidesUser> userManager,
-            SignInManager<SlidesUser> signInManager)
+            SignInManager<SlidesUser> signInManager,
+            IUserService userService)
         {
             this.db = db;
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this._userService = userService;
         }
 
         [HttpGet]
-        public IActionResult Register()
+        public async Task<IActionResult> Register()
         {
-            var model = new RegisterFormViewModel();
+            var generatedUsernames = await this._userService.GenerateUsernames();
+            this.ViewData["GeneratedUsernames"] = generatedUsernames.ToArray();
 
-            return View(model);
+            return View();
         }
 
         [HttpPost]
