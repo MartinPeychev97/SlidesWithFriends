@@ -1,0 +1,22 @@
+﻿@page
+@model web_app.Pages.Presentations.DeleteModel
+
+<form method="post">
+    <input hidden asp-for="Presentation.Id" />
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary pl-3">Delete Presentation</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Presentation.Id"></label>
+            <input asp-for="Presentation.Id" disabled class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Presentation.Name"></label>
+            <input asp-for="Presentation.Name" disabled class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-danger" style="width:150px">Delete</button>
+        <a asp-page="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+    </div>
+</form>
