@@ -64,6 +64,9 @@ namespace DAL.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("varchar(40)");
 
+                    b.Property<int>("Subscription")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("TestEntities");
@@ -72,12 +75,14 @@ namespace DAL.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "firstTestEntity"
+                            Name = "firstTestEntity",
+                            Subscription = 0
                         },
                         new
                         {
                             Id = 2,
-                            Name = "secondTestEntity"
+                            Name = "secondTestEntity",
+                            Subscription = 0
                         });
                 });
 
@@ -125,6 +130,9 @@ namespace DAL.Migrations
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");
+
+                    b.Property<int>("Subscription")
+                        .HasColumnType("int");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("tinyint(1)");

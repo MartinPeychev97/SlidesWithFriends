@@ -2,13 +2,25 @@
 
 @{
     ViewData["Title"] = "Register";
+    var generatedUsernames = ViewData["GeneratedUsernames"] as string[];
 }
 
 <h1 class="text-lg-center">@ViewData["Title"]</h1>
 <hr />
 
-<div class="row">
-    <div class="col-md-4 offset-md-4">
+<div class="row register-page">
+    <div class="name-generator-wrapper card col-md-2 rounded-5 offset-md-1" style="height:fit-content">
+        <div class="card-body">
+            <h5 class="text-center">Available usernames:</h5>
+            <ul class="d-flex flex-column flex-wrap name-generator-container">
+                @foreach (var name in generatedUsernames)
+                {
+                    <li role="button">@name</li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-4 offset-md-1">
         <form id="registerForm" method="post">
             <hr />
             <div asp-validation-summary="ModelOnly"></div>
@@ -41,4 +53,17 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+
+        const selectors = {
+            generatedNames:'.name-generator-container li',
+            usernameInput:'#registerForm div:nth-of-type(1) > input'
+        }
+
+        $(selectors.generatedNames).click((el) => {
+            const selectedName = el.target.textContent;
+            $(selectors.usernameInput).val(selectedName);
+        })
+    </script>
 }

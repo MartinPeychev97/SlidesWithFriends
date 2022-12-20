@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using RandomNameGeneratorLibrary;
 using System;
 
 namespace web_app
@@ -63,7 +66,9 @@ namespace web_app
             services.AddTransient<ISlideService, SlideService>();
             services.AddTransient<IPresentationService, PresentationService>();
 
-        }
+            services.AddSingleton<PlaceNameGenerator>();
+            services.AddTransient<IUserService, UserService>();
+		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

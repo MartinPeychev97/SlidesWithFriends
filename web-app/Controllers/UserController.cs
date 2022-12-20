@@ -3,28 +3,40 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using web_app.ViewModels.User;
+using DAL.Enums;
+using DAL;
+using System.Linq;
+using BAL.Interfaces;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace web_app.Controllers
 {
     public class UserController : Controller
     {
+        private readonly SlidesDbContext db;
         private readonly SignInManager<SlidesUser> signInManager;
         private readonly UserManager<SlidesUser> userManager;
+        private readonly IUserService _userService;
 
         public UserController(
+            SlidesDbContext db,
             UserManager<SlidesUser> userManager,
-            SignInManager<SlidesUser> signInManager)
+            SignInManager<SlidesUser> signInManager,
+            IUserService userService)
         {
+            this.db = db;
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this._userService = userService;
         }
 
         [HttpGet]
-        public IActionResult Register()
+        public async Task<IActionResult> Register()
         {
-            var model = new RegisterFormViewModel();
+            var generatedUsernames = await this._userService.GenerateUsernames();
+            this.ViewData["GeneratedUsernames"] = generatedUsernames.ToArray();
 
-            return View(model);
+            return View();
         }
 
         [HttpPost]
@@ -39,6 +51,7 @@ namespace web_app.Controllers
             {
                 UserName = model.UserName,
                 Email = model.Email,
+                Subscription = DAL.Enums.Subscription.None
             };
 
             var result = await userManager.CreateAsync(user, model.Password);
@@ -87,6 +100,20 @@ namespace web_app.Controllers
             await signInManager.SignOutAsync();
 
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Subscription()
+        {
+            return View();
+        }
+
+        public IActionResult Subscribe(Subscription subscriptionType)
+        {
+            var user = db.Users.Where(x => x.UserName == User.Identity.Name).FirstOrDefault();
+            user.Subscription = subscriptionType;
+            db.SaveChanges();
+           
+            return RedirectToAction("Subscription", "User");
         }
     }
 }

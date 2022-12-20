@@ -1,0 +1,60 @@
+﻿.rounded-lg {
+    border-radius: 1rem !important;
+}
+
+.text-small {
+    font-size: 0.9rem !important;
+}
+
+.custom-separator {
+    width: 5rem;
+    height: 6px;
+    border-radius: 1rem;
+}
+
+.text-uppercase {
+    letter-spacing: 0.2em;
+}
+
+body {
+    background: #8464a3;
+    background: -webkit-linear-gradient(to right, #8464a3, #8464a3);
+    background: linear-gradient(to right, #8464a3, #8464a3);
+    color: #8464a3;
+    min-height: 100vh;
+}
+
+#eight {
+    height: 100px;
+    line-height: 100px;
+}
+
+#samel1 {
+    display: inline;
+    vertical-align: 11px;
+}
+
+#samel2 {
+    display: inline;
+    margin-right: -9px;
+}
+
+#samel3 {
+    display: inline;
+    vertical-align: 11px;
+}
+#table{
+    margin-left:150px;
+    aspect-ratio: 1/1;
+}
+#rejectbtn {
+    color:white;
+    background-color: gray;
+    background-repeat: no-repeat;
+    border: thin;
+    clear:both;
+    margin-left:680px;
+}
+#rejectbtn:hover {
+    background-color: dimgray;
+}
