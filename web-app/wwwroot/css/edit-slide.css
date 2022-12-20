@@ -1,6 +1,8 @@
 ﻿/* Side panel */
 .editor {
     overflow: hidden;
+    height: 82vh;
+
 }
 
 aside::-webkit-scrollbar {

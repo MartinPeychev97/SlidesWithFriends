@@ -13,7 +13,7 @@
             <div class="deck-box m-l-30 m-r-30">
                 @foreach (var obj in Model.Presentations)
                 {
-                    <a class="deck-card">
+                    <a class="deck-card" asp-controller="Presentation" asp-action="Edit" asp-route-id="@obj.Id">
                         <div class="deck-thumb flex-row align-center center">
                             <section class="slide-frame">
                                 <img src="https://www.downloadyouthministry.com/dw/image/v2/BFBF_PRD/on/demandware.static/-/Sites-dym-master-catalog/default/dwbbddebb7/images/hi-res/h/a/halloween_trivia_game.png?sw=1200&sh=675&sm=fit">
