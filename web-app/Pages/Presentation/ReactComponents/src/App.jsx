@@ -1,23 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./app.module.css";
 
 import Header from "./components/header/Header";
 import SidePane from "./components/side-pane/SidePane";
 import Main from "./components/main/Main";
-import { SlideProvider } from "./context/SlideContext";
+import SlideContext, { SlideProvider } from "./context/SlideContext";
 
 const App = () => {
-  const presentationId = window.location.href.split("/").pop();
+  const { slides } = useContext(SlideContext);
 
   return (
     <div className={styles.editor}>
-      <SlideProvider>
         <Header />
         <div className={styles.slidesContainer}>
           <SidePane />
-          <Main />
+          { slides.length > 0 && <Main /> }
         </div>
-      </SlideProvider>
     </div>
   );
 };

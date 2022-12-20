@@ -5,7 +5,7 @@
   height: 70px;
 }
 
-.slideActionsLeft {
+.presentationName {
   width: 210px;
   border-right: 1px solid #eaeaea;
   display: flex;
@@ -13,7 +13,7 @@
   align-items: center;
 }
 
-.slideActionsLeft input{
+.presentationName input{
   width: 80%;
   padding: 8px;
   margin: 8px;
@@ -23,8 +23,20 @@
   text-align: center;
 }
 
-.slideActionsLeft input:hover,
-.slideActionsLeft input:focus {
+.presentationName input:hover,
+.presentationName input:focus {
   border: dotted #cccccc 1px;
   border-radius: 5px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actions svg {
+  margin: 10px;
+  color: #4a4a4a;
+  cursor: pointer;
 }
