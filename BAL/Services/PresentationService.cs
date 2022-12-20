@@ -35,5 +35,21 @@ namespace BAL.Services
 
             await this.db.SaveChangesAsync();
         }
+
+        public async Task<bool> EditName(int id, string name)
+        {
+           var presentation = await this.GetById(id);
+
+            if (presentation == null)
+            {
+                return false;
+            }
+
+            presentation.Name = name;
+
+            await this.db.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

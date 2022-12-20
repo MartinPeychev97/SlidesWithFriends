@@ -20,7 +20,14 @@ namespace web_app.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int id)
+        public IActionResult Edit()
+        {
+
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetById([FromQuery] int id)
         {
             var presentation = await this.presentationService.GetById(id);
             var slides = presentation.Slides
@@ -30,7 +37,7 @@ namespace web_app.Controllers
                     Title = s.Title,
                     Text = s.Text,
                     PresentationBackground = presentation.Background
-                });
+                }).ToList();
 
             var presentationViewModel = new PresentationEditViewModel()
             {
@@ -39,7 +46,15 @@ namespace web_app.Controllers
                 Slides = slides
             };
 
-            return View(presentationViewModel);
+            return new JsonResult(presentationViewModel);
+        }
+
+        [HttpPut]
+        public async Task<JsonResult> EditName([FromBody] PresentationNameViewModel viewModel)
+        {
+            await this.presentationService.EditName(viewModel.Id, viewModel.Name);
+
+            return new JsonResult(Ok());
         }
 
 

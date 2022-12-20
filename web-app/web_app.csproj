@@ -43,4 +43,10 @@
     <ProjectReference Include="..\DAL\DAL.csproj" />
   </ItemGroup>  
 
+  <ItemGroup>
+    <Folder Include="Pages\Presentation\ReactComponents\" />
+    <Folder Include="Resources\" />
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>  
+
 </Project>

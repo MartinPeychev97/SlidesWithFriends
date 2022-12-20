@@ -1,0 +1,30 @@
+.header {
+  border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
+  display: flex;
+  height: 70px;
+}
+
+.slideActionsLeft {
+  width: 210px;
+  border-right: 1px solid #eaeaea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slideActionsLeft input{
+  width: 80%;
+  padding: 8px;
+  margin: 8px;
+  font-weight: 700;
+  border: none;
+  outline: none;
+  text-align: center;
+}
+
+.slideActionsLeft input:hover,
+.slideActionsLeft input:focus {
+  border: dotted #cccccc 1px;
+  border-radius: 5px;
+}

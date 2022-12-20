@@ -9,5 +9,7 @@ namespace BAL.Interfaces
         Task<Presentation> GetById(int id);
 
         Task EditBackground(PresentationBackgroundInputModel model);
+
+        Task<bool> EditName(int id, string name);
     }
 }

@@ -2,6 +2,8 @@
 using DAL;
 using DAL.EntityModels;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BAL.Services
@@ -41,6 +43,10 @@ namespace BAL.Services
 
             return slite;
         }
+
+        public async Task<IEnumerable<Slide>> GetAll(int presentationId) => 
+            await this.db.Slides.Where(s => s.PresentationId == presentationId).ToListAsync();
+        
 
         public async Task<Slide> GetById(int id) =>
             await this.db.Slides.Include(x => x.Presentation).FirstOrDefaultAsync(x => x.Id == id);

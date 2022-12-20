@@ -1,0 +1,7 @@
+.editor {
+  overflow: hidden;
+}
+
+.slidesContainer {
+  display: flex;
+}
