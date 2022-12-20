@@ -1,38 +1,64 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.Google;
-using Microsoft.AspNetCore.Authentication;
+﻿using DAL.EntityModels.User;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace web_app.Controllers
 {
     [AllowAnonymous, Route("test")]
     public class TestController : Controller
     {
-        [Route("google-login")]
-        public IActionResult GoogleLogin()
+        private UserManager<SlidesUser> userManager;
+        private SignInManager<SlidesUser> signInManager;
+
+        public TestController(UserManager<SlidesUser> userMgr, SignInManager<SlidesUser> signinMgr)
         {
-            var authProperties = new AuthenticationProperties { RedirectUri = Url.Action("GoogleResponse") };
-            return Challenge(authProperties, GoogleDefaults.AuthenticationScheme);
+            userManager = userMgr;
+            signInManager = signinMgr;
         }
 
-        [Route("google-response")]
+        [Route("GoogleLogin")]
+        public IActionResult GoogleLogin()
+        {
+            string redirectUrl = Url.Action("GoogleResponse", "Test");
+            var properties = signInManager.ConfigureExternalAuthenticationProperties("Google", redirectUrl);
+            return new ChallengeResult("Google", properties);
+        }
+
+        [Route("GoogleResponse")]
         public async Task<IActionResult> GoogleResponse()
         {
-            var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            ExternalLoginInfo info = await signInManager.GetExternalLoginInfoAsync();
+            if (info == null)
+                return RedirectToAction("Index", "Home");
 
-            var claims = result.Principal.Identities.FirstOrDefault()
-                .Claims.Select(claim => new
+            var result = await signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, false);
+            string[] userInfo = { info.Principal.FindFirst(ClaimTypes.Name).Value, info.Principal.FindFirst(ClaimTypes.Email).Value };
+            
+            if (result.Succeeded)
+                return View(userInfo);
+            else
+            {
+                SlidesUser user = new SlidesUser
                 {
-                    claim.Issuer,
-                    claim.OriginalIssuer,
-                    claim.Type,
-                    claim.Value
-                });
+                    Email = info.Principal.FindFirst(ClaimTypes.Email).Value,
+                    UserName = info.Principal.FindFirst(ClaimTypes.Email).Value
+                };
 
-            return Json(claims);
+                IdentityResult identResult = await userManager.CreateAsync(user);
+                if (identResult.Succeeded)
+                {
+                    identResult = await userManager.AddLoginAsync(user, info);
+                    if (identResult.Succeeded)
+                    {
+                        await signInManager.SignInAsync(user, false);
+                        return View(userInfo);
+                    }
+                }
+                return Unauthorized();
+            }
         }
     }
 }

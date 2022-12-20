@@ -1,6 +1,7 @@
 ﻿using DAL;
 using DAL.EntityModels.User;
 using DAL.Enums;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -93,6 +94,8 @@ namespace web_app.Controllers
 
         public async Task<IActionResult> Logout()
         {
+            await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
+            
             await signInManager.SignOutAsync();
 
             return RedirectToAction("Index", "Home");
