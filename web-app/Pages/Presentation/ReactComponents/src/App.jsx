@@ -5,17 +5,17 @@ import Header from "./components/header/Header";
 import SidePane from "./components/side-pane/SidePane";
 import Main from "./components/main/Main";
 import SlideContext, { SlideProvider } from "./context/SlideContext";
+import AddSlide from "./components/add-slide/AddSlide";
 
 const App = () => {
-  const { slides } = useContext(SlideContext);
+  const { slides, isAddNewSlideOpen } = useContext(SlideContext);
 
   return (
     <div className={styles.editor}>
         <Header />
-        <div className={styles.slidesContainer}>
           <SidePane />
+          { isAddNewSlideOpen && <AddSlide /> }
           { slides.length > 0 && <Main /> }
-        </div>
     </div>
   );
 };

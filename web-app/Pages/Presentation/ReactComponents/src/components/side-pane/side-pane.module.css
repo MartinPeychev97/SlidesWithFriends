@@ -1,4 +1,3 @@
-
 aside::-webkit-scrollbar {
   width: 5px;
 }
@@ -14,25 +13,10 @@ aside::-webkit-scrollbar-track {
   margin: 8px 0;
 }
 
-.slidesContainer {
-  display: flex;
-}
-
-.slideEdit{
-  width: 100%;
-  background-color: #f9f9f9;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-  .slideEdit .slideFrame {
-      width: 60%;
-      height: 80%;
-  }
-
 .slidesPane {
+  position: absolute;
+  top: 50px;
+  bottom: 0;
   flex-shrink: 0;
   width: 210px;
   background-color: #fdfdfd;
@@ -42,6 +26,22 @@ aside::-webkit-scrollbar-track {
   align-items: center;
   height: 85vh;
   overflow-y: auto;
+  padding: 10px;
+}
+
+
+.slideEdit {
+  width: 100%;
+  background-color: #f9f9f9;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slideEdit .slideFrame {
+  width: 60%;
+  height: 80%;
 }
 
 
@@ -61,11 +61,11 @@ aside::-webkit-scrollbar-track {
   padding: 12px 0;
 }
 
-  .addSlide > div {
-      color: inherit;
-      text-decoration: inherit;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-  }
+.addSlide > div {
+  color: inherit;
+  text-decoration: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

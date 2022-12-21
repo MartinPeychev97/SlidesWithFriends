@@ -1,22 +1,15 @@
 import React, { useContext } from "react";
 import SlideContext from "../../context/SlideContext";
-import useFetch from "../../hooks/useFetch";
 import Preview from "../preview/Preview";
 import styles from "./side-pane.module.css";
 
 const SidePane = () => {
-  const { presentationId, setSlides, slides, setActiveSlide } =
-    useContext(SlideContext);
-  const { post } = useFetch();
-
-  const addSlide = async () => {
-    const slide = await post(`slide/add?presentationId=${presentationId}`, {
-      method: "POST",
-    });
-
-    setSlides([...slides, slide]);
-    setActiveSlide(slide);
-  };
+  const {
+    setSlides,
+    slides,
+    setActiveSlide,
+    setIsAddNewSlideOpen,
+  } = useContext(SlideContext);
 
   const handleDragStart = (e, index) => {
     e.dataTransfer.setData("text/plain", index);
@@ -36,6 +29,10 @@ const SidePane = () => {
     setActiveSlide(slides[draggedIndex]);
   };
 
+  const openAddNewSlide = () => {
+    setIsAddNewSlideOpen(true);
+  };
+
   return (
     <aside className={styles.slidesPane}>
       {slides.map((slide, index) => (
@@ -50,7 +47,7 @@ const SidePane = () => {
         </div>
       ))}
 
-      <div className={styles.addSlide} onClick={addSlide}>
+      <div className={styles.addSlide} onClick={openAddNewSlide}>
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"

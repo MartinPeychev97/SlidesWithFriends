@@ -1,7 +1,9 @@
 .editor {
   overflow: hidden;
-}
-
-.slidesContainer {
-  display: flex;
+  position: relative;
+  height: calc(100vh - 100px);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
