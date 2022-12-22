@@ -1,24 +1,53 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import SlideContext from "../../context/SlideContext";
 import useFetch from "../../hooks/useFetch";
 import styles from "./add-slide.module.css";
 
 const AddSlide = () => {
-  const { setIsAddNewSlideOpen, presentationId, setSlides, slides, setActiveSlide} = useContext(SlideContext);
+  const {
+    setIsAddNewSlideOpen,
+    presentationId,
+    setSlides,
+    slides,
+    setActiveSlide,
+  } = useContext(SlideContext);
   const { post } = useFetch();
+  const fileInput = useRef(null);
+  const fileInputContainer = useRef(null);
 
   const addTitleSlide = async () => {
-    const slide = await post(`slide/add?presentationId=${presentationId}`, {
+    const slide = await post(`slide/addTitleSlide?presentationId=${presentationId}`, {
       method: "POST",
     });
 
     setSlides([...slides, slide]);
     setActiveSlide(slide);
-    setIsAddNewSlideOpen(false)
+    setIsAddNewSlideOpen(false);
+  };
+
+  const addImageSlide = async (event) => {
+    const image = event.target.files[0];
+
+    const formData = new FormData();
+    formData.append("image", image);
+    formData.append("json", JSON.stringify({id: +presentationId}))
+
+    const slide = await post(`slide/addImageSlide`, {
+      method: "POST",
+      body: formData
+    });
+
+    setSlides([...slides, slide]);
+    setActiveSlide(slide);
+    setIsAddNewSlideOpen(false);
   };
 
   const closeAddNewSlide = () => {
     setIsAddNewSlideOpen(false);
+  };
+
+  const handleClick = () => {
+    fileInput.current.click();
   };
 
   return (
@@ -46,7 +75,18 @@ const AddSlide = () => {
             </svg>
             <p>Title Slide</p>
           </div>
-          <div className={styles.slideType}>
+          <div
+            onClick={handleClick}
+            ref={fileInputContainer}
+            className={styles.slideType}
+          >
+            <input
+              type="file"
+              ref={fileInput}
+              onChange={addImageSlide}
+              style={{ display: "none" }}
+              accept=".jpg, .png, .gif"
+            />
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 576 512"

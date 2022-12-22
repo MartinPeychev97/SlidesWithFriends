@@ -19,7 +19,6 @@ const Header = () => {
 
   const handleChange = (e) => {
     setPresentationName(e.target.value);
-    console.log(presentationId);
   };
 
   const editName = async (e) => {
@@ -42,7 +41,12 @@ const Header = () => {
       method: "DELETE",
     });
     const activeSlideIndex = slides.indexOf(activeSlide);
-    setActiveSlide(slides[activeSlideIndex - 1])
+    if(activeSlideIndex == 0 && slides.length > 0){
+      setActiveSlide(slides[activeSlideIndex + 1])
+    }
+    else{
+      setActiveSlide(slides[activeSlideIndex - 1])
+    }
     setSlides(slides.filter(s => s.id != activeSlide.id))
   };
 

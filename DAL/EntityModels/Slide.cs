@@ -8,6 +8,8 @@
 
         public string Text { get; set; }
 
+        public string Image { get; set; }
+
         public int PresentationId { get; set; }
         public Presentation Presentation { get; set; }
     }

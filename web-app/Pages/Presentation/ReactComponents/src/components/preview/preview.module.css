@@ -4,8 +4,14 @@
   align-items: center;
   justify-content: space-evenly;
   padding: 12px 0;
-  cursor: pointer;
+  cursor: grab;
 }
+
+.slidePreview:active {
+  cursor: grabbing;
+}
+
+
 
 .slideNumber {
   color: #a69999;

@@ -36,6 +36,7 @@ namespace web_app.Controllers
                     Id = s.Id,
                     Title = s.Title,
                     Text = s.Text,
+                    Image = s.Image,
                     PresentationBackground = presentation.Background
                 }).ToList();
 

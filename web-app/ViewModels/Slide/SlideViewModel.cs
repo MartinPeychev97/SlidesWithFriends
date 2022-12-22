@@ -4,9 +4,11 @@
     {
         public int Id { get; set; }
 
-        public string Title { get; set; } = "Title Slide";
+        public string Title { get; set; }
 
-        public string Text { get; set; } = "Super cool slide text";
+        public string Text { get; set; }
+
+        public string Image { get; set; }
 
         public string PresentationBackground { get; set; }
     }

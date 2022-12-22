@@ -1,8 +1,10 @@
 ﻿using BAL.Interfaces;
-using DAL.EntityModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Linq;
 using System.Threading.Tasks;
+using web_app.ViewModels.Presentation;
 using web_app.ViewModels.Slide;
 
 namespace web_app.Controllers
@@ -16,44 +18,32 @@ namespace web_app.Controllers
             this.slideService = slideService;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetById([FromQuery]int id)
+        [HttpPost]
+        public async Task<JsonResult> AddTitleSlide([FromQuery] int presentationId)
         {
-            var slide = await this.slideService.GetById(id);
-            var slideViewModel = new SlideViewModel 
+            var slide = await this.slideService.AddTitleSlide(presentationId);
+
+            var slideViewModel = new SlideViewModel
             {
-                Id= id,
+                Id = slide.Id,
                 Title = slide.Title,
-                Text= slide.Text,
-                PresentationBackground = slide.Presentation.Background
+                Text = slide.Text,
+                Image = slide.Image,
             };
-
-           
-            return PartialView("_SlideEdit", slideViewModel);
-        }
-
-        [HttpGet]
-        public async Task<JsonResult> GetAll([FromQuery] int presentationId)
-        {
-            var slides = await this.slideService.GetAll(presentationId);
-            var slideViewModel = slides.Select(s => new SlideViewModel
-            {
-                Id = s.Id,
-                Title = s.Title,
-                Text = s.Text,
-            });
 
             return new JsonResult(slideViewModel);
         }
 
         [HttpPost]
-        public async Task<JsonResult> Add([FromQuery] int presentationId)
+        public async Task<JsonResult> AddImageSlide([FromForm] IFormFile image, [FromForm] string json)
         {
-            var id = await this.slideService.Add(presentationId);
+            var presentation = JsonConvert.DeserializeObject<PresentationNameViewModel>(json);
+            var slide = await this.slideService.AddImageSlide(presentation.Id, image);
 
             var slideViewModel = new SlideViewModel
             {
-                Id = id,
+                Id = slide.Id,
+                Image = slide.Image
             };
 
             return new JsonResult(slideViewModel);

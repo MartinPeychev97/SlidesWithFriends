@@ -4,17 +4,8 @@ import useFetch from "../../hooks/useFetch";
 import styles from "./main.module.css";
 
 const Main = () => {
-  const { activeSlide, slides, setSlides, setActiveSlide } = useContext(SlideContext);
+  const { activeSlide, slides, setSlides, setIsAddNewSlideOpen } = useContext(SlideContext);
   const { post } = useFetch();
-
-  const removeSlide = async () => {
-    await post(`slide/remove?id=${activeSlide.id}`, {
-      method: "DELETE",
-    });
-    const activeSlideIndex = slides.indexOf(activeSlide);
-    setActiveSlide(slides[activeSlideIndex - 1])
-    setSlides(slides.filter(s => s.id != activeSlide.id))
-  };
 
   const editTitle = async (e) => {
     const title = e.target.innerText;
@@ -66,13 +57,16 @@ const Main = () => {
     }))
   }
 
+  const closeAddNewSlide = () => {
+    setIsAddNewSlideOpen(false)
+  }
+
   return (
-    <div className={styles.slideEdit}>
+    <div onClick={closeAddNewSlide} className={styles.slideEdit}>
       <div className={styles.slideFrame}>
         <img
           className={styles.slideBackground}
-          src="https://slideswith.com/cdn-cgi/image/w=1900,h=1400,fit=scale-down,metadata=none,onerror=false/https://slideswith.com//backgrounds/background-20.jpg"
-          alt=""
+          src={`data:image/jpeg;base64,${activeSlide.image}`}
         />
         <div className={styles.content}>
           <h1 onBlur={editTitle} className={styles.title}>{activeSlide.title}</h1>

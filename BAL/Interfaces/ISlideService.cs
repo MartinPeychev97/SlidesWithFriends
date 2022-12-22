@@ -1,4 +1,5 @@
 ﻿using DAL.EntityModels;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6,7 +7,9 @@ namespace BAL.Interfaces
 {
     public interface ISlideService
     {
-        Task<int> Add(int presentationId);
+        Task<Slide> AddTitleSlide(int presentationId);
+
+        Task<Slide> AddImageSlide(int presentationId, IFormFile image);
 
         Task<bool> Remove(int slideId);
 
