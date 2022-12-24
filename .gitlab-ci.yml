@@ -32,14 +32,14 @@ build-job:       # This job runs in the build stage, which runs first.
 deploy-job:
   stage: deploy
   only:
-    - main
+    - main      # This job runs in the deploy stage.
   script:
-    - dotnet publish ./web-app/web-app.csproj -c Release -o ./publish_web/
+    - dotnet publish ./web-app/web_app.csproj -c Release -o ./publish_web/
     - rm -f ./publish_web/appsettings.json
     - cp -a ./publish_web/. /var/www/academy/
     - systemctl restart kestrel-academy.service
 
-analyse-job:      # This job runs in the deploy stage.
+analyse-job:
   stage: analyse
   script:
     - echo "SonarQube analysing..."
