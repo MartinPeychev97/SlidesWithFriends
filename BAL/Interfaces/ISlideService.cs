@@ -9,7 +9,7 @@ namespace BAL.Interfaces
     {
         Task<Slide> AddTitleSlide(int presentationId);
 
-        Task<Slide> AddImageSlide(int presentationId, IFormFile image);
+        Task<Slide> AddImageSlide(int presentationId, string image);
 
         Task<bool> Remove(int slideId);
 
@@ -17,6 +17,10 @@ namespace BAL.Interfaces
 
         Task<IEnumerable<Slide>> GetAll(int presentationId);
 
-        Task<Slide> Edit(int id, string title, string text);
+        Task<bool> EditTitle(int id, string title);
+
+        Task<bool> EditText(int id, string text);
+
+        Task<bool> EditOnDragAndDrop(int firstId, int secondId);
     }
 }

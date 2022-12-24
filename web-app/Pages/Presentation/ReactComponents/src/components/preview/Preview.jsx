@@ -16,7 +16,7 @@ const Preview = ({index, slide}) => {
       <div className={styles.slideFrame}>
         <img
           className={styles.slideBackground}
-          src={`data:image/jpeg;base64,${slide.image}`}
+          src={slide.image}
         />
         <div className={styles.content}>
           <h6>{slide.title}</h6>

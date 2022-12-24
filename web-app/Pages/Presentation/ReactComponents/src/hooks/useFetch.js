@@ -3,9 +3,6 @@ import { useEffect, useState } from "react";
 const useFetch = () => {
   const base = window.location.origin;
 
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-
   const get = async (url) => {
     let result;
 
@@ -14,9 +11,7 @@ const useFetch = () => {
       const data = await response.json();
       result = data;
     } catch (error) {
-      setError(error);
-    } finally {
-      setIsLoading(false);
+      console.log(error);
     }
 
     return result;
@@ -30,15 +25,13 @@ const useFetch = () => {
       const data = await response.json();
       result = data;
     } catch (error) {
-      setError(error);
-    } finally {
-      setIsLoading(false);
+      console.log(error);
     }
 
     return result;
   }
 
-  return { error, isLoading, get, post };
+  return { get, post };
 };
 
 export default useFetch;

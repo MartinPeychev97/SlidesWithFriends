@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import SlideContext from "../../context/SlideContext";
+import useFetch from "../../hooks/useFetch";
 import Preview from "../preview/Preview";
 import styles from "./side-pane.module.css";
 
@@ -11,6 +12,8 @@ const SidePane = () => {
     setIsAddNewSlideOpen,
   } = useContext(SlideContext);
 
+  const { post } = useFetch();
+
   const handleDragStart = (e, index) => {
     e.dataTransfer.setData("text/plain", index);
   };
@@ -19,12 +22,24 @@ const SidePane = () => {
     e.preventDefault();
   };
 
-  const handleDrop = (e, index) => {
+  const handleDrop = async (e, index) => {
     const draggedIndex = e.dataTransfer.getData("text/plain");
     const tempSlides = [...slides];
     const temp = tempSlides[draggedIndex];
     tempSlides[draggedIndex] = tempSlides[index];
     tempSlides[index] = temp;
+
+    await post("slide/editOnDragAndDrop", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        firstId: slides[draggedIndex].id,
+        secondId: slides[index].id,
+      })
+    })
+
     setSlides(tempSlides);
     setActiveSlide(slides[draggedIndex]);
   };

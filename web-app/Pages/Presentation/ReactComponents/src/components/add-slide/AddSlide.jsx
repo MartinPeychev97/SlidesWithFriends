@@ -30,7 +30,7 @@ const AddSlide = () => {
 
     const formData = new FormData();
     formData.append("image", image);
-    formData.append("json", JSON.stringify({id: +presentationId}))
+    formData.append("presentationId", +presentationId)
 
     const slide = await post(`slide/addImageSlide`, {
       method: "POST",
