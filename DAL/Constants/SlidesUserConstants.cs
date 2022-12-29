@@ -16,3 +16,5 @@ namespace DAL.Constants
         public const int MinPasswordLength = 8;
     }
 }
+
+

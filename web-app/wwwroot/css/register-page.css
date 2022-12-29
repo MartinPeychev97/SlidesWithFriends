@@ -1,0 +1,7 @@
+﻿.register-page > .name-generator {
+    /*background:orange;*/
+}
+
+.register-page .name-generator-container li:hover {
+    color:var(--primary);
+}

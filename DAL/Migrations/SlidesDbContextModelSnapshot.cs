@@ -23,6 +23,9 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("Background")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
@@ -36,6 +39,9 @@ namespace DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("longtext");
 
                     b.Property<int>("PresentationId")
                         .HasColumnType("int");
@@ -64,9 +70,6 @@ namespace DAL.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("varchar(40)");
 
-                    b.Property<int>("Subscription")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("TestEntities");
@@ -75,14 +78,12 @@ namespace DAL.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "firstTestEntity",
-                            Subscription = 0
+                            Name = "firstTestEntity"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "secondTestEntity",
-                            Subscription = 0
+                            Name = "secondTestEntity"
                         });
                 });
 

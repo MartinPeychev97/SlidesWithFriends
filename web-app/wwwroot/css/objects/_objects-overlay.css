@@ -1,0 +1,8 @@
+﻿.o-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: .5;
+    top: 0;
+    z-index: 1;
+}

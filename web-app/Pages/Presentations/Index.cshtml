@@ -1,0 +1,72 @@
+﻿@page "/"
+@model web_app.Pages.Presentations.IndexModel
+
+<p class="create-presentation">
+    <a asp-page="create" class="btn btn-primary">
+        Create New Presentation
+    </a>
+</p>
+
+<body>
+    <div>
+        <div class="deck-box">
+            <div class="deck-box m-l-30 m-r-30">
+                @foreach (var obj in Model.Presentations)
+                {
+                    <a class="deck-card" asp-controller="Presentation" asp-action="Edit" asp-route-id="@obj.Id">
+                        <div class="deck-thumb flex-row align-center center">
+                            <section class="slide-frame">
+                                <img src="https://www.downloadyouthministry.com/dw/image/v2/BFBF_PRD/on/demandware.static/-/Sites-dym-master-catalog/default/dwbbddebb7/images/hi-res/h/a/halloween_trivia_game.png?sw=1200&sh=675&sm=fit">
+                            </section>
+                        </div>
+                        <div class="deck-icon">
+                            <img src="https://img.freepik.com/free-vector/realistic-halloween-pumpkin-concept_52683-45082.jpg?w=826&t=st=1669825964~exp=1669826564~hmac=489a4ca18782f6de4c6d2b1714086d06570ab9989321c2a9e35d0d21c0246879">
+                        </div>
+                        <div class="deck-content">
+                            <p class="vibe">Competitive</p>
+                            <p class="subtitle is-5 m-t-15 deck-name">@obj.Name</p>
+                            <div class="level-meta">
+                                <div class="level-left">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-images" viewBox="0 0 16 16">
+                                        <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                                        <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z" />
+                                    </svg> @obj.Slides.Count Slides
+                                </div>
+                            </div>
+                        </div>
+                        <a asp-page="delete" asp-route-id="@obj.Id" class="delete-button" />
+                        <i class="bi bi-trash"></i>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+
+@*<div class="deck-box">
+    <div class="deck-box m-l-30 m-r-30">
+        @foreach (var card in Model.Presentations)
+        {
+            <a class="card-deck">
+                <div class="deck-thumb flex-row align-center center">
+                    <section class="slide-frame">
+                        <img src="https://www.downloadyouthministry.com/dw/image/v2/BFBF_PRD/on/demandware.static/-/Sites-dym-master-catalog/default/dwbbddebb7/images/hi-res/h/a/halloween_trivia_game.png?sw=1200&sh=675&sm=fit">
+                    </section>
+                </div>
+                <div class="deck-icon">
+                    <img src="https://img.freepik.com/free-vector/realistic-halloween-pumpkin-concept_52683-45082.jpg?w=826&t=st=1669825964~exp=1669826564~hmac=489a4ca18782f6de4c6d2b1714086d06570ab9989321c2a9e35d0d21c0246879">
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">@card.Name</h4>
+                    <p class="card-text"> <i class="bi bi-images"></i> &nbsp; @card.Slides.Count Slides</p>
+                </div>
+                <div class="delete-btn">
+                    <a asp-page="delete" asp-route-id="@card.Id" class="btn delete-btn">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </div>
+            </a>
+        }
+    </div>
+</div>*@    
