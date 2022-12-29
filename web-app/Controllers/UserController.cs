@@ -114,7 +114,5 @@ namespace web_app.Controllers
 
             return RedirectToAction("Subscription", "User");
         }
-
-       
     }
 }

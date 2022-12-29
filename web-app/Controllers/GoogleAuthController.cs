@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace web_app.Controllers
 {
-    [AllowAnonymous, Route("test")]
-    public class TestController : Controller
+    [AllowAnonymous, Route("GoogleAuth")]
+    public class GoogleAuthController : Controller
     {
         private UserManager<SlidesUser> userManager;
         private SignInManager<SlidesUser> signInManager;
 
-        public TestController(UserManager<SlidesUser> userMgr, SignInManager<SlidesUser> signinMgr)
+        public GoogleAuthController(UserManager<SlidesUser> userMgr, SignInManager<SlidesUser> signinMgr)
         {
             userManager = userMgr;
             signInManager = signinMgr;
@@ -22,7 +22,7 @@ namespace web_app.Controllers
         [Route("GoogleLogin")]
         public IActionResult GoogleLogin()
         {
-            string redirectUrl = Url.Action("GoogleResponse", "Test");
+            string redirectUrl = Url.Action("GoogleResponse", "GoogleAuth");
             var properties = signInManager.ConfigureExternalAuthenticationProperties("Google", redirectUrl);
             return new ChallengeResult("Google", properties);
         }

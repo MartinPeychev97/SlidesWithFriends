@@ -62,10 +62,10 @@ namespace web_app
             })
                 .AddEntityFrameworkStores<SlidesDbContext>();
 
-            //services.ConfigureApplicationCookie(options =>
-            //{
-            //    options.LoginPath = "/User/Login";
-            //});
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/User/Login";
+            });
 
             services.AddMvc()
                     .AddViewLocalization(
