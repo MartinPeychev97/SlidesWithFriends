@@ -1,13 +1,5 @@
-﻿@{
-    Layout = null;
-}
+﻿@model string
 
-<!DOCTYPE html>
+<h1 class="bg-info text-white">Your QR Code is Generated Successfully</h1>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width"/>
-    <title>Index</title>
-</head>
-<img src="@ViewBag.QRCodeImage" alt="" style="height:150px;width:150px"/>
-</html>
+<img src="@ViewBag.QRCodeImage" alt="" style="height:150px;width:150px" />
