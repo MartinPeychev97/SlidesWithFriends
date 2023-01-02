@@ -21,7 +21,19 @@ h2 {
     font-size: 22px;
     line-height: 28px;
 }
-
+/*#google {
+    position: relative;
+    border-top: 100px solid #EA4335;
+    border-right: 100px solid #4285F4;
+    border-bottom: 100px solid #34A853;
+    border-left: 100px solid #FBBC05;
+    border-radius: 50%;
+    background-color: #FFFFFF;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 10vh auto 0;
+}*/
 h3 {
     font-family: 'Open Sans';
     font-style: normal;
