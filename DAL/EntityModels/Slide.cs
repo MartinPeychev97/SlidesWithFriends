@@ -10,6 +10,8 @@
 
         public string Image { get; set; }
 
+        public string Background { get; set; }
+
         public int PresentationId { get; set; }
         public Presentation Presentation { get; set; }
     }

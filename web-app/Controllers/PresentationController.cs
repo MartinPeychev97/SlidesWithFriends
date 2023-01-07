@@ -37,7 +37,7 @@ namespace web_app.Controllers
                     Title = s.Title,
                     Text = s.Text,
                     Image = s.Image,
-                    PresentationBackground = presentation.Background
+                    //PresentationBackground = presentation.Background
                 }).ToList();
 
             var presentationViewModel = new PresentationEditViewModel()

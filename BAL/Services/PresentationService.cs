@@ -31,7 +31,7 @@ namespace BAL.Services
                 throw new ArgumentNullException("Presentation does not exist");
             }
 
-            presentation.Background = model.Background;
+            //presentation.Background = model.Background;
 
             await this.db.SaveChangesAsync();
         }
