@@ -48,7 +48,6 @@
   </ItemGroup>  
 
   <ItemGroup>
-    <Folder Include="Pages\Presentation\ReactComponents\" />
     <Folder Include="Resources\" />
   </ItemGroup>  
 

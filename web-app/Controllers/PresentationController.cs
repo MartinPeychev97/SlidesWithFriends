@@ -1,8 +1,5 @@
 ﻿using BAL.Interfaces;
-using Common.InputModels.Presentation;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using web_app.ViewModels.Presentation;
@@ -37,7 +34,7 @@ namespace web_app.Controllers
                     Title = s.Title,
                     Text = s.Text,
                     Image = s.Image,
-                    //PresentationBackground = presentation.Background
+                    Background = s.Background,
                 }).ToList();
 
             var presentationViewModel = new PresentationEditViewModel()
@@ -56,23 +53,6 @@ namespace web_app.Controllers
             await this.presentationService.EditName(viewModel.Id, viewModel.Name);
 
             return new JsonResult(Ok());
-        }
-
-
-        [HttpPut]
-        public async Task<IActionResult> EditBackground(PresentationBackgroundInputModel model)
-        {
-            try
-            {
-                await this.presentationService.EditBackground(model);
-
-                return Ok(model.Background);
-            }
-            catch (Exception e)
-            {
-                //TODO: Talk about different errors being thrown from service.
-                return NotFound();
-            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BAL.Interfaces;
+using BAL.Models.Slide;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
@@ -25,7 +26,7 @@ namespace web_app.Controllers
         {
             var slide = await this.slideService.AddTitleSlide(presentationId);
 
-            if(slide is null)
+            if (slide is null)
             {
                 return new JsonResult(NotFound());
             }
@@ -72,13 +73,13 @@ namespace web_app.Controllers
             return new JsonResult(slideViewModel);
         }
 
-      
+
         [HttpPut]
         public async Task<JsonResult> EditTitle([FromBody] SlideTitleViewModel viewModel)
         {
             var result = await this.slideService.EditTitle(viewModel.Id, viewModel.Title);
 
-            if(result is false)
+            if (result is false)
             {
                 return new JsonResult(NotFound());
             }
@@ -112,6 +113,21 @@ namespace web_app.Controllers
             return new JsonResult(Ok());
         }
 
+        [HttpPut]
+        public async Task<JsonResult> EditBackground([FromBody] EditSlideBackgroundInputModel model)
+        {
+            try
+            {
+                await this.slideService.EditBackground(model);
+
+                return new JsonResult(Ok(model.Background));
+            }
+            catch (Exception e)
+            {
+                return new JsonResult(NotFound());
+            }
+        }
+
         [HttpDelete]
         public async Task<JsonResult> Remove([FromQuery] int id)
         {
@@ -130,9 +146,7 @@ namespace web_app.Controllers
 
             await this.slideService.Remove(id);
 
-
             return new JsonResult(Ok());
         }
-
     }
 }
