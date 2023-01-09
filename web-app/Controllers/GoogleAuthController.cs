@@ -35,6 +35,7 @@ namespace web_app.Controllers
                 return RedirectToAction("Index", "Home");
 
             var result = await signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, false);
+            string[] userInfo = { info.Principal.FindFirst(ClaimTypes.Name).Value, info.Principal.FindFirst(ClaimTypes.Email).Value };
             
             if (result.Succeeded)
                 return RedirectToAction("Index", "Home");
