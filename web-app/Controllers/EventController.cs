@@ -1,7 +1,12 @@
 ﻿using BAL.Interfaces;
 using BAL.Models.Event;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using QRCoder;
 using System;
+using System.Drawing.Imaging;
+using System.Drawing;
+using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -34,7 +39,7 @@ namespace web_app.Controllers
                 var model = new EventStartViewModel
                 {
                     Username = username.AsCountry.ToUpper(),
-                    QRCode = null
+                    QRCode = GenerateQRCode()
                 };
 
                 return View(model);
@@ -44,7 +49,23 @@ namespace web_app.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+        }
 
+        private string GenerateQRCode()
+        {
+            var callingUrl = Request.GetTypedHeaders().Referer.ToString();
+            MemoryStream ms = new MemoryStream();
+
+            using QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(callingUrl, QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new QRCode(qrCodeData);
+            using (Bitmap bitMap = qrCode.GetGraphic(20))
+            {
+                bitMap.Save(ms, ImageFormat.Png);
+            }
+            string result = "data:image/png;base64," + Convert.ToBase64String(ms.ToArray());
+
+            return result;
         }
     }
 }
