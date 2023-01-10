@@ -1,0 +1,23 @@
+﻿@using BAL.Models.Event
+@model EventStartViewModel
+
+@{
+    Layout = "~/Pages/Shared/_EventLayout.cshtml";
+}
+
+<div class="event-page container-fluid">
+    <section class="row justify-content-center align-items-center">
+        <div class="col-4 qr-code">
+            <img src="https://www.citypng.com/public/uploads/preview/black-qr-code-barcode-transparent-background-31632177587er1xxdtdtx.png" />
+        </div>
+        <div class="col-8 event-info">
+            <h1 class="display-1 text-light font-weight-bold">
+                Who's the Biggest Pumpkin of Them All?
+            </h1>
+            <h2 class="display-3 text-light mb-3">[ a mini trivia game ]</h2>
+            <div class="event-info__link">
+                <h2 class="text-primary">slideswith.com/@Model.Username</h2>
+            </div>
+        </div>
+    </section>
+</div>
