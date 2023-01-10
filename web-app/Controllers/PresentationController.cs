@@ -17,9 +17,8 @@ namespace web_app.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit()
+        public async Task<IActionResult> Edit()
         {
-
             return View();
         }
 

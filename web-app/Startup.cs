@@ -74,7 +74,12 @@ namespace web_app
 
             services.AddSingleton<PlaceNameGenerator>();
             services.AddTransient<IUserService, UserService>();
-		}
+
+            services.AddHttpClient<IUsernameGenerator, UsernameGenerator>();
+            //services.AddSingleton<IUsernameGenerator, UsernameGenerator>();
+            services.AddSingleton<Random>();
+
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -94,9 +99,9 @@ namespace web_app
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "Pages/{controller=Home}/{action=Index}/{id?}");
+                //endpoints.MapControllerRoute(
+                //    name: "default",
+                //    pattern: "Pages/{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
