@@ -2,6 +2,7 @@
 using BAL.Models.Slide;
 using DAL;
 using DAL.EntityModels;
+using DAL.Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ namespace BAL.Services
             {
                 Title = "Title Slide",
                 Text = "Super cool slide text",
-                Image = @"\images\slides\default-background.jpg",
+                Type = SlideType.Title,
                 PresentationId = presentationId
             };
 
@@ -47,6 +48,8 @@ namespace BAL.Services
             Slide slide = new Slide
             {
                 Image = image,
+                Text = "Image description here",
+                Type = SlideType.Image,
                 PresentationId = presentationId
             };
 

@@ -1,4 +1,6 @@
-﻿namespace DAL.EntityModels
+﻿using DAL.Enums;
+
+namespace DAL.EntityModels
 {
     public class Slide
     {
@@ -11,6 +13,8 @@
         public string Image { get; set; }
 
         public string Background { get; set; }
+
+        public SlideType Type { get; set; }
 
         public int PresentationId { get; set; }
         public Presentation Presentation { get; set; }

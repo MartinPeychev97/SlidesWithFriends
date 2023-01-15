@@ -15,10 +15,11 @@ const Preview = ({ index, slide }) => {
             <div className={styles.slideFrame}>
                 <img
                     className={styles.slideBackground}
-                    src={slide.image}
+                    src="https://slideswith.com/cdn-cgi/image/w=1900,h=1400,fit=scale-down,metadata=none,onerror=false/https://slideswith.com//backgrounds/background-20.jpg"
                 />
                 <div className={styles.content}>
                     <h6>{slide.title}</h6>
+                    <img src={slide.image} alt="" />
                 </div>
                 <div style={{ background: slide.background }} className={styles.slidePreviewOverlay}></div>
             </div>

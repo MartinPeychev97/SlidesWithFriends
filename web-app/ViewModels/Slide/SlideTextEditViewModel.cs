@@ -1,9 +1,9 @@
 ﻿namespace web_app.ViewModels.Slide
 {
-    public class SlideTitleViewModel
+    public class SlideTextEditViewModel
     {
         public int Id { get; set; }
 
-        public string Title { get; set; }
+        public string Text { get; set; }
     }
 }

@@ -36,7 +36,7 @@ namespace web_app.Controllers
                 Id = slide.Id,
                 Title = slide.Title,
                 Text = slide.Text,
-                Image = slide.Image
+                Type = slide.Type.ToString(),
             };
 
             return new JsonResult(slideViewModel);
@@ -67,7 +67,9 @@ namespace web_app.Controllers
             var slideViewModel = new SlideViewModel
             {
                 Id = slide.Id,
-                Image = slide.Image
+                Image = slide.Image,
+                Text = slide.Text,
+                Type = slide.Type.ToString(),
             };
 
             return new JsonResult(slideViewModel);
@@ -75,7 +77,7 @@ namespace web_app.Controllers
 
 
         [HttpPut]
-        public async Task<JsonResult> EditTitle([FromBody] SlideTitleViewModel viewModel)
+        public async Task<JsonResult> EditTitle([FromBody] SlideTitleEditViewModel viewModel)
         {
             var result = await this.slideService.EditTitle(viewModel.Id, viewModel.Title);
 
@@ -88,7 +90,7 @@ namespace web_app.Controllers
         }
 
         [HttpPut]
-        public async Task<JsonResult> EditText([FromBody] SlideTextViewModel viewModel)
+        public async Task<JsonResult> EditText([FromBody] SlideTextEditViewModel viewModel)
         {
             var result = await this.slideService.EditText(viewModel.Id, viewModel.Text);
 
@@ -138,10 +140,13 @@ namespace web_app.Controllers
                 return new JsonResult(NotFound());
             }
 
-            var imagePath = Path.Combine(hostEnvironment.WebRootPath, slide.Image.TrimStart('\\'));
-            if (System.IO.File.Exists(imagePath) && !imagePath.Contains("default-background"))
+            if (slide.Image != null)
             {
-                System.IO.File.Delete(imagePath);
+                var imagePath = Path.Combine(hostEnvironment.WebRootPath, slide.Image.TrimStart('\\'));
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
             }
 
             await this.slideService.Remove(id);

@@ -17,7 +17,7 @@ namespace web_app.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit()
+        public  IActionResult Edit()
         {
             return View();
         }
@@ -34,6 +34,7 @@ namespace web_app.Controllers
                     Text = s.Text,
                     Image = s.Image,
                     Background = s.Background,
+                    Type = s.Type.ToString(),
                 }).ToList();
 
             var presentationViewModel = new PresentationEditViewModel()
