@@ -1,0 +1,23 @@
+﻿@using BAL.Models.Event
+@model EventStartViewModel
+
+<div id="qr-code-container">
+    <img id="qr-code-image" src="" />
+</div>
+
+<script>
+  var currentUrl = window.location.href;
+
+  fetch('/generate-qr-code', {
+    method: 'POST',
+    body: JSON.stringify({ url: currentUrl }),
+    headers: { 'Content-Type': 'application/json' }
+  })
+  .then(function(response) {
+    return response.text();
+  })
+  .then(function(data) {
+    var qrCodeImage = document.getElementById('qr-code-image');
+    qrCodeImage.src = data;
+  });
+</script>

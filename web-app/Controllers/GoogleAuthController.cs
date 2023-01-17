@@ -38,7 +38,7 @@ namespace web_app.Controllers
             string[] userInfo = { info.Principal.FindFirst(ClaimTypes.Name).Value, info.Principal.FindFirst(ClaimTypes.Email).Value };
             
             if (result.Succeeded)
-                return View(userInfo);
+                return RedirectToAction("Index", "Home");
             else
             {
                 SlidesUser user = new SlidesUser
@@ -54,7 +54,7 @@ namespace web_app.Controllers
                     if (identResult.Succeeded)
                     {
                         await signInManager.SignInAsync(user, false);
-                        return View(userInfo);
+                        return RedirectToAction("Index", "Home");
                     }
                 }
                 return Unauthorized();
