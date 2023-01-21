@@ -60,6 +60,10 @@
   word-break: break-all;
 }
 
+.text {
+   font-size: 24px;
+}
+
 .title:focus,
 .text:focus {
   border: dotted #777777 2px;

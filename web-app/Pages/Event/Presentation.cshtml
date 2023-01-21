@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-8 event-info">
                     <h1 class="display-1 text-light font-weight-bold">
-                       @Model.Presentation.Name
+                        @Model.Presentation.Name
                     </h1>
                     <h2 class="display-3 text-light mb-3">[ a mini trivia game ]</h2>
                     <div class="event-info__link">
@@ -27,13 +27,23 @@
         @foreach (var slide in Model.Presentation.Slides)
         {
             <section>
-                <img src="@slide.Image"/>
-                <h1>
-                    @slide.Title
-                </h1>
-                <p>
-                    @slide.Text
-                </p>
+                @if (slide.Type == "Title")
+                {
+                    <h1>
+                        @slide.Title
+                    </h1>
+                    <p>
+                        @slide.Text
+                    </p>
+                }
+
+                @if (slide.Type == "Image")
+                {
+                    <img src="@slide.Image" />
+                    <p>
+                        @slide.Text
+                    </p>
+                }
             </section>
         }
     </div>
