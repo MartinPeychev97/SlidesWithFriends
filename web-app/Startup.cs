@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RandomNameGeneratorLibrary;
 using System;
+using web_app.Hubs;
 
 namespace web_app
 {
@@ -69,6 +70,8 @@ namespace web_app
 
             services.AddRazorPages();
 
+            services.AddSignalR();
+
             services.AddTransient<ISlideService, SlideService>();
             services.AddTransient<IPresentationService, PresentationService>();
 
@@ -99,6 +102,7 @@ namespace web_app
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHub<PresentationHub>("/hubs/presentation");
                 //endpoints.MapControllerRoute(
                 //    name: "default",
                 //    pattern: "Pages/{controller=Home}/{action=Index}/{id?}");
