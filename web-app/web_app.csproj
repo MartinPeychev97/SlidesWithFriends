@@ -22,14 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\QrCodeController.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="Pages\Shared\_QRCodePartial.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="wwwroot\images\slides\default-background.jpg" />
   </ItemGroup>
 

@@ -11,7 +11,10 @@
         <section class="event-page container-fluid">
             <div class="row justify-content-center align-items-center">
                 <div class="col-4 qr-code">
-                    <img src="@Model.QRCode" />
+                    @*<img src="@Model.QRCodeTest" />*@
+                    @await Html.PartialAsync("~/Pages/Shared/_QRCodePartial.cshtml", Model.QRCodeViewModel)
+                    @*@Html.Partial("~/Views/Partials/Components/_AdvancedComponentRenderer.cshtml", Model.QRCodeTest);*@
+                    @*@Html.Partial("_MyPartialView")*@
                 </div>
                 <div class="col-8 event-info">
                     <h1 class="display-1 text-light font-weight-bold">
