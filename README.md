@@ -24,3 +24,6 @@ npm install
 npm run webpack
 ```
 4. Start building your react components!
+
+# SonarQube
+[SonarQube analysis result](https://sonarcloud.io/summary/new_code?id=RolandE36_sf-72-dotnet&branch=develop)
