@@ -13,7 +13,7 @@ namespace DAL.Constants
         public const int MinEmailLength = 4;
 
         public const int MaxPasswordLength = 100;
-        public const int MinPasswordLength = 8;
+        public const int MinPasswordLength = 3;
     }
 }
 

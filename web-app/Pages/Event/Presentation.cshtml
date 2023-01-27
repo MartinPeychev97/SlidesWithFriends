@@ -49,4 +49,25 @@
     </div>
 </div>
 
+<script src="~/revealjs/dist/reveal.js"></script>
+<script src="~/revealjs/plugin/notes/notes.js"></script>
+<script src="~/revealjs/plugin/markdown/markdown.js"></script>
+<script src="~/revealjs/plugin/highlight/highlight.js"></script>
+
+<script>
+    isPresenter = (@Model.IsPresenter.ToString().ToLower());
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+
+        controls: isPresenter,
+        keyboard: isPresenter,
+        touch: isPresenter,
+    });
+</script>
 

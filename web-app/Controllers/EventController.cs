@@ -12,7 +12,6 @@ using System.Drawing;
 using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using web_app.ViewModels.Presentation;
 
 namespace web_app.Controllers
 {
@@ -34,9 +33,10 @@ namespace web_app.Controllers
 
         [HttpGet]
         [Route("/[controller]/[action]/{id}")]
-        public async Task<IActionResult> Presentation(int id)
+        public async Task<IActionResult> Presentation(int id, bool isPresenter)
         {
             try
+            
             {
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -64,7 +64,8 @@ namespace web_app.Controllers
                 var model = new EventStartViewModel
                 {
                     Username = username.AsCountry.ToUpper(),
-                    QRCode = GenerateQRCode(),
+                    QRCode = GenerateQRCode(presentationViewModel.Id),
+                    IsPresenter = isPresenter,
                     Presentation = presentationViewModel,
                 };
 
@@ -77,9 +78,10 @@ namespace web_app.Controllers
             }
         }
 
-        private string GenerateQRCode()
+        private string GenerateQRCode(int presentationId)
         {
-            var callingUrl = Request.GetTypedHeaders().Referer.ToString();
+            string baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
+            var callingUrl = $"{baseUrl}/event/presentation/{presentationId}";
             MemoryStream ms = new MemoryStream();
 
             using QRCodeGenerator qrGenerator = new QRCodeGenerator();

@@ -57,7 +57,7 @@ const Header = () => {
     };
 
     const startEventHandler = () => {
-        window.open(`/event/presentation/${presentationId}`)
+        window.open(`/event/presentation/${presentationId}?isPresenter=true`)
     }
 
     return (

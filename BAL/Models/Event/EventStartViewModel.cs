@@ -8,6 +8,8 @@ namespace BAL.Models.Event
 
         public string QRCode { get; set; }
 
+        public bool IsPresenter { get; set; }
+
         public PresentationEventViewModel Presentation { get; set; }
     }
 }
