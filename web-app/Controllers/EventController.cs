@@ -66,7 +66,10 @@ namespace web_app.Controllers
                 var model = new EventStartViewModel
                 {
                     Username = username.AsCountry.ToUpper(),
-                    QRCode = GenerateQRCode(presentationViewModel.Id),
+                    QRCodeViewModel = new QrCodeViewModel()
+                    {
+                        QRCode = GenerateQRCode(presentationViewModel.Id)
+                    },
                     IsPresenter = isPresenter,
                     Presentation = presentationViewModel,
                 };
