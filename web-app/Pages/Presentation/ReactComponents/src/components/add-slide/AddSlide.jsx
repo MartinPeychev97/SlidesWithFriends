@@ -48,7 +48,7 @@ const AddSlide = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ presentationId : +presentationId, rating: 5 })
+            body: JSON.stringify({ presentationId : +presentationId, rating: 0 })
         })
         setSlides([...slides, slide]);
         setActiveSlide(slide);

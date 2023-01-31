@@ -1,6 +1,5 @@
 ﻿using BAL.Models.Slide;
 using DAL.EntityModels;
-using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -26,5 +25,6 @@ namespace BAL.Interfaces
 
         Task EditBackground(EditSlideBackgroundInputModel model);
         Task<Slide> AddRatingSlide(int presentationId, int rating);
+        Task<bool> EditRating(int id, int rating);
     }
 }

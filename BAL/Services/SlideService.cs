@@ -166,5 +166,21 @@ namespace BAL.Services
 
             return slide;
         }
+
+        public async Task<bool> EditRating(int id, int rating)
+        {
+            var slide = await this.db.Slides.FindAsync(id);
+
+            if (slide is null)
+            {
+                return false;
+            }
+
+            slide.Rating = rating;
+
+            await this.db.SaveChangesAsync();
+
+            return true;
+        }
     }
 }
