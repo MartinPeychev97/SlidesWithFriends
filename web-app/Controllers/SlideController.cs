@@ -2,7 +2,6 @@
 using BAL.Models.Slide;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -74,7 +73,6 @@ namespace web_app.Controllers
 
             return new JsonResult(slideViewModel);
         }
-
 
         [HttpPut]
         public async Task<JsonResult> EditTitle([FromBody] SlideTitleEditViewModel viewModel)

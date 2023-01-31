@@ -23,7 +23,6 @@ namespace BAL.Services
         public async Task<IEnumerable<Slide>> GetAll(int presentationId) =>
             await this.db.Slides.Where(s => s.PresentationId == presentationId).ToListAsync();
 
-
         public async Task<Slide> GetById(int id) =>
             await this.db.Slides.Include(x => x.Presentation).FirstOrDefaultAsync(x => x.Id == id);
 
@@ -58,7 +57,6 @@ namespace BAL.Services
 
             return slide;
         }
-
 
         public async Task<bool> EditTitle(int id, string title)
         {
@@ -127,7 +125,6 @@ namespace BAL.Services
 
             return true;
         }
-
 
         public async Task<bool> Remove(int id)
         {
