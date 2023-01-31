@@ -99,7 +99,9 @@ namespace BAL.Services
             { 
                 Title = firstSlide.Title,
                 Text = firstSlide.Text, 
-                Image = firstSlide.Image 
+                Image = firstSlide.Image,
+                Type= firstSlide.Type,
+                Background = firstSlide.Background,
             };
 
             var secondSlide = await this.db.Slides.FindAsync(secondId);
@@ -112,10 +114,14 @@ namespace BAL.Services
             firstSlide.Title = secondSlide.Title;
             firstSlide.Text = secondSlide.Text;
             firstSlide.Image = secondSlide.Image;
+            firstSlide.Background = secondSlide.Background;
+            firstSlide.Type = secondSlide.Type;
 
             secondSlide.Title = firstTemp.Title;
             secondSlide.Text = firstTemp.Text;
             secondSlide.Image = firstTemp.Image;
+            secondSlide.Background = firstTemp.Background;
+            secondSlide.Type = firstSlide.Type;
 
             await this.db.SaveChangesAsync();
 
