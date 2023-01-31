@@ -153,5 +153,25 @@ namespace web_app.Controllers
 
             return new JsonResult(Ok());
         }
+
+        [HttpPost]
+        public async Task<JsonResult> AddRatingSlide([FromBody] SlideRatingViewModel viewModel)
+        {
+            var slide = await this.slideService.AddRatingSlide(viewModel.PresentationId, viewModel.Rating);
+
+            if (slide is null)
+            {
+                return new JsonResult(NotFound());
+            }
+
+            var slideViewModel = new SlideViewModel
+            {
+                Id = slide.Id,
+                Rating = slide.Rating,
+                Type = slide.Type.ToString(),
+            };
+
+            return new JsonResult(slideViewModel);
+        }
     }
 }

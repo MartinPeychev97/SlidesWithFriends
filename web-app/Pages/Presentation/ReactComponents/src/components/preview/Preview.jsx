@@ -20,6 +20,7 @@ const Preview = ({ index, slide }) => {
                 <div className={styles.content}>
                     <h6>{slide.title}</h6>
                     <img src={slide.image} alt="" />
+                    <h6> {slide.rating}</h6>
                 </div>
                 <div style={{ background: slide.background }} className={styles.slidePreviewOverlay}></div>
             </div>

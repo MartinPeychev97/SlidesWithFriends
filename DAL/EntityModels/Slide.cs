@@ -13,7 +13,7 @@ namespace DAL.EntityModels
         public string Image { get; set; }
 
         public string Background { get; set; }
-
+        public int Rating { get; set; }
         public SlideType Type { get; set; }
 
         public int PresentationId { get; set; }

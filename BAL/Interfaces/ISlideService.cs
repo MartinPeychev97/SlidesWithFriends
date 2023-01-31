@@ -25,5 +25,6 @@ namespace BAL.Interfaces
         Task<bool> EditOnDragAndDrop(int firstId, int secondId);
 
         Task EditBackground(EditSlideBackgroundInputModel model);
+        Task<Slide> AddRatingSlide(int presentationId, int rating);
     }
 }

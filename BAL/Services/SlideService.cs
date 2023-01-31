@@ -151,5 +151,20 @@ namespace BAL.Services
 
             await this.db.SaveChangesAsync();
         }
+
+        public async Task<Slide> AddRatingSlide(int presentationId, int rating)
+        {
+            Slide slide = new Slide
+            {
+                Type = SlideType.Rating,
+                PresentationId = presentationId,
+                Rating = rating
+            };
+
+            await this.db.Slides.AddAsync(slide);
+            await this.db.SaveChangesAsync();
+
+            return slide;
+        }
     }
 }

@@ -35,6 +35,7 @@ namespace web_app.Controllers
                     Image = s.Image,
                     Background = s.Background,
                     Type = s.Type.ToString(),
+                    Rating= s.Rating,
                 }).ToList();
 
             var presentationViewModel = new PresentationEditViewModel()
