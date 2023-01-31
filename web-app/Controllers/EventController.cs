@@ -12,6 +12,8 @@ using System.Drawing;
 using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using web_app.ViewModels.Presentation;
+using BAL.Models;
 
 namespace web_app.Controllers
 {

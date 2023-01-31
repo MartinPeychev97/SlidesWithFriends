@@ -8,25 +8,25 @@
 
   <ItemGroup>
     <Compile Remove="Pages\QrCode\**" />
+    <Compile Remove="Pages\Rating\**" />
     <Compile Remove="Resources\**" />
     <Compile Remove="wwwroot\images\**" />
     <Content Remove="Pages\QrCode\**" />
+    <Content Remove="Pages\Rating\**" />
     <Content Remove="Resources\**" />
     <Content Remove="wwwroot\images\**" />
     <EmbeddedResource Remove="Pages\QrCode\**" />
+    <EmbeddedResource Remove="Pages\Rating\**" />
     <EmbeddedResource Remove="Resources\**" />
     <EmbeddedResource Remove="wwwroot\images\**" />
     <None Remove="Pages\QrCode\**" />
+    <None Remove="Pages\Rating\**" />
     <None Remove="Resources\**" />
     <None Remove="wwwroot\images\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Controllers\QrCodeController.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="Pages\Shared\_QRCodePartial.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
