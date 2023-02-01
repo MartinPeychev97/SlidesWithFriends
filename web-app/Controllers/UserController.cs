@@ -8,11 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
 using web_app.ViewModels.User;
-using DAL.Enums;
-using DAL;
-using System.Linq;
 using BAL.Interfaces;
-using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace web_app.Controllers
 {
@@ -115,9 +111,9 @@ namespace web_app.Controllers
             return View();
         }
 
-        public IActionResult Subscribe(Subscription subscriptionType)
+        public async Task<IActionResult> Subscribe(Subscription subscriptionType)
         {
-            var user = db.Users.Where(x => x.UserName == User.Identity.Name).FirstOrDefault();
+            var user = await this.userManager.FindByNameAsync(User.Identity.Name);
             user.Subscription = subscriptionType;
             db.SaveChanges();
 
