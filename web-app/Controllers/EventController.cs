@@ -77,7 +77,7 @@ namespace web_app.Controllers
                 return View(model);
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return RedirectToAction("Index", "Home");
             }

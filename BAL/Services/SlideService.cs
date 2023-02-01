@@ -126,9 +126,9 @@ namespace BAL.Services
             return true;
         }
 
-        public async Task<bool> Remove(int id)
+        public async Task<bool> Remove(int slideId)
         {
-            var slide = await this.db.Slides.FindAsync(id);
+            var slide = await this.db.Slides.FindAsync(slideId);
 
             if (slide == null)
             {
@@ -147,7 +147,7 @@ namespace BAL.Services
 
             if (slide == null)
             {
-                throw new ArgumentNullException("Presentation does not exist");
+                throw new ArgumentNullException("Slide does not exist");
             }
 
             slide.Background = model.Background;

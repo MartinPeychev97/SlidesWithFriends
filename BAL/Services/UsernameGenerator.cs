@@ -45,12 +45,12 @@ namespace BAL.Services
                 throw new ArgumentException("Inexistent presentation");
             }
 
-            if (_generatedUsernames.Any() == false)
+            if (!_generatedUsernames.Any())
             {
                 await this.InitUsernames();
             }
 
-            if (_usernamesByPresentation.ContainsKey(presentationId) == false)
+            if (!_usernamesByPresentation.ContainsKey(presentationId))
             {
                 _usernamesByPresentation.Add(presentationId, new Dictionary<string, PresentationUsername>());
             }
@@ -64,11 +64,11 @@ namespace BAL.Services
 
             while (true)
             {
-                var randomIndex = this._random.Next(0, _generatedUsernames.Count() - 1);
+                var randomIndex = this._random.Next(0, _generatedUsernames.Count - 1);
 
                 var username = _generatedUsernames.ElementAt(randomIndex);
 
-                if (currentPresentation.Any(x => x.Value.AsCountry == username.AsCountry) == false)
+                if (!currentPresentation.Any(x => x.Value.AsCountry == username.AsCountry))
                 {
                     currentPresentation.Add(userId, username);
 
@@ -83,8 +83,6 @@ namespace BAL.Services
 
             var response = JsonSerializer.Deserialize<ApiResponse<CountryWithFlag>>(json, jsonSerializerOptions);
 
-            // TODO: Handle error from response ?
-
             return response.Data;
         }
 
@@ -93,8 +91,6 @@ namespace BAL.Services
             string json = await _httpClient.GetStringAsync($"{this.baseApiUrl}{this.capitalsPath}");
 
             var response = JsonSerializer.Deserialize<ApiResponse<CountryWithCapital>>(json, jsonSerializerOptions);
-
-            // TODO: Handle error from response ?
 
             return response.Data;
         }

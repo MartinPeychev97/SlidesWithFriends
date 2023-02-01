@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DAL.Constants
 {
-    public class SlidesUserConstants
+    public static class SlidesUserConstants
     {
         public const int MaxUserNameLength = 30;
         public const int MinUserNameLength = 3;

@@ -85,7 +85,6 @@ namespace web_app
             services.AddTransient<IUserService, UserService>();
 
             services.AddHttpClient<IUsernameGenerator, UsernameGenerator>();
-            //services.AddSingleton<IUsernameGenerator, UsernameGenerator>();
             services.AddSingleton<Random>();
 
         }
@@ -109,9 +108,6 @@ namespace web_app
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapHub<PresentationHub>("/hubs/presentation");
-                //endpoints.MapControllerRoute(
-                //    name: "default",
-                //    pattern: "Pages/{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

@@ -122,7 +122,7 @@ namespace web_app.Controllers
 
                 return new JsonResult(Ok(model.Background));
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new JsonResult(NotFound());
             }

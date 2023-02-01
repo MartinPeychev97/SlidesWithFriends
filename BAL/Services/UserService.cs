@@ -21,7 +21,7 @@ namespace BAL.Services
             this._dbContext = slidesDbContext;
         }
 
-        public async Task<IEnumerable<string>> GenerateUsernames(int? count = 5)
+        public async Task<IEnumerable<string>> GenerateUsernames(int? count = 8)
         {
             var usernames = this._placeNameGenerator.GenerateMultiplePlaceNames((int)count).ToList();
 
@@ -35,7 +35,7 @@ namespace BAL.Services
             bool areValid = false;
             int index = 0;
 
-            while (areValid == false)
+            while (!areValid)
             {
                 bool userNameExists = await this._dbContext.Users.AnyAsync(u => u.UserName == generatedNames[index]);
 

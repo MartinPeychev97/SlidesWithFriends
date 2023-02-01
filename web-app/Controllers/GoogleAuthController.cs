@@ -10,8 +10,8 @@ namespace web_app.Controllers
     [AllowAnonymous, Route("GoogleAuth")]
     public class GoogleAuthController : Controller
     {
-        private UserManager<SlidesUser> userManager;
-        private SignInManager<SlidesUser> signInManager;
+        private readonly UserManager<SlidesUser> userManager;
+        private readonly SignInManager<SlidesUser> signInManager;
 
         public GoogleAuthController(UserManager<SlidesUser> userMgr, SignInManager<SlidesUser> signinMgr)
         {
@@ -35,7 +35,6 @@ namespace web_app.Controllers
                 return RedirectToAction("Index", "Home");
 
             var result = await signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, false);
-            string[] userInfo = { info.Principal.FindFirst(ClaimTypes.Name).Value, info.Principal.FindFirst(ClaimTypes.Email).Value };
             
             if (result.Succeeded)
                 return RedirectToAction("Index", "Home");
