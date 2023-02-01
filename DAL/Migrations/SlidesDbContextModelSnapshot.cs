@@ -46,6 +46,9 @@ namespace DAL.Migrations
                     b.Property<int>("PresentationId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
                     b.Property<string>("Text")
                         .HasColumnType("longtext");
 

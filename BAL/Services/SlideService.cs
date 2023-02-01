@@ -23,7 +23,6 @@ namespace BAL.Services
         public async Task<IEnumerable<Slide>> GetAll(int presentationId) =>
             await this.db.Slides.Where(s => s.PresentationId == presentationId).ToListAsync();
 
-
         public async Task<Slide> GetById(int id) =>
             await this.db.Slides.Include(x => x.Presentation).FirstOrDefaultAsync(x => x.Id == id);
 
@@ -58,7 +57,6 @@ namespace BAL.Services
 
             return slide;
         }
-
 
         public async Task<bool> EditTitle(int id, string title)
         {
@@ -128,7 +126,6 @@ namespace BAL.Services
             return true;
         }
 
-
         public async Task<bool> Remove(int id)
         {
             var slide = await this.db.Slides.FindAsync(id);
@@ -156,6 +153,37 @@ namespace BAL.Services
             slide.Background = model.Background;
 
             await this.db.SaveChangesAsync();
+        }
+
+        public async Task<Slide> AddRatingSlide(int presentationId, int rating)
+        {
+            Slide slide = new Slide
+            {
+                Type = SlideType.Rating,
+                PresentationId = presentationId,
+                Rating = rating
+            };
+
+            await this.db.Slides.AddAsync(slide);
+            await this.db.SaveChangesAsync();
+
+            return slide;
+        }
+
+        public async Task<bool> EditRating(int id, int rating)
+        {
+            var slide = await this.db.Slides.FindAsync(id);
+
+            if (slide is null)
+            {
+                return false;
+            }
+
+            slide.Rating = rating;
+
+            await this.db.SaveChangesAsync();
+
+            return true;
         }
     }
 }

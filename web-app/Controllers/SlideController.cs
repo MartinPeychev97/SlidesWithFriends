@@ -2,7 +2,6 @@
 using BAL.Models.Slide;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -74,7 +73,6 @@ namespace web_app.Controllers
 
             return new JsonResult(slideViewModel);
         }
-
 
         [HttpPut]
         public async Task<JsonResult> EditTitle([FromBody] SlideTitleEditViewModel viewModel)
@@ -150,6 +148,39 @@ namespace web_app.Controllers
             }
 
             await this.slideService.Remove(id);
+
+            return new JsonResult(Ok());
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> AddRatingSlide([FromBody] SlideRatingViewModel viewModel)
+        {
+            var slide = await this.slideService.AddRatingSlide(viewModel.PresentationId, viewModel.Rating);
+
+            if (slide is null)
+            {
+                return new JsonResult(NotFound());
+            }
+
+            var slideViewModel = new SlideViewModel
+            {
+                Id = slide.Id,
+                Rating = slide.Rating,
+                Type = slide.Type.ToString(),
+            };
+
+            return new JsonResult(slideViewModel);
+        }
+
+        [HttpPut]
+        public async Task<JsonResult> EditRating([FromBody] SlideEditRatingViewModel viewModel)
+        {
+            var result = await this.slideService.EditRating(viewModel.Id, viewModel.Rating);
+
+            if (result is false)
+            {
+                return new JsonResult(NotFound());
+            }
 
             return new JsonResult(Ok());
         }

@@ -12,6 +12,8 @@ using System.Drawing;
 using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using web_app.ViewModels.Presentation;
+using BAL.Models;
 
 namespace web_app.Controllers
 {
@@ -64,7 +66,10 @@ namespace web_app.Controllers
                 var model = new EventStartViewModel
                 {
                     Username = username.AsCountry.ToUpper(),
-                    QRCode = GenerateQRCode(presentationViewModel.Id),
+                    QRCodeViewModel = new QrCodeViewModel()
+                    {
+                        QRCode = GenerateQRCode(presentationViewModel.Id)
+                    },
                     IsPresenter = isPresenter,
                     Presentation = presentationViewModel,
                 };

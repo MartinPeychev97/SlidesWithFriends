@@ -1,11 +1,10 @@
-﻿@using BAL.Models.Event
-@model EventStartViewModel
+﻿@using BAL.Models
+@model QrCodeViewModel
 
-<div id="qr-code-container">
-    <img id="qr-code-image" src="" />
-</div>
+<img id="qr-code-image" src="@Model.QRCode" />
 
-<script>
+
+@*<script>
   var currentUrl = window.location.href;
 
   fetch('/generate-qr-code', {
@@ -20,4 +19,4 @@
     var qrCodeImage = document.getElementById('qr-code-image');
     qrCodeImage.src = data;
   });
-</script>
+</script>*@
