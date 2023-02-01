@@ -93,23 +93,27 @@ namespace BAL.Services
         public async Task<bool> EditOnDragAndDrop(int firstId, int secondId)
         {
             var firstSlide = await this.db.Slides.FindAsync(firstId);
-            var firstTemp = new Slide 
-            { 
-                Title = firstSlide.Title,
-                Text = firstSlide.Text, 
-                Image = firstSlide.Image,
-                Type= firstSlide.Type,
-                Background = firstSlide.Background,
-                Rating = firstSlide.Rating,
 
-            };
-
-            var secondSlide = await this.db.Slides.FindAsync(secondId);
-
-            if (firstSlide is null || secondSlide is null)
+            if (firstSlide is null)
             {
                 return false;
             }
+            var secondSlide = await this.db.Slides.FindAsync(secondId);
+
+            if (secondSlide is null)
+            {
+                return false;
+            }
+
+            var firstTemp = new Slide
+            {
+                Title = firstSlide.Title,
+                Text = firstSlide.Text,
+                Image = firstSlide.Image,
+                Type = firstSlide.Type,
+                Background = firstSlide.Background,
+                Rating = firstSlide.Rating,
+            };
 
             firstSlide.Title = secondSlide.Title;
             firstSlide.Text = secondSlide.Text;
