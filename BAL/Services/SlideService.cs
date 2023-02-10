@@ -153,11 +153,6 @@ namespace BAL.Services
         {
             var slide = await this.db.Slides.FindAsync(model.Id);
 
-            if (slide == null)
-            {
-                throw new ArgumentNullException("Slide does not exist");
-            }
-
             slide.Background = model.Background;
 
             await this.db.SaveChangesAsync();

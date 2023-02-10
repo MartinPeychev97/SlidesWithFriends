@@ -29,9 +29,9 @@ namespace BAL.Services
             await this.db.SaveChangesAsync();
         }
 
-        public async Task<Presentation> GetById(int id) =>
+        public async Task<Presentation> GetById(int presentationId) =>
             await this.db.Presentations
-                .Where(p => p.Id == id)
+                .Where(p => p.Id == presentationId)
                 .Include(p => p.Slides)
                 .FirstOrDefaultAsync();
 
@@ -66,9 +66,9 @@ namespace BAL.Services
             return true;
         }
 
-        public async Task<IEnumerable<Presentation>> GetAll(string usreId) =>
+        public async Task<IEnumerable<Presentation>> GetAll(string userId) =>
             await this.db.Presentations
-                .Where(p => p.UserId == usreId)
+                .Where(p => p.UserId == userId)
                 .Include(p => p.Slides).ToListAsync();
     }
 }
