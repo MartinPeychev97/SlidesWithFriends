@@ -53,6 +53,7 @@ namespace web_app.Controllers
                         Text = s.Text,
                         Image = s.Image,
                         Background = s.Background,
+                        Rating = s.Rating,
                         Type = s.Type.ToString(),
                     }).ToList();
 

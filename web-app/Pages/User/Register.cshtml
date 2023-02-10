@@ -5,20 +5,12 @@
     var generatedUsernames = ViewData["GeneratedUsernames"] as string[];
 }
 
+<br />
 <h1 class="text-lg-center">@ViewData["Title"]</h1>
 <hr />
 
 <div class="row register-page">
-    <div class="name-generator-wrapper card col-md-2 rounded-5 offset-md-1" style="height:fit-content">
-        <div class="card-body">
-            <h5 class="text-center">Available usernames:</h5>
-            <ul class="d-flex flex-column flex-wrap name-generator-container">
-              @*  @foreach (var name in generatedUsernames)
-                {
-                    <li role="button">@name</li>
-                }*@
-            </ul>
-        </div>
+    <div class="col-md-2 rounded-5 offset-md-1">
     </div>
     <div class="col-md-4 offset-md-1">
         <form id="registerForm" method="post">

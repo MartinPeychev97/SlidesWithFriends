@@ -1,6 +1,8 @@
 ﻿using BAL.Interfaces;
+using DAL.EntityModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using web_app.ViewModels.Presentation;
 using web_app.ViewModels.Slide;
@@ -15,6 +17,23 @@ namespace web_app.Controllers
         {
             this.presentationService = presentationService;
         }
+
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(string name)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            await this.presentationService.Create(name, userId);
+
+            return RedirectToAction("Index" ,"Home");
+        }
+
 
         [HttpGet]
         public  IActionResult Edit()
@@ -54,6 +73,27 @@ namespace web_app.Controllers
             await this.presentationService.EditName(viewModel.Id, viewModel.Name);
 
             return new JsonResult(Ok());
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Remove(int id)
+        {
+            var presentation = await this.presentationService.GetById(id);
+
+            return View(presentation);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Remove(Presentation presentation)
+        {
+            if (presentation is null)
+            {
+                return new JsonResult(NotFound());
+            }
+
+            await this.presentationService.Remove(presentation.Id);
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

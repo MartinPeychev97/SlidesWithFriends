@@ -2,6 +2,8 @@
 using DAL;
 using DAL.EntityModels;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BAL.Services
@@ -15,10 +17,23 @@ namespace BAL.Services
             this.db = db;
         }
 
+        public async Task Create(string name, string userId)
+        {
+            var presentation = new Presentation
+            {
+                Name = name,
+                UserId = userId
+            };
+
+            await this.db.Presentations.AddAsync(presentation);
+            await this.db.SaveChangesAsync();
+        }
+
         public async Task<Presentation> GetById(int id) =>
             await this.db.Presentations
+                .Where(p => p.Id == id)
                 .Include(p => p.Slides)
-                .FirstOrDefaultAsync(p => p.Id == id);
+                .FirstOrDefaultAsync();
 
         public async Task<bool> EditName(int id, string name)
         {
@@ -35,5 +50,25 @@ namespace BAL.Services
 
             return true;
         }
+
+        public async Task<bool> Remove(int presentationId)
+        {
+            var presentation = await this.db.Presentations.FindAsync(presentationId);
+
+            if (presentation == null)
+            {
+                return false;
+            }
+
+            this.db.Presentations.Remove(presentation);
+            await this.db.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<IEnumerable<Presentation>> GetAll(string usreId) =>
+            await this.db.Presentations
+                .Where(p => p.UserId == usreId)
+                .Include(p => p.Slides).ToListAsync();
     }
 }

@@ -169,7 +169,7 @@ namespace BAL.Services
             {
                 Type = SlideType.Rating,
                 PresentationId = presentationId,
-                Rating = rating
+                Rating = rating,
             };
 
             await this.db.Slides.AddAsync(slide);

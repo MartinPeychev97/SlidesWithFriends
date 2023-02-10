@@ -12,6 +12,8 @@
 
         public string Background { get; set; }
 
+        public int Rating { get; set; }
+
         public string Type { get; set; }
     }
 }
