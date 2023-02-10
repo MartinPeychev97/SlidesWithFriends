@@ -26,10 +26,15 @@ namespace web_app.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(string name)
+        public async Task<IActionResult> Create(PresentationCreateViewModel viewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+               
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            await this.presentationService.Create(name, userId);
+            await this.presentationService.Create(viewModel.Name, userId);
 
             return RedirectToAction("Index" ,"Home");
         }
@@ -80,11 +85,17 @@ namespace web_app.Controllers
         {
             var presentation = await this.presentationService.GetById(id);
 
-            return View(presentation);
+            var viewModel = new PresentationRemoveViewModel 
+            {
+                Id = presentation.Id,
+                Name = presentation.Name,
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Remove(Presentation presentation)
+        public async Task<IActionResult> Remove(PresentationRemoveViewModel presentation)
         {
             if (presentation is null)
             {

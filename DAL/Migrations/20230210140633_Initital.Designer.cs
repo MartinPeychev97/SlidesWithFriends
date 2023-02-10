@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(SlidesDbContext))]
-    [Migration("20230201143351_Initial")]
-    partial class Initial
+    [Migration("20230210140633_Initital")]
+    partial class Initital
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,7 +28,12 @@ namespace DAL.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(255)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Presentations");
                 });
@@ -294,6 +299,15 @@ namespace DAL.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("DAL.EntityModels.Presentation", b =>
+                {
+                    b.HasOne("DAL.EntityModels.User.SlidesUser", "User")
+                        .WithMany("Presentations")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("DAL.EntityModels.Slide", b =>
                 {
                     b.HasOne("DAL.EntityModels.Presentation", "Presentation")
@@ -359,6 +373,11 @@ namespace DAL.Migrations
             modelBuilder.Entity("DAL.EntityModels.Presentation", b =>
                 {
                     b.Navigation("Slides");
+                });
+
+            modelBuilder.Entity("DAL.EntityModels.User.SlidesUser", b =>
+                {
+                    b.Navigation("Presentations");
                 });
 #pragma warning restore 612, 618
         }
