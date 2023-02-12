@@ -12,6 +12,7 @@ namespace BAL.Services
     {
         private readonly SlidesDbContext db;
 
+
         public PresentationService(SlidesDbContext db)
         {
             this.db = db;
@@ -24,7 +25,8 @@ namespace BAL.Services
                 Name = name,
                 UserId = userId
             };
-
+            var user = await this.db.Users.Where(u => u.Id == userId).FirstOrDefaultAsync();
+            user.Presentations.Add(presentation);
             await this.db.Presentations.AddAsync(presentation);
             await this.db.SaveChangesAsync();
         }

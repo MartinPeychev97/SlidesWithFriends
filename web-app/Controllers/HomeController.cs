@@ -9,20 +9,15 @@ namespace web_app.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        private readonly IPresentationService presentationService;
 
-        public HomeController(IPresentationService presentationService)
+        public HomeController()
         {
-            this.presentationService = presentationService;
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var presentation = await this.presentationService.GetAll(userId);
-
-            return View(presentation);
+            return View();
         }
 
         public IActionResult Profile()

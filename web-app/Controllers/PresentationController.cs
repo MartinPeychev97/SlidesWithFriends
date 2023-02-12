@@ -3,6 +3,7 @@ using DAL.EntityModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using web_app.ViewModels.Presentation;
 using web_app.ViewModels.Slide;
@@ -17,7 +18,10 @@ namespace web_app.Controllers
         {
             this.presentationService = presentationService;
         }
-
+        public IActionResult PresentationIndex()
+        {
+            return View();
+        }
 
         [HttpGet]
         public IActionResult Create()
@@ -36,7 +40,7 @@ namespace web_app.Controllers
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             await this.presentationService.Create(viewModel.Name, userId);
 
-            return RedirectToAction("Index" ,"Home");
+            return RedirectToAction("PresentationIndex" ,"Presentation");
         }
 
 
@@ -80,23 +84,23 @@ namespace web_app.Controllers
             return new JsonResult(Ok());
         }
 
-        [HttpGet]
+        //[HttpGet]
+        //public async Task<IActionResult> Remove(int id)
+        //{
+        //    var presentation = await this.presentationService.GetById(id);
+        //
+        //    var viewModel = new PresentationRemoveViewModel 
+        //    {
+        //        Id = presentation.Id,
+        //        Name = presentation.Name,
+        //    };
+        //
+        //    return View(viewModel);
+        //}
+
         public async Task<IActionResult> Remove(int id)
         {
             var presentation = await this.presentationService.GetById(id);
-
-            var viewModel = new PresentationRemoveViewModel 
-            {
-                Id = presentation.Id,
-                Name = presentation.Name,
-            };
-
-            return View(viewModel);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Remove(PresentationRemoveViewModel presentation)
-        {
             if (presentation is null)
             {
                 return new JsonResult(NotFound());
@@ -104,7 +108,7 @@ namespace web_app.Controllers
 
             await this.presentationService.Remove(presentation.Id);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("PresentationIndex", "Presentation");
         }
     }
 }

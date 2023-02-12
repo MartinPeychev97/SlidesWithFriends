@@ -80,7 +80,7 @@ namespace web_app.Controllers
             }
             catch (Exception)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("PresentationIndex", "Presentation");
             }
         }
 
