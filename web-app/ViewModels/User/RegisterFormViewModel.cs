@@ -1,5 +1,6 @@
 ﻿namespace web_app.ViewModels.User
 {
+    using Microsoft.AspNetCore.Http;
     using System.ComponentModel.DataAnnotations;
     using static DAL.Constants.SlidesUserConstants;
     public class RegisterFormViewModel
@@ -11,6 +12,7 @@
         [EmailAddress]
         [StringLength(MaxEmailLength, MinimumLength = MinEmailLength)]
         public string Email { get; set; }
+        public IFormFile Image { get; set; }
         [Required]
         [StringLength(MaxPasswordLength, MinimumLength = MinPasswordLength)]
         [DataType(DataType.Password)]

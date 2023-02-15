@@ -13,7 +13,7 @@
     <div class="col-md-2 rounded-5 offset-md-1">
     </div>
     <div class="col-md-4 offset-md-1">
-        <form id="registerForm" method="post">
+        <form id="registerForm" method="post" enctype="multipart/form-data">
             <hr />
             <div asp-validation-summary="ModelOnly"></div>
             <div class="text-center">
@@ -25,6 +25,11 @@
                 <label asp-for="@Model.Email">Email</label>
                 <input class="form-control" aria-required="true" asp-for="@Model.Email" />
                 <span asp-validation-for="@Model.Email" class="text-danger"></span>
+            </div>
+            <div class="text-center mb-3">
+                <label asp-for="@Model.Image">Image</label>
+                <input type="file" class="form-control" asp-for="@Model.Image" />
+                <span asp-validation-for="@Model.Image" class="text-danger"></span>
             </div>
             <div class="text-center mb-3">
                 <label asp-for="@Model.Password">Password</label>

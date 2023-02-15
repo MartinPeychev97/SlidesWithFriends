@@ -10,6 +10,8 @@ namespace DAL.EntityModels.User
         [Required]
         public Subscription Subscription { get; set; } = Subscription.None;
 
+        public string Image { get; set; }
+
         public ICollection<Presentation> Presentations { get; set; } = new List<Presentation>();
     }
 }

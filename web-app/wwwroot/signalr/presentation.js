@@ -1,5 +1,5 @@
 ﻿let connection = new signalR.HubConnectionBuilder()
-    .withUrl("/hubs/presentation")
+    .withUrl(`/hubs/presentation?presentationId=${presentationId}`,)
     .build();
 
 connection.on("UpdateSlide", function (indexh, indexv) {
