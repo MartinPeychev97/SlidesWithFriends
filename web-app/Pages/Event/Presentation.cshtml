@@ -18,35 +18,7 @@
                         @Model.Presentation.Name
                     </h1>
                 </div>
-                <div class="users-container">
-                    <div class="avatar">
-                        <img src="@Model.Image" />
-                        <p>@Model.Username</p>
-                    </div>
-                    <div class="avatar">
-                        <img src="@Model.Image" />
-                        <p>@Model.Username</p>
-                    </div>
-                    <div class="avatar">
-                        <img src="@Model.Image" />
-                        <p>@Model.Username</p>
-                    </div>
-                    <div class="avatar">
-                        <img src="@Model.Image" />
-                        <p>@Model.Username</p>
-                    </div>
-                     <div class="avatar">
-                        <img src="@Model.Image" />
-                        <p>@Model.Username</p>
-                    </div>
-                    <div class="avatar">
-                        <img src="@Model.Image" />
-                        <p>@Model.Username</p>
-                    </div>
-                    <div class="avatar">
-                        <img src="@Model.Image" />
-                        <p>@Model.Username</p>
-                    </div>
+                <div id="users-container" class="users-container">
                 </div>
             </div>
         </section>
@@ -95,6 +67,8 @@
 <script>
     isPresenter = (@Model.IsPresenter.ToString().ToLower());
     var presentationId = @Model.Presentation.Id;
+    var username = "@Model.Username";
+    var image = `@string.Join("\\\\", Model.Image.Split("\\"))`;
 
     Reveal.initialize({
         hash: true,
