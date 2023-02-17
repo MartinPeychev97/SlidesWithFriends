@@ -84,20 +84,6 @@ namespace web_app.Controllers
             return new JsonResult(Ok());
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> Remove(int id)
-        //{
-        //    var presentation = await this.presentationService.GetById(id);
-        //
-        //    var viewModel = new PresentationRemoveViewModel 
-        //    {
-        //        Id = presentation.Id,
-        //        Name = presentation.Name,
-        //    };
-        //
-        //    return View(viewModel);
-        //}
-
         public async Task<IActionResult> Remove(int id)
         {
             var presentation = await this.presentationService.GetById(id);

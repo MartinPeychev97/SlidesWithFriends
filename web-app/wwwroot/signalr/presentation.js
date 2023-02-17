@@ -6,31 +6,16 @@ connection.on("UpdateSlide", function (indexh, indexv) {
     Reveal.slide(indexh, indexv);
 });
 
-connection.on("UserJoined", function (users) {
+connection.on("DisplayUsers", function (users) {
+    console.log(users)
     $("#users-container").empty();
-    $.each(users, function (user, image) {
-        console.log(user)
-        console.log(image)
+    $.each(users, function (index, user) {
         $("#users-container").append(`
                     <div class="avatar">
-                        <img src="${image}" />
-                        <p>${user}</p>
+                        <img src="${user.image}" />
+                        <p>${user.username}</p>
                     </div>
-`);
-    });
-});
-
-connection.on("UserLeft", function (users) {
-    $("#users-container").empty();
-    $.each(users, function (user, image) {
-        console.log(user)
-        console.log(image)
-        $("#users-container").append(`
-                    <div class="avatar">
-                        <img src="${image}" />
-                        <p>${user}</p>
-                    </div>
-`);
+        `);
     });
 });
 

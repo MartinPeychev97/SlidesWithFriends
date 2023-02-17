@@ -1,35 +1,38 @@
-﻿using DAL.EntityModels;
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.Extensions.Primitives;
-using System;
+﻿using Microsoft.AspNetCore.SignalR;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using web_app.ViewModels.User;
 
 namespace web_app.Hubs
 {
     public class PresentationHub : Hub
     {
-        private static Dictionary<string, string> connectedUsers = new Dictionary<string, string>();
-
-        public override async Task OnConnectedAsync()
-        {
-            var presentationId = GetPresentationId();
-
-            await Groups.AddToGroupAsync(Context.ConnectionId, presentationId);
-        }
+        private static Dictionary<string, List<UserJoinEventViewModel>> connectedUsers = new Dictionary<string, List<UserJoinEventViewModel>>();
 
         public async Task Join(string username, string image)
         {
             var presentationId = GetPresentationId();
-            connectedUsers.Add(username, image);
-            await Clients.Group(presentationId).SendAsync("UserJoined", connectedUsers);
+
+            if (!connectedUsers.ContainsKey(presentationId))
+            {
+                connectedUsers.Add(presentationId, new List<UserJoinEventViewModel>());
+            }
+            connectedUsers[presentationId].Add(new UserJoinEventViewModel
+            {
+                Username = username,
+                Image = image
+            });
+
+            await Groups.AddToGroupAsync(Context.ConnectionId, presentationId);
+            await Clients.Group(presentationId).SendAsync("DisplayUsers", connectedUsers[presentationId]);
         }
 
         public async Task Leave(string username)
         {
             var presentationId = GetPresentationId();
-            connectedUsers.Remove(username);
-            await Clients.Group(presentationId).SendAsync("UserLeft", connectedUsers);
+            connectedUsers[presentationId].Remove(connectedUsers[presentationId].FirstOrDefault(u => u.Username == username));
+            await Clients.Group(presentationId).SendAsync("DisplayUsers", connectedUsers[presentationId]);
         }
 
 

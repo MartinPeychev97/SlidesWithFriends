@@ -13,7 +13,7 @@ namespace BAL.Services
 {
     public class UsernameGenerator : IUsernameGenerator
     {
-        private readonly string baseApiUrl = "https://countriesnow.space/api/v0.1/";
+        private const string baseApiUrl = "https://countriesnow.space/api/v0.1/";
         private readonly string flagsPath = $"countries/flag/images";
         private readonly string capitalsPath = $"countries/capital";
         private readonly IPresentationService presentationService;
@@ -79,7 +79,7 @@ namespace BAL.Services
 
         private async Task<IEnumerable<CountryWithFlag>> GetCountriesWithFlags()
         {
-            string json = await _httpClient.GetStringAsync($"{this.baseApiUrl}{this.flagsPath}");
+            string json = await _httpClient.GetStringAsync($"{baseApiUrl}{this.flagsPath}");
 
             var response = JsonSerializer.Deserialize<ApiResponse<CountryWithFlag>>(json, jsonSerializerOptions);
 
@@ -88,7 +88,7 @@ namespace BAL.Services
 
         private async Task<IEnumerable<CountryWithCapital>> GetCountriesWithCapitals()
         {
-            string json = await _httpClient.GetStringAsync($"{this.baseApiUrl}{this.capitalsPath}");
+            string json = await _httpClient.GetStringAsync($"{baseApiUrl}{this.capitalsPath}");
 
             var response = JsonSerializer.Deserialize<ApiResponse<CountryWithCapital>>(json, jsonSerializerOptions);
 
