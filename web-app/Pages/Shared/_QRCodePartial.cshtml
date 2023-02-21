@@ -1,0 +1,22 @@
+﻿@using BAL.Models
+@model QrCodeViewModel
+
+<img id="qr-code-image" src="@Model.QRCode" alt="QR code image"/>
+
+
+@*<script>
+  var currentUrl = window.location.href;
+
+  fetch('/generate-qr-code', {
+    method: 'POST',
+    body: JSON.stringify({ url: currentUrl }),
+    headers: { 'Content-Type': 'application/json' }
+  })
+  .then(function(response) {
+    return response.text();
+  })
+  .then(function(data) {
+    var qrCodeImage = document.getElementById('qr-code-image');
+    qrCodeImage.src = data;
+  });
+</script>*@

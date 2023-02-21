@@ -1,0 +1,10 @@
+﻿.c-colour-picker {
+    position:absolute;
+    top:80px;
+}
+
+.c-colour-picker__header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}

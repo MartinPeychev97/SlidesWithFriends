@@ -1,0 +1,61 @@
+﻿@model RegisterFormViewModel
+
+@{
+    ViewData["Title"] = "Register";
+    var generatedUsernames = ViewData["GeneratedUsernames"] as string[];
+}
+
+<br />
+<h1 class="text-lg-center">@ViewData["Title"]</h1>
+<hr />
+
+<div class="row register-page">
+    <div class="col-md-2 rounded-5 offset-md-1">
+    </div>
+    <div class="col-md-4 offset-md-1">
+        <form id="registerForm" method="post">
+            <hr />
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="text-center">
+                <label asp-for="@Model.UserName">Username</label>
+                <input class="form-control" aria-required="true" asp-for="@Model.UserName" />
+                <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+            </div>
+            <div class="text-center mb-3">
+                <label asp-for="@Model.Email">Email</label>
+                <input class="form-control" aria-required="true" asp-for="@Model.Email" />
+                <span asp-validation-for="@Model.Email" class="text-danger"></span>
+            </div>
+            <div class="text-center mb-3">
+                <label asp-for="@Model.Password">Password</label>
+                <input class="form-control" aria-required="true" type="password" asp-for="@Model.Password" />
+                <span asp-validation-for="@Model.Password" class="text-danger"></span>
+            </div>
+            <div class="text-center mb-3">
+                <label asp-for="@Model.ConfirmPassword">Confirm Password</label>
+                <input class="form-control" aria-required="true" type="password" asp-for="@Model.ConfirmPassword" />
+                <span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="text-center">
+                <button id="registerSubmit" type="submit" class="btn btn-primary">Register</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+
+        const selectors = {
+            generatedNames:'.name-generator-container li',
+            usernameInput:'#registerForm div:nth-of-type(1) > input'
+        }
+
+        $(selectors.generatedNames).click((el) => {
+            const selectedName = el.target.textContent;
+            $(selectors.usernameInput).val(selectedName);
+        })
+    </script>
+}

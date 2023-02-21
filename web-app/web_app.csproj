@@ -7,32 +7,62 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\QrCode\**" />
+    <Compile Remove="Pages\Rating\**" />
+    <Compile Remove="Resources\**" />
+    <Compile Remove="wwwroot\images\**" />
+    <Content Remove="Pages\QrCode\**" />
+    <Content Remove="Pages\Rating\**" />
+    <Content Remove="Resources\**" />
+    <Content Remove="wwwroot\images\**" />
+    <EmbeddedResource Remove="Pages\QrCode\**" />
+    <EmbeddedResource Remove="Pages\Rating\**" />
+    <EmbeddedResource Remove="Resources\**" />
+    <EmbeddedResource Remove="wwwroot\images\**" />
+    <None Remove="Pages\QrCode\**" />
+    <None Remove="Pages\Rating\**" />
+    <None Remove="Resources\**" />
+    <None Remove="wwwroot\images\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\QrCodeController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\images\slides\default-background.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
 	<PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="3.1.30" />
 	<PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.29" />
 	<PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
 	<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.17" />
+	<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.30" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.17">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.25" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.25" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.25">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.30" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.30">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.1" />
+    <PackageReference Include="QRCoder" Version="1.4.3" />
+    <PackageReference Include="RandomNameGeneratorLibrary" Version="1.2.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BAL\BAL.csproj" />
     <ProjectReference Include="..\DAL\DAL.csproj" />
-  </ItemGroup>
+  </ItemGroup>  
 
   <ItemGroup>
     <Folder Include="Resources\" />
-    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\js\" />
   </ItemGroup>  
 
 </Project>

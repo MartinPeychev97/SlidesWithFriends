@@ -1,0 +1,127 @@
+﻿@using DAL.Enums;
+@using DAL;
+@inject SlidesDbContext db;
+
+@{
+    var user = db.Users.Where(x => x.UserName == User.Identity.Name).FirstOrDefault();
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/subscription.css" type="text/css" />
+    <title>User Subscription</title>
+</head>
+
+<body>
+    <section>
+        <div class="container py-5">
+            <div class="row text-center align-items-end">
+                <!-- Table 1-->
+                <div id="table" class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="bg-white p-5 rounded-lg shadow">
+                        <h1 class="title">Starter</h1>
+
+                        <h1 class="description">Engaging events for classrooms, small teams and communities.</h1>
+
+                        <h2 class="samel1">$</h2>
+                        <h2 class="samel2">8 </h2>
+                        <h2 class="samel3">/mo</h2>
+
+                        <h2 class="fineprint">billed annualy ($96 per year)</h2>
+                        </br>
+                        @if (user.Subscription == Subscription.Starter)
+                        {
+                            <a asp-controller="User" asp-action="Subscribe" asp-route-subscriptionType="@Subscription.None" id="subbtn" class="btn btn-danger btn-block p-2 shadow ">Cancell Subscription</a>
+                        }
+                        else if (user.Subscription == Subscription.Pro)
+                        {
+                            <a asp-controller="User" asp-action="Subscribe" asp-route-subscriptionType="@Subscription.Starter" id="subbtn" class="btn btn-danger btn-block p-2 shadow ">Downgrade to Starter</a>
+                        }
+                        else if (user.Subscription == Subscription.None)
+                        {
+                            <a asp-controller="User" asp-action="Subscribe" asp-route-subscriptionType="@Subscription.Starter" id="subbtn" class="btn btn-danger btn-block p-2 shadow ">Get Starter Subscription</a>
+                        }
+                        </br>
+                        </br>
+
+                        <ul>
+                            <li class="mb-1">
+                                <i class="mr-2"></i>🙋‍♀️ <b>Host up to 50 people</b>
+                            </li>
+                            <li class="mb-1">
+                                <i class="mr-2"></i>💬 All interaction slides
+                            </li>
+                            <li class="mb-1">
+                                <i class="mr-2"></i>🎨 Custom fonts & design
+                            </li>
+                            <li class="mb-1">
+                                <i class="mr-2"></i>💾 Save & export event data
+                            </li>
+                            <li class="mb-3">
+                                <i class="mr-2"></i>📴 Moderator tools (soon)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- T1 end -->
+                <!-- Table 2-->
+                <div id="table" class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="bg-white p-5 rounded-lg shadow">
+                        <h1 class="title">Pro</h1>
+
+                        <h1 class="description">Branded events for large teams, conferences and groups.</h1>
+
+                        <h2 class="samel1">$</h2>
+                        <h2 class="samel2">24 </h2>
+                        <h2 class="samel3">/mo</h2>
+
+                        <h2 class="fineprint">billed at $288 per year</h2>
+                        </br>
+                        @if (user.Subscription == Subscription.Starter)
+                        {
+                            <a asp-controller="User" asp-action="Subscribe" asp-route-subscriptionType="@Subscription.Pro" id="subbtn" class="btn btn-danger btn-block p-2 shadow">Upgrade to Pro</a>
+                        }
+                        else if (user.Subscription == Subscription.Pro)
+                        {
+                            <a asp-controller="User" asp-action="Subscribe" asp-route-subscriptionType="@Subscription.None" id="subbtn" class="btn btn-danger btn-block p-2 shadow ">Cancell Subscription</a>
+                        }
+                        else if (user.Subscription == Subscription.None)
+                        {
+                            <a asp-controller="User" asp-action="Subscribe" asp-route-subscriptionType="@Subscription.Pro" id="subbtn" class="btn btn-danger btn-block p-2 shadow ">Get Pro Subscription</a>
+                        }
+
+                        </br>
+                        </br>
+
+                        <ul>
+                            <li class="mb-1">
+                                <i class="mr-2"></i> <b>🙋‍♀️ Host up to 250 people</b>
+                            </li>
+                            <li class="mb-1">
+                                <i class="mr-2"></i>💬 All interaction slides
+                            </li>
+                            <li class="mb-1">
+                                <i class="mr-2"></i>🎨 Custom fonts & design
+                            </li>
+                            <li class="mb-1">
+                                <i class="mr-2"></i>📦 Remove SlidesWith Logo
+                            </li>
+                            <li class="mb-1">
+                                <i class="mr-2"></i>💾 Save & export event data
+                            </li>
+                            <li class="mb-1">
+                                <i class="mr-2"></i>📴 Moderator tools (soon)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- T2 end -->
+
+            </div>
+        </div>
+    </section>
+    <br />
+    <div class="rejectbtn">
+        <a id="rejectbtn" asp-controller="Home" asp-action="Index" class="btn btn-block">Not right now</a>
+    </div>
+
+</body>

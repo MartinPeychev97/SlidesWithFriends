@@ -1,0 +1,25 @@
+﻿.event-page > section {
+    margin-top: 100px;
+}
+
+.event-page .qr-code {
+    width: 400px;
+    height: 400px;
+    margin-right: 50px;
+}
+
+    .event-page .qr-code > img {
+        width: 100%;
+        height: 100%;
+    }
+
+.event-page .event-info h1 {
+    font-weight: 500;
+}
+
+.event-page .event-info .event-info__link {
+    font-weight: normal;
+    width: fit-content;
+    padding: 1rem;
+    background: white;
+}

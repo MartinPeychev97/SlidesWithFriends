@@ -1,0 +1,19 @@
+﻿.u-absolute {
+    position: absolute;
+}
+
+.u-pos-default-top {
+    top: 0;
+}
+
+.u-pos-default-left {
+    left: 0;
+}
+
+.u-pos-default-right {
+    right: 0;
+}
+
+.u-pos-default-bottom {
+    bottom: 0;
+}

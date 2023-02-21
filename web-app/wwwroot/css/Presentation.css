@@ -1,0 +1,129 @@
+﻿.level-left {
+    font-family: 'Lato', sans-serif;
+    font-size: smaller;
+    color: gray;
+    font-size: 0.7em;
+    display: flexbox;
+    justify-content: left;
+    position: relative;
+    bottom: 10px;
+    left: 2px;
+}
+
+.create-presentation a {
+    position: relative;
+    left: 130px;
+}
+
+.delete-button {
+    position: relative;
+    top: 245px;
+    right: 75px;
+    color: #888;
+}
+
+p.vibe {
+    cursor: pointer;
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0; 
+    text-transform: uppercase;
+    font-size: .7em;
+    color: #888;
+    margin-bottom: -15px;
+    margin-top: 10px;
+    text-align: left;
+}
+
+p.subtitle.is-5.m-t-15.deck-name {
+    cursor: pointer;
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    word-break: break-word;
+    color: #4a4a4a;
+    font-weight: 400;
+    line-height: 1.25;
+    margin-top: 15px;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    min-height: 2.5em;
+    text-align: left;
+}
+
+.deck-box {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    max-width: 1400px;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.deck-card {
+
+    text-decoration: none;
+    margin: 0 1em 2em 0;
+    flex-grow: 1;
+    width: 370px;
+    height: 280px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #fff;
+    box-shadow: 0 .85rem 1.5rem rgba(18,38,63,.03);
+    max-width: 420px;
+    border: 1px solid rgba(229,234,236,.712);
+    padding: .8em;
+    position: relative;
+    transition: transform .16s ease;
+}
+
+.deck-thumb {
+    cursor: pointer;
+    box-sizing: inherit;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 7px;
+    flex-grow: 1;
+    text-align: center;
+    position: relative;
+    height: 140px;
+    width: 100%;
+    border-radius: 6px;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+    overflow: hidden;
+    box-shadow: 1px 8px 16px -8px rgba(0,0,0,.2);
+    background-color: rgb(33, 41, 39);
+    color: rgb(255, 255, 255);
+    font-family: "Open Sans";
+    --titleFont: Open Sans;
+    --paraFont: Open Sans;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.deck-icon {
+    position: absolute;
+    top: 115px;
+    right: 25px;
+    margin: 0;
+    display: block;
+    opacity: 1;
+    height: 60px;
+    width: 60px;
+    z-index: 5;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 2px 6px;
+    box-shadow: 1px 6px 12px -8px rgb(0 0 0 / 20%);
+    text-align: center;
+}

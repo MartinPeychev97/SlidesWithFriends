@@ -1,0 +1,28 @@
+﻿@using DAL.EntityModels.User;
+@using DAL.EntityModels;
+@inject SignInManager<SlidesUser> signInManager
+
+@if (signInManager.IsSignedIn(User))
+{
+    <br />
+    <br />
+    <div class="d-flex align-items-center h-100">
+        <div class="container text-center">
+            <h1 class="display-4">Welcome to our website!</h1>
+            <p class="lead">Go to <a asp-controller="Presentation" asp-action="PresentationIndex">MyDecks</a> to view your presentations.</p>
+        </div>
+    </div>
+}
+else
+{
+    <br />
+    <br />
+    <div class="d-flex align-items-center h-100">
+        <div class="container text-center">
+            <h1 class="display-4">Welcome to our website!</h1>
+            <p class="lead">Please sign in or create an account to access exclusive features and personalize your experience.</p>
+            <p class="lead">Don't miss out on the benefits of being a member. <a asp-controller="User" asp-action="Register">Register now!</a></p>
+        </div>
+    </div>
+}
+
