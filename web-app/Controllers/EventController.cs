@@ -12,7 +12,6 @@ using System.Drawing;
 using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using web_app.ViewModels.Presentation;
 using BAL.Models;
 using Microsoft.AspNetCore.Identity;
 using DAL.EntityModels.User;
@@ -69,8 +68,6 @@ namespace web_app.Controllers
                     Name = presentation.Name,
                     Slides = slides
                 };
-
-                var image = User.FindFirstValue("image");
 
                 var model = new EventStartViewModel
                 {
