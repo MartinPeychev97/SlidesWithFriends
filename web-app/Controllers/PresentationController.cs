@@ -1,10 +1,10 @@
 ﻿using BAL.Interfaces;
-using DAL.EntityModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
+using System;
 using System.Linq;
 using System.Security.Claims;
-using System.Security.Principal;
 using System.Threading.Tasks;
 using web_app.ViewModels.Presentation;
 using web_app.ViewModels.Slide;
@@ -89,6 +89,31 @@ namespace web_app.Controllers
             await this.presentationService.EditName(viewModel.Id, viewModel.Name);
 
             return new JsonResult(Ok());
+        }
+
+        [HttpPut]
+        public async Task<JsonResult> EditImage([FromForm] PresentationImageEditViewModel viewModel)
+        {
+            if (viewModel.Image == null && viewModel.Image.ContentType.StartsWith("image"))
+            {
+                return new JsonResult(BadRequest());
+            }
+
+            string wwwroot = hostEnvironment.WebRootPath;
+            string fileName = Guid.NewGuid().ToString();
+            var uploads = Path.Combine(wwwroot, @"images\presentation");
+            var extension = Path.GetExtension(viewModel.Image.FileName);
+
+            using (var fileStream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+            {
+                viewModel.Image.CopyTo(fileStream);
+            }
+
+            var imagePath = @"\images\presentation\" + fileName + extension;
+
+            await this.presentationService.EditImage(viewModel.Id, imagePath);
+
+            return new JsonResult(Ok(imagePath));
         }
 
         public async Task<IActionResult> Remove(int id)

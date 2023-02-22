@@ -1,8 +1,10 @@
 ﻿using BAL.Interfaces;
 using DAL;
 using DAL.EntityModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,11 +13,12 @@ namespace BAL.Services
     public class PresentationService : IPresentationService
     {
         private readonly SlidesDbContext db;
+        private readonly IWebHostEnvironment hostEnvironment;
 
-
-        public PresentationService(SlidesDbContext db)
+        public PresentationService(SlidesDbContext db, IWebHostEnvironment hostEnvironment)
         {
             this.db = db;
+            this.hostEnvironment = hostEnvironment;
         }
 
         public async Task Create(string name, string userId, string image)
@@ -40,7 +43,7 @@ namespace BAL.Services
 
         public async Task<bool> EditName(int id, string name)
         {
-           var presentation = await this.GetById(id);
+            var presentation = await this.GetById(id);
 
             if (presentation == null)
             {
@@ -54,6 +57,25 @@ namespace BAL.Services
             return true;
         }
 
+        public async Task<bool> EditImage(int id, string image)
+        {
+            var presentation = await this.GetById(id);
+
+            if (presentation == null)
+            {
+                return false;
+            }
+
+            RemoveImage(presentation);
+
+            presentation.Image = image;
+
+            await this.db.SaveChangesAsync();
+
+            return true;
+        }
+
+
         public async Task<bool> Remove(int presentationId)
         {
             var presentation = await this.db.Presentations.FindAsync(presentationId);
@@ -62,6 +84,8 @@ namespace BAL.Services
             {
                 return false;
             }
+
+            RemoveImage(presentation);
 
             this.db.Presentations.Remove(presentation);
             await this.db.SaveChangesAsync();
@@ -73,5 +97,17 @@ namespace BAL.Services
             await this.db.Presentations
                 .Where(p => p.UserId == userId)
                 .Include(p => p.Slides).ToListAsync();
+
+        private void RemoveImage(Presentation presentation)
+        {
+            if (presentation.Image != @"\images\presentation\default.png")
+            {
+                var imagePath = Path.Combine(hostEnvironment.WebRootPath, presentation.Image.TrimStart('\\'));
+                if (File.Exists(imagePath))
+                {
+                    File.Delete(imagePath);
+                }
+            }
+        }
     }
 }

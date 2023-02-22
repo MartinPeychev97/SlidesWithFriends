@@ -66,6 +66,7 @@ namespace web_app.Controllers
                 {
                     Id = presentation.Id,
                     Name = presentation.Name,
+                    Image = presentation.Image,
                     Slides = slides
                 };
 

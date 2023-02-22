@@ -18,11 +18,15 @@ namespace web_app.Hubs
             {
                 connectedUsers.Add(presentationId, new List<UserJoinEventViewModel>());
             }
-            connectedUsers[presentationId].Add(new UserJoinEventViewModel
+
+            if (!connectedUsers[presentationId].Any(u => u.Username == username))
             {
-                Username = username,
-                Image = image
-            });
+                connectedUsers[presentationId].Add(new UserJoinEventViewModel
+                {
+                    Username = username,
+                    Image = image
+                });
+            }
 
             await Groups.AddToGroupAsync(Context.ConnectionId, presentationId);
             await Clients.Group(presentationId).SendAsync("DisplayUsers", connectedUsers[presentationId]);

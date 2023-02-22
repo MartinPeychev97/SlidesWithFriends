@@ -14,6 +14,8 @@ namespace BAL.Interfaces
 
         Task<bool> EditName(int id, string name);
 
+        Task<bool> EditImage(int id, string image);
+
         Task<bool> Remove(int presentationId);
     }
 }

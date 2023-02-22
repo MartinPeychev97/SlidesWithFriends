@@ -350,7 +350,7 @@ section.has-light-background, section.has-light-background h1, section.has-light
 .reveal {
     height: 100vh;
     width: 100vw;
-    background-image: url('https://slideswith.com//backgrounds/background-16.svg');
+    /*background-image: url('https://slideswith.com//backgrounds/background-16.svg');*/
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
