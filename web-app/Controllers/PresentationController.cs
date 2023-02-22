@@ -1,5 +1,6 @@
 ﻿using BAL.Interfaces;
 using DAL.EntityModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Security.Claims;
@@ -13,10 +14,12 @@ namespace web_app.Controllers
     public class PresentationController : Controller
     {
         private readonly IPresentationService presentationService;
+        private readonly IWebHostEnvironment hostEnvironment;
 
-        public PresentationController(IPresentationService presentationService)
+        public PresentationController(IPresentationService presentationService, IWebHostEnvironment hostEnvironment)
         {
             this.presentationService = presentationService;
+            this.hostEnvironment = hostEnvironment;
         }
         public IActionResult PresentationIndex()
         {
@@ -38,7 +41,10 @@ namespace web_app.Controllers
             }
                
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            await this.presentationService.Create(viewModel.Name, userId);
+
+            string imagePath = @"\images\presentation\default.png";
+
+            await this.presentationService.Create(viewModel.Name, userId, imagePath);
 
             return RedirectToAction("PresentationIndex" ,"Presentation");
         }
@@ -70,6 +76,7 @@ namespace web_app.Controllers
             {
                 Id = presentation.Id,
                 Name = presentation.Name,
+                Image = presentation.Image,
                 Slides = slides
             };
 

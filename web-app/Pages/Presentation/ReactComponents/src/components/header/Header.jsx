@@ -6,8 +6,8 @@ import styles from "./header.module.css";
 
 const Header = () => {
     const {
-        presentationName,
-        setPresentationName,
+        presentation,
+        setPresentation,
         presentationId,
         setSlides,
         slides,
@@ -19,7 +19,7 @@ const Header = () => {
     const { post } = useFetch();
 
     const handleChange = (e) => {
-        setPresentationName(e.target.value);
+        setPresentation({...presentation, name: e.target.value});
     };
 
     const editName = async (e) => {
@@ -67,7 +67,7 @@ const Header = () => {
                     onBlur={editName}
                     onChange={handleChange}
                     type="text"
-                    value={presentationName}
+                    value={presentation.name}
                 />
             </div>
             <div className={styles.actions}>

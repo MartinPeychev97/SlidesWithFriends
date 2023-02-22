@@ -23,6 +23,9 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("Image")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
@@ -68,34 +71,6 @@ namespace DAL.Migrations
                     b.HasIndex("PresentationId");
 
                     b.ToTable("Slides");
-                });
-
-            modelBuilder.Entity("DAL.EntityModels.TestEntity.TestEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("varchar(40)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TestEntities");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "firstTestEntity"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "secondTestEntity"
-                        });
                 });
 
             modelBuilder.Entity("DAL.EntityModels.User.SlidesUser", b =>

@@ -6,7 +6,7 @@ namespace BAL.Interfaces
 {
     public interface IPresentationService
     {
-        Task Create(string name, string userId);
+        Task Create(string name, string userId, string image);
 
         Task<Presentation> GetById(int presentationId);
 

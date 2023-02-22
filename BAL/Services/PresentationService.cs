@@ -18,12 +18,13 @@ namespace BAL.Services
             this.db = db;
         }
 
-        public async Task Create(string name, string userId)
+        public async Task Create(string name, string userId, string image)
         {
             var presentation = new Presentation
             {
                 Name = name,
-                UserId = userId
+                UserId = userId,
+                Image = image
             };
             var user = await this.db.Users.Where(u => u.Id == userId).FirstOrDefaultAsync();
             user.Presentations.Add(presentation);
