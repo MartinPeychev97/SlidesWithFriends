@@ -8,10 +8,6 @@ namespace DAL
 {
     public class SlidesDbContext : IdentityDbContext<SlidesUser>
     {
-        public SlidesDbContext() : base()
-        {
-        }
-
         public SlidesDbContext(DbContextOptions<SlidesDbContext> options) : base(options)
         {
         }
@@ -21,11 +17,6 @@ namespace DAL
         public DbSet<Presentation> Presentations { get; set; }
 
         public DbSet<Slide> Slides { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

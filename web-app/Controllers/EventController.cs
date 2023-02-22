@@ -12,8 +12,9 @@ using System.Drawing;
 using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using web_app.ViewModels.Presentation;
 using BAL.Models;
+using Microsoft.AspNetCore.Identity;
+using DAL.EntityModels.User;
 
 namespace web_app.Controllers
 {
@@ -21,11 +22,16 @@ namespace web_app.Controllers
     {
         private readonly IUsernameGenerator _usernameGenerator;
         private readonly IPresentationService presentationService;
+        private readonly UserManager<SlidesUser> userManager;
 
-        public EventController(IUsernameGenerator usernameGenerator, IPresentationService presentationService)
+        public EventController(
+            IUsernameGenerator usernameGenerator, 
+            IPresentationService presentationService,
+            UserManager<SlidesUser> userManager)
         {
             this._usernameGenerator = usernameGenerator;
             this.presentationService = presentationService;
+            this.userManager = userManager;
         }
 
         public IActionResult Index()
@@ -41,8 +47,7 @@ namespace web_app.Controllers
             
             {
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-                var username = await this._usernameGenerator.GenerateUsername(id, userId);
+                var user = await userManager.FindByIdAsync(userId);
 
                 var presentation = await this.presentationService.GetById(id);
                 var slides = presentation.Slides
@@ -66,7 +71,8 @@ namespace web_app.Controllers
 
                 var model = new EventStartViewModel
                 {
-                    Username = username.AsCountry.ToUpper(),
+                    Username = user.UserName,
+                    Image = user.Image,
                     QRCodeViewModel = new QrCodeViewModel()
                     {
                         QRCode = GenerateQRCode(presentationViewModel.Id)

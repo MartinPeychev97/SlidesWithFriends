@@ -16,15 +16,45 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 main, menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, main, menu, nav, section {
-  display: block;
+    display: block;
 }
+
+.users-container {
+    display: flex;
+}
+
+    .users-container .avatar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-left: 12px;
+    }
+
+    .users-container .avatar img {
+        border-radius: 50%;
+        width: 75px;
+        height: 75px;
+        object-fit:cover;
+        margin-bottom: 4px;
+    }
+
+    .users-container .avatar p {
+        font-size: 12px;
+        margin: 0;
+        text-align: center;
+        background: #0094ff;
+        padding: 4px;
+        border: 1px solid #0094ff;
+        border-radius: 15px;
+    }

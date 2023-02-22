@@ -30,7 +30,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\images\home\business.png" />
+    <Content Include="wwwroot\images\home\personal.png" />
+    <Content Include="wwwroot\images\home\school.png" />
     <Content Include="wwwroot\images\slides\default-background.jpg" />
+    <Content Include="wwwroot\images\users\avatar-default-icon.png" />
   </ItemGroup>
 
   <ItemGroup>
