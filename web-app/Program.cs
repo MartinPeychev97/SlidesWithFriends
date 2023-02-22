@@ -15,6 +15,7 @@ namespace web_app
 				.ConfigureWebHostDefaults(webBuilder =>
 				{
 					webBuilder.UseStartup<Startup>();
+					webBuilder.UseUrls(urls: "http://localhost:5009");
 				});
 	}
 }
