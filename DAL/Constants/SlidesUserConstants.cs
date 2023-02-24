@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DAL.Constants
+﻿namespace DAL.Constants
 {
     public static class SlidesUserConstants
     {

@@ -11,6 +11,8 @@ namespace DAL.EntityModels
 
         public string Name { get; set; }
 
+        public string Image { get; set; }
+
         public string UserId { get; set; }
         public SlidesUser User { get; set; }
 

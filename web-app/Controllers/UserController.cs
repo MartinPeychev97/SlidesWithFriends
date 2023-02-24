@@ -5,10 +5,11 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using System.Threading.Tasks;
 using web_app.ViewModels.User;
-using BAL.Interfaces;
+using System.IO;
+using System;
+using Microsoft.AspNetCore.Hosting;
 
 namespace web_app.Controllers
 {
@@ -18,42 +19,61 @@ namespace web_app.Controllers
         private readonly SlidesDbContext db;
         private readonly SignInManager<SlidesUser> signInManager;
         private readonly UserManager<SlidesUser> userManager;
-        private readonly IUserService _userService;
+        private readonly IWebHostEnvironment hostEnvironment;
 
         public UserController(
             SlidesDbContext db,
             UserManager<SlidesUser> userManager,
             SignInManager<SlidesUser> signInManager,
-            IUserService userService)
+            IWebHostEnvironment hostEnvironment)
         {
             this.db = db;
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this._userService = userService;
+            this.hostEnvironment = hostEnvironment;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Register()
+        public IActionResult Register()
         {
-            var generatedUsernames = await this._userService.GenerateUsernames();
-            this.ViewData["GeneratedUsernames"] = generatedUsernames.ToArray();
-
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterFormViewModel model)
+        public async Task<IActionResult> Register([FromForm] RegisterFormViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
+            var imagePath = string.Empty;
+
+            if (model.Image != null)
+            {
+                string wwwroot = hostEnvironment.WebRootPath;
+                string fileName = Guid.NewGuid().ToString();
+                var uploads = Path.Combine(wwwroot, @"images\users");
+                var extension = Path.GetExtension(model.Image.FileName);
+
+                using (var fileStream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                {
+                    model.Image.CopyTo(fileStream);
+                }
+
+                imagePath = @"\images\users\" + fileName + extension;
+            }
+            else
+            {
+                imagePath = @"\images\users\avatar-default-icon.png";
+            }
+
             var user = new SlidesUser()
             {
                 UserName = model.UserName,
                 Email = model.Email,
-                Subscription = DAL.Enums.Subscription.None
+                Subscription = DAL.Enums.Subscription.None,
+                Image = imagePath,
             };
 
             var result = await userManager.CreateAsync(user, model.Password);
@@ -117,7 +137,7 @@ namespace web_app.Controllers
             user.Subscription = subscriptionType;
             db.SaveChanges();
 
-            return RedirectToAction("Subscription", "User");
+            return RedirectToAction("PresentationIndex", "Presentation");
         }
     }
 }

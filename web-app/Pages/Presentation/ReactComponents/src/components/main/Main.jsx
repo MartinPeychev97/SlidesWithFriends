@@ -10,6 +10,7 @@ const Main = () => {
     slides,
     setSlides,
     setIsAddNewSlideOpen,
+    presentation
   } = useContext(SlideContext);
   const { post } = useFetch();
 
@@ -117,7 +118,7 @@ const Main = () => {
       <div className={styles.slideFrame}>
         <img
           className={styles.slideBackground}
-          src="https://slideswith.com/cdn-cgi/image/w=1900,h=1400,fit=scale-down,metadata=none,onerror=false/https://slideswith.com//backgrounds/background-20.jpg"
+          src={presentation.image}
         />
         {activeSlide.type === "Title" && (
           <div className={styles.content}>

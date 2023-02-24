@@ -3,7 +3,7 @@ import SlideContext from "../../context/SlideContext";
 import styles from "./preview.module.css";
 
 const Preview = ({ index, slide }) => {
-    const { setActiveSlide, activeSlide, setIsAddNewSlideOpen, slides } = useContext(SlideContext);
+    const { setActiveSlide, activeSlide, setIsAddNewSlideOpen, presentation } = useContext(SlideContext);
     const selectSlide = () => {
         setActiveSlide(slide)
         setIsAddNewSlideOpen(false)
@@ -20,7 +20,7 @@ const Preview = ({ index, slide }) => {
             <div className={styles.slideFrame}>
                 <img
                     className={styles.slideBackground}
-                    src="https://slideswith.com/cdn-cgi/image/w=1900,h=1400,fit=scale-down,metadata=none,onerror=false/https://slideswith.com//backgrounds/background-20.jpg"
+                    src={presentation.image}
                 />
                 <div className={styles.content}>
                     <h6>{slide.title}</h6>

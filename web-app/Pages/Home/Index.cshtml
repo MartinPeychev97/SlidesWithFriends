@@ -2,27 +2,60 @@
 @using DAL.EntityModels;
 @inject SignInManager<SlidesUser> signInManager
 
-@if (signInManager.IsSignedIn(User))
-{
-    <br />
-    <br />
-    <div class="d-flex align-items-center h-100">
-        <div class="container text-center">
-            <h1 class="display-4">Welcome to our website!</h1>
-            <p class="lead">Go to <a asp-controller="Presentation" asp-action="PresentationIndex">MyDecks</a> to view your presentations.</p>
-        </div>
-    </div>
-}
-else
-{
-    <br />
-    <br />
-    <div class="d-flex align-items-center h-100">
-        <div class="container text-center">
-            <h1 class="display-4">Welcome to our website!</h1>
-            <p class="lead">Please sign in or create an account to access exclusive features and personalize your experience.</p>
-            <p class="lead">Don't miss out on the benefits of being a member. <a asp-controller="User" asp-action="Register">Register now!</a></p>
-        </div>
-    </div>
-}
+
+<div class="text-container">
+    <h1>
+        Simple, Delightful, Group <br>
+        <span class="blue-underline">Engagement</span>
+    </h1>
+    @if (signInManager.IsSignedIn(User))
+    {
+        <p>
+            With Slides, you can showcase your ideas with ease and engage your audience like a pro.
+            Keep up the great work and thank you for choosing Slides!
+        </p>
+        <a asp-controller="Presentation" asp-action="PresentationIndex">Start Presenting</a>
+    }
+    else
+    {
+        <p>
+            Welcome to Slides, the ultimate presentation tool that allows you to
+            create stunning presentations and stream them in real time to your
+            audience. Sign up today and start presenting like a pro!
+        </p>
+        <a asp-controller="User" asp-action="Register">Get Started</a>
+    }
+</div>
+
+<div class="card-container">
+ <div class="card">
+        <img src="~/images/home/school.png" alt="" />
+        <h4>For Your School</h4>
+        <ul>
+          <li>Teach from anywhere </li>
+          <li>Present your homework</li>
+          <li>Study together</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <img src="~/images/home/business.png" alt="" />
+        <h4>For Your Work</h4>
+        <ul>
+          <li>Introduce a new product</li>
+          <li>Share market research</li>
+          <li>Present service offering</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <img src="~/images/home/personal.png" alt="" />
+        <h4>For Personal Use</h4>
+        <ul>
+          <li>Present recent project</li>
+          <li>Share personal photography </li>
+          <li>Highlight a recent achievement</li>
+        </ul>
+      </div>
+</div>
 

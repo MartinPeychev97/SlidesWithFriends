@@ -5,7 +5,7 @@ import useFetch from "../hooks/useFetch";
 const SlideContext = createContext({});
 
 export const SlideProvider = ({ children }) => {
-    const [presentationName, setPresentationName] = useState("");
+    const [presentation, setPresentation] = useState("");
     const [slides, setSlides] = useState([]);
     const [activeSlide, setActiveSlide] = useState({});
     const [isAddNewSlideOpen, setIsAddNewSlideOpen] = useState(false);
@@ -16,7 +16,10 @@ export const SlideProvider = ({ children }) => {
     useEffect(() => {
         const getPresentation = async () => {
             const data = await get(`presentation/getById?id=${presentationId}`);
-            setPresentationName(data.name);
+            setPresentation({
+                name: data.name,
+                image: data.image
+            });
             setSlides(data.slides);
             setActiveSlide(data.slides[0]);
         };
@@ -27,8 +30,8 @@ export const SlideProvider = ({ children }) => {
     return (
         <SlideContext.Provider
             value={{
-                presentationName,
-                setPresentationName,
+                presentation,
+                setPresentation,
                 slides,
                 setSlides,
                 activeSlide,

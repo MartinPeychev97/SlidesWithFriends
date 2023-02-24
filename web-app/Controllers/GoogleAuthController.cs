@@ -40,10 +40,14 @@ namespace web_app.Controllers
                 return RedirectToAction("Index", "Home");
             else
             {
+                var userName = info.Principal.FindFirst(ClaimTypes.Email).Value;
+                userName = userName.Substring(0, userName.IndexOf("@"));
+
                 SlidesUser user = new SlidesUser
                 {
                     Email = info.Principal.FindFirst(ClaimTypes.Email).Value,
-                    UserName = info.Principal.FindFirst(ClaimTypes.Email).Value
+                    UserName = userName,
+                    Image = info.Principal.FindFirst("image").Value,
                 };
 
                 IdentityResult identResult = await userManager.CreateAsync(user);

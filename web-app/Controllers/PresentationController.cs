@@ -1,9 +1,10 @@
 ﻿using BAL.Interfaces;
-using DAL.EntityModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
+using System;
 using System.Linq;
 using System.Security.Claims;
-using System.Security.Principal;
 using System.Threading.Tasks;
 using web_app.ViewModels.Presentation;
 using web_app.ViewModels.Slide;
@@ -13,10 +14,12 @@ namespace web_app.Controllers
     public class PresentationController : Controller
     {
         private readonly IPresentationService presentationService;
+        private readonly IWebHostEnvironment hostEnvironment;
 
-        public PresentationController(IPresentationService presentationService)
+        public PresentationController(IPresentationService presentationService, IWebHostEnvironment hostEnvironment)
         {
             this.presentationService = presentationService;
+            this.hostEnvironment = hostEnvironment;
         }
         public IActionResult PresentationIndex()
         {
@@ -38,7 +41,10 @@ namespace web_app.Controllers
             }
                
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            await this.presentationService.Create(viewModel.Name, userId);
+
+            string imagePath = @"\images\presentation\default.png";
+
+            await this.presentationService.Create(viewModel.Name, userId, imagePath);
 
             return RedirectToAction("PresentationIndex" ,"Presentation");
         }
@@ -70,6 +76,7 @@ namespace web_app.Controllers
             {
                 Id = presentation.Id,
                 Name = presentation.Name,
+                Image = presentation.Image,
                 Slides = slides
             };
 
@@ -84,19 +91,30 @@ namespace web_app.Controllers
             return new JsonResult(Ok());
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> Remove(int id)
-        //{
-        //    var presentation = await this.presentationService.GetById(id);
-        //
-        //    var viewModel = new PresentationRemoveViewModel 
-        //    {
-        //        Id = presentation.Id,
-        //        Name = presentation.Name,
-        //    };
-        //
-        //    return View(viewModel);
-        //}
+        [HttpPut]
+        public async Task<JsonResult> EditImage([FromForm] PresentationImageEditViewModel viewModel)
+        {
+            if (viewModel.Image == null && viewModel.Image.ContentType.StartsWith("image"))
+            {
+                return new JsonResult(BadRequest());
+            }
+
+            string wwwroot = hostEnvironment.WebRootPath;
+            string fileName = Guid.NewGuid().ToString();
+            var uploads = Path.Combine(wwwroot, @"images\presentation");
+            var extension = Path.GetExtension(viewModel.Image.FileName);
+
+            using (var fileStream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+            {
+                viewModel.Image.CopyTo(fileStream);
+            }
+
+            var imagePath = @"\images\presentation\" + fileName + extension;
+
+            await this.presentationService.EditImage(viewModel.Id, imagePath);
+
+            return new JsonResult(Ok(imagePath));
+        }
 
         public async Task<IActionResult> Remove(int id)
         {

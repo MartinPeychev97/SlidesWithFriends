@@ -2,6 +2,7 @@ using BAL.Interfaces;
 using BAL.Services;
 using DAL;
 using DAL.EntityModels.User;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using RandomNameGeneratorLibrary;
 using System;
 using web_app.Hubs;
@@ -33,6 +35,7 @@ namespace web_app
                     opts.ClientId = "350014667085-dj0la8tmuqvbcp2o72atcmc1deake5c8.apps.googleusercontent.com";
                     opts.ClientSecret = "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";
                     opts.SignInScheme = IdentityConstants.ExternalScheme;
+                    opts.ClaimActions.MapJsonKey("image", "picture");
                 });
 
             services.Configure<RazorViewEngineOptions>(o =>

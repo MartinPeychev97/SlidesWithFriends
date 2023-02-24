@@ -1,0 +1,103 @@
+﻿.text-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+    .text-container h1 {
+        margin-top: 0;
+        margin-bottom: 24px;
+        color: #2d3958;
+        font-size: 64px;
+        line-height: 1.07;
+        font-weight: 700;
+        letter-spacing: -.03em;
+        text-align: center;
+    }
+
+    .text-container p {
+        max-width: 740px;
+        text-align: center;
+        color: #7b88a8;
+        font-size: 24px;
+        line-height: 1.25;
+        font-weight: 400;
+        margin: 0;
+    }
+
+.blue-underline {
+    display: inline-block;
+    border-bottom: 15px solid #25ace9;
+    font-size: 64px;
+    line-height: 30px;
+    text-decoration: none;
+}
+
+.text-container a {
+    margin-top: 24px;
+    margin-bottom: 44px;
+    padding: 20px 60px;
+    font-size: 22px;
+    border: none;
+    cursor: pointer;
+    background-color: #25ace9;
+    color: #fff;
+}
+
+    .text-container a:hover {
+        filter: brightness(110%);
+    }
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+    .card-container .card {
+        border: 1px solid #25ace9;
+        margin: 0 80px 40px 80px;
+        border-radius: 15px;
+        -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.31);
+        -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.31);
+        box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.31);
+        transition: transform .3s ease-in-out;
+        background-color: #f3f3f3;
+    }
+
+        .card-container .card:hover {
+            transform: scale(1.1);
+        }
+
+        .card-container .card img {
+            height: 200px;
+            width: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .card-container .card h4 {
+            text-align: center;
+            color: #2d3958;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+.card ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.card li {
+    margin: 10px;
+    color: #105cb4;
+    padding: 0;
+    position: relative;
+    line-height: 1.4;
+    font-size: 18px;
+}

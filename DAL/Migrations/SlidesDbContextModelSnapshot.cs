@@ -23,6 +23,9 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("Image")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
@@ -70,34 +73,6 @@ namespace DAL.Migrations
                     b.ToTable("Slides");
                 });
 
-            modelBuilder.Entity("DAL.EntityModels.TestEntity.TestEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("varchar(40)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TestEntities");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "firstTestEntity"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "secondTestEntity"
-                        });
-                });
-
             modelBuilder.Entity("DAL.EntityModels.User.SlidesUser", b =>
                 {
                     b.Property<string>("Id")
@@ -116,6 +91,9 @@ namespace DAL.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
