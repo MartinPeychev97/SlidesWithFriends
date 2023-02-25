@@ -58,3 +58,104 @@ footer, header, hgroup, main, menu, nav, section {
         border: 1px solid #0094ff;
         border-radius: 15px;
     }
+
+.reactions-container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 30px;
+}
+
+.reactions-list {
+  visibility: hidden;
+  opacity: 0;
+  position: relative;
+  background-color: #f3f3f3;
+  border-radius: 15px;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=11, Direction=98, Color=#000000)"; /*IE 8*/
+  -moz-box-shadow: 1px 7px 11px 1px rgba(0, 0, 0, 0.2); /*FF 3.5+*/
+  -webkit-box-shadow: 1px 7px 11px 1px rgba(0, 0, 0, 0.2); /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+  box-shadow: 1px 7px 11px 1px rgba(0, 0, 0, 0.2); /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=11, Direction=135, Color=#000000); /*IE 5.5-7*/
+  transition: opacity 0.3s ease-in-out;
+}
+
+.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.reactions-list::after {
+  top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: "";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(136, 183, 213, 0);
+	border-top-color: #f3f3f3;
+	border-width: 11px;
+	margin-left: -11px;
+}
+
+.reactions-list img {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.reactions-container .reactions-btn {
+  width: 75px;
+  height: 75px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.reactions {
+    position: absolute;
+    right: 10%;
+    top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.reactions div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.reactions img {
+  width: 75px;
+  height: 75px;
+  margin: 20px;
+  animation: scale-infinite 1s ease-in-out alternate infinite;
+}
+
+.reactions p {
+  background-color: #f3f3f3;
+  padding: 6px;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 15px;
+  font-size: 12px;
+}
+
+@keyframes scale-infinite {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.2);
+  }
+}

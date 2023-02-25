@@ -46,6 +46,12 @@ namespace web_app.Hubs
             await Clients.Group(presentationId).SendAsync("UpdateSlide", indexh, indexv);
         }
 
+        public async Task React(string username, string reaction)
+        {
+            var presentationId = GetPresentationId();
+            await Clients.Group(presentationId).SendAsync("React" ,username, reaction);
+        }
+
         private string GetPresentationId()
         {
             var httpContext = Context.GetHttpContext();
