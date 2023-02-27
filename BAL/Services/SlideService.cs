@@ -188,5 +188,21 @@ namespace BAL.Services
 
             return true;
         }
+
+        public async Task<Slide> AddWordCloudSlide(int presentationId)
+        {
+            Slide slide = new Slide
+            {
+                Title = "WordCloud",
+                Text = "Answer Box",
+                Type = SlideType.WordCloud,
+                PresentationId = presentationId
+            };
+
+            await this.db.Slides.AddAsync(slide);
+            await this.db.SaveChangesAsync();
+
+            return slide;
+        }
     }
 }
