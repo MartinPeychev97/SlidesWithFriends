@@ -1,6 +1,6 @@
-﻿namespace web_app.ViewModels.Slide
+﻿namespace web_app.ViewModels.Rating
 {
-    public class SlideRatingViewModel
+    public class RatingViewModel
     {
         public int PresentationId { get; set; }
         public int Rating { get; set; }

@@ -3,14 +3,16 @@ using System;
 using DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
     [DbContext(typeof(SlidesDbContext))]
-    partial class SlidesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230224173211_Secondary")]
+    partial class Secondary
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,28 +39,6 @@ namespace DAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Presentations");
-                });
-
-            modelBuilder.Entity("DAL.EntityModels.Rating", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("PresentationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("value")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PresentationId");
-
-                    b.ToTable("Ratings");
                 });
 
             modelBuilder.Entity("DAL.EntityModels.Slide", b =>
@@ -306,15 +286,6 @@ namespace DAL.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("DAL.EntityModels.Rating", b =>
-                {
-                    b.HasOne("DAL.EntityModels.Presentation", null)
-                        .WithMany("PresentationRatings")
-                        .HasForeignKey("PresentationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("DAL.EntityModels.Slide", b =>
                 {
                     b.HasOne("DAL.EntityModels.Presentation", "Presentation")
@@ -379,8 +350,6 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.EntityModels.Presentation", b =>
                 {
-                    b.Navigation("PresentationRatings");
-
                     b.Navigation("Slides");
                 });
 

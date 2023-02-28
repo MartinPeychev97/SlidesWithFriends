@@ -90,6 +90,8 @@ namespace web_app
             services.AddHttpClient<IUsernameGenerator, UsernameGenerator>();
             services.AddSingleton<Random>();
 
+            services.AddTransient<IRatingService, RatingService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

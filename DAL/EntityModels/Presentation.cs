@@ -15,6 +15,8 @@ namespace DAL.EntityModels
 
         public string UserId { get; set; }
         public SlidesUser User { get; set; }
+        
+        public ICollection<Rating> PresentationRatings {get; set; } = new List<Rating>();
 
         public ICollection<Slide> Slides { get; set; } = new List<Slide>();
     }
