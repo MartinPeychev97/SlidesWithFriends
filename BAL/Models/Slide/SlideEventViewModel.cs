@@ -1,4 +1,8 @@
-﻿namespace BAL.Models.Slide
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace BAL.Models.Slide
 {
     public class SlideEventViewModel
     {
@@ -15,5 +19,6 @@
         public int Rating { get; set; }
 
         public string Type { get; set; }
+        public ICollection<string> WordCloudAnswers { get; set; }
     }
 }

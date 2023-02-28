@@ -1,4 +1,7 @@
 ﻿using DAL.Enums;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL.EntityModels
 {
@@ -13,5 +16,7 @@ namespace DAL.EntityModels
         public SlideType Type { get; set; }
         public int PresentationId { get; set; }
         public Presentation Presentation { get; set; }
+        [NotMapped]
+        public ICollection<string> WordSlideAnswers { get; set; } = new List<string>();
     }
 }

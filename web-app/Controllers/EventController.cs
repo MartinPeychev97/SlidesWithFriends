@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using BAL.Models;
 using Microsoft.AspNetCore.Identity;
 using DAL.EntityModels.User;
+using BAL.Services;
 
 namespace web_app.Controllers
 {
@@ -23,15 +24,18 @@ namespace web_app.Controllers
         private readonly IUsernameGenerator _usernameGenerator;
         private readonly IPresentationService presentationService;
         private readonly UserManager<SlidesUser> userManager;
+        private readonly SlideService slideService;
 
         public EventController(
             IUsernameGenerator usernameGenerator, 
             IPresentationService presentationService,
-            UserManager<SlidesUser> userManager)
+            UserManager<SlidesUser> userManager,
+            SlideService slideservice)
         {
             this._usernameGenerator = usernameGenerator;
             this.presentationService = presentationService;
             this.userManager = userManager;
+            this.slideService = slideservice;
         }
 
         public IActionResult Index()
@@ -60,6 +64,7 @@ namespace web_app.Controllers
                         Background = s.Background,
                         Rating = s.Rating,
                         Type = s.Type.ToString(),
+                        WordCloudAnswers = s.WordSlideAnswers
                     }).ToList();
 
                 var presentationViewModel = new PresentationEventViewModel()
@@ -107,6 +112,20 @@ namespace web_app.Controllers
             string result = "data:image/png;base64," + Convert.ToBase64String(ms.ToArray());
 
             return result;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> WordCloudSubmit(string id, string message)
+        {
+            var idArray = id.Split(" ");
+            var presentationId = int.Parse(idArray[0]);
+            var slideId = int.Parse(idArray[1]);
+            var slideIndex = int.Parse(idArray[2]);
+
+            var slide = await slideService.GetById(slideId);
+            slide.WordSlideAnswers.Add(message);
+
+            return RedirectToAction("Presentation", "Event", presentationId);
         }
     }
 }

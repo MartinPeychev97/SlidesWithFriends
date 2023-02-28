@@ -5,6 +5,7 @@ using DAL.EntityModels.User;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
@@ -80,6 +81,8 @@ namespace web_app
             services.AddRazorPages();
 
             services.AddSignalR();
+
+            services.AddHttpContextAccessor();
 
             services.AddTransient<ISlideService, SlideService>();
             services.AddTransient<IPresentationService, PresentationService>();
