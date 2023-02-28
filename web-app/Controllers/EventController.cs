@@ -24,13 +24,13 @@ namespace web_app.Controllers
         private readonly IUsernameGenerator _usernameGenerator;
         private readonly IPresentationService presentationService;
         private readonly UserManager<SlidesUser> userManager;
-        private readonly SlideService slideService;
+        private readonly ISlideService slideService;
 
         public EventController(
             IUsernameGenerator usernameGenerator, 
             IPresentationService presentationService,
             UserManager<SlidesUser> userManager,
-            SlideService slideservice)
+            ISlideService slideservice)
         {
             this._usernameGenerator = usernameGenerator;
             this.presentationService = presentationService;
@@ -125,7 +125,7 @@ namespace web_app.Controllers
             var slide = await slideService.GetById(slideId);
             slide.WordSlideAnswers.Add(message);
 
-            return RedirectToAction("Presentation", "Event", presentationId);
+            return RedirectToAction("Presentation", new { id = presentationId });
         }
     }
 }
