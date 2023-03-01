@@ -32,9 +32,9 @@ namespace web_app
             services.AddAuthentication()
                 .AddGoogle(opts =>
                 {
-                    opts.ClientId = "350014667085-dj0la8tmuqvbcp2o72atcmc1deake5c8.apps.googleusercontent.com";
-                    opts.ClientSecret = "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";
-                    opts.SignInScheme = IdentityConstants.ExternalScheme;
+                    opts.ClientId = Configuration["Authentication:Google:ClientId"];
+					opts.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+					opts.SignInScheme = IdentityConstants.ExternalScheme;
                     opts.ClaimActions.MapJsonKey("image", "picture");
                 });
 
