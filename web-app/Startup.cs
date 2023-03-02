@@ -5,6 +5,7 @@ using DAL.EntityModels.User;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
@@ -29,7 +30,7 @@ namespace web_app
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication()
+			services.AddAuthentication()
                 .AddGoogle(opts =>
                 {
                     opts.ClientId = Configuration["Authentication:Google:ClientId"];
@@ -68,7 +69,7 @@ namespace web_app
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/User/Login";
-            });
+			});
 
             services.AddMvc()
                     .AddViewLocalization(
@@ -101,8 +102,12 @@ namespace web_app
             app.UseStaticFiles();
             app.UseRouting();
 
-            app.UseAuthentication();
+			app.UseCookiePolicy(new CookiePolicyOptions {
+				Secure = CookieSecurePolicy.Always
+			});
+			app.UseAuthentication();
             app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints =>
             {
