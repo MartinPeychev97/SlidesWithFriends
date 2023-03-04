@@ -10,7 +10,7 @@ namespace BAL.Interfaces
     {
         Task<IEnumerable<Rating>> GetAll(int presentationId);
         Task<Rating> GetById(int id);
-        Task<double> CalculateAverageRating(int presentationId);
+        int CalculateAverageRating(int presentationId);
         Task<Rating> AddRating(int presentationId, int ratingValue, string userId);
         Task<bool> EditRating(int id, int ratingValue);
         Task<bool> Remove(int ratingId);

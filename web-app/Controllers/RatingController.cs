@@ -1,21 +1,23 @@
 ﻿using BAL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using web_app.Hubs;
 using web_app.ViewModels.Rating;
 using web_app.ViewModels.Slide;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class RatingController : ControllerBase
+    public class RatingController : Controller
     {
         private readonly IRatingService ratingService;
+        private readonly PresentationHub presentationHub;
 
-        public RatingController(IRatingService ratingService)
+        public RatingController(IRatingService ratingService, PresentationHub presentationHub)
         {
             this.ratingService = ratingService;
+            this.presentationHub = presentationHub;
         }
 
         [HttpGet("presentation/{presentationId}/average")]
@@ -23,7 +25,7 @@ namespace API.Controllers
         {
             try
             {
-                var averageRating = await ratingService.CalculateAverageRating(presentationId);
+                var averageRating = ratingService.CalculateAverageRating(presentationId);
                 return Ok(averageRating);
             }
             catch (Exception ex)
@@ -32,10 +34,13 @@ namespace API.Controllers
             }
         }
 
-        [HttpPost("presentation/{presentationId}")]
-        public async Task<IActionResult> AddRating([FromBody] SlideRatingViewModel viewModel)
+        [HttpPost]
+        public async Task<IActionResult> AddRating( SlideRatingViewModel viewModel)
         {
-            var rating = await this.ratingService.AddRating(viewModel.PresentationId, viewModel.Rating,viewModel.UserId);
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var rating = await this.ratingService.AddRating(viewModel.PresentationId, viewModel.Rating, userId);
+            var resultRating = this.ratingService.CalculateAverageRating(viewModel.PresentationId);
+            await presentationHub.UpdateHostRating(viewModel.PresentationId, resultRating);
 
             if (rating is null)
             {
@@ -43,7 +48,7 @@ namespace API.Controllers
             }
             var ratingViewModel = new RatingViewModel
             {
-                UserId = viewModel.UserId,
+                UserId = userId,
                 PresentationId = viewModel.PresentationId,
                 Rating = rating.value
             };

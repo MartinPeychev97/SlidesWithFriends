@@ -12,5 +12,7 @@ namespace DAL.EntityModels.User
 
         public string Image { get; set; }
         public ICollection<Presentation> Presentations { get; set; } = new List<Presentation>();
+        public ICollection<Rating> PresentationRatings { get; set; } = new List<Rating>();
+
     }
 }

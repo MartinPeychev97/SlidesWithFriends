@@ -1,12 +1,10 @@
 ﻿using BAL.Interfaces;
 using DAL;
 using DAL.EntityModels;
-using DAL.Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BAL.Services
@@ -26,25 +24,12 @@ namespace BAL.Services
             await this.db.Ratings.Include(x => x.Id).FirstOrDefaultAsync(x => x.Id == id);
 
 
-        public async Task<double> CalculateAverageRating(int presentationId)
+        public int CalculateAverageRating(int presentationId)
         {
-            double totalRating = 0;
+            var count = db.Ratings.Count(e => e.PresentationId == presentationId && e.value >= 0);
+            if (count == 0) return 0;
 
-            var allRatings = (List<Rating>)await GetAll(presentationId);
-
-            if (allRatings != null && allRatings.Count > 0)
-            {
-                foreach (var rating in allRatings)
-                {
-                    totalRating += rating.value;
-                }
-
-                return totalRating / allRatings.Count;
-            }
-            else
-            {
-                throw new Exception("There are no Ratings in the collection.");
-            }
+            return db.Ratings.Where(e => e.PresentationId == presentationId && e.value >= 0).Select(e => e.value).Sum() / count;
         }
 
         public async Task<Rating> AddRating(int presentationId, int ratingValue, string userId)
