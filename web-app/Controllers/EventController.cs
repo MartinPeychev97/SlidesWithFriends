@@ -113,19 +113,5 @@ namespace web_app.Controllers
 
             return result;
         }
-
-        [HttpGet]
-        public async Task<IActionResult> WordCloudSubmit(string id, string message)
-        {
-            var idArray = id.Split(" ");
-            var presentationId = int.Parse(idArray[0]);
-            var slideId = int.Parse(idArray[1]);
-            var slideIndex = int.Parse(idArray[2]);
-
-            var slide = await slideService.GetById(slideId);
-            slide.WordSlideAnswers.Add(message);
-
-            return RedirectToAction("Presentation", new { id = presentationId });
-        }
     }
 }

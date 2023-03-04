@@ -24,8 +24,7 @@ namespace BAL.Services
             await this.db.Slides.Where(s => s.PresentationId == presentationId).ToListAsync();
 
         public async Task<Slide> GetById(int id) =>
-            await this.db.Slides.Include(x => x.Presentation).FirstOrDefaultAsync(x => x.Id == id);
-
+            await this.db.Slides.Include(x => x.Presentation).Include(s=>s.WordSlideAnswers).FirstOrDefaultAsync(x => x.Id == id);
         public async Task<Slide> AddTitleSlide(int presentationId)
         {
             Slide slide = new Slide
@@ -203,6 +202,26 @@ namespace BAL.Services
             await this.db.SaveChangesAsync();
 
             return slide;
+        }
+
+        public async Task AddAnswerToWordCloud(string message, Slide slide)
+        {
+            Answer answer = new Answer
+            {
+                Message = message
+            };
+            slide.WordSlideAnswers.Add(answer);
+            await this.db.SaveChangesAsync();
+        }
+
+        public async Task ClearAnswers()
+        {
+            var wordcloud = await db.Slides.Where(s => s.Type == SlideType.WordCloud).Include(s=>s.WordSlideAnswers).ToListAsync();
+            foreach(var slide in wordcloud)
+            {
+                slide.WordSlideAnswers.Clear();
+            }
+            await db.SaveChangesAsync();
         }
     }
 }

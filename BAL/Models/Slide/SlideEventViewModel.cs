@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DAL.EntityModels;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -19,6 +20,6 @@ namespace BAL.Models.Slide
         public int Rating { get; set; }
 
         public string Type { get; set; }
-        public ICollection<string> WordCloudAnswers { get; set; }
+        public ICollection<Answer> WordCloudAnswers { get; set; }
     }
 }

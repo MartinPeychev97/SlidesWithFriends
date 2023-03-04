@@ -95,3 +95,16 @@ clap.addEventListener("click", () => {
 laughter.addEventListener("click", () => {
     connection.invoke("React", username, reactions.laughter);
 });
+
+//Test
+const submitBtn = document.getElementById("answer-btn");
+
+submitBtn.addEventListener("click", () => {
+    var url = window.location.href;
+    var answer = document.getElementById("submit_answer").value;
+    connection.invoke("Submit", answer, url);
+});
+
+connection.on("Update", function () {
+    window.location.reload
+});

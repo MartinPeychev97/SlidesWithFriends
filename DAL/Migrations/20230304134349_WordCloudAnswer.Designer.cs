@@ -3,38 +3,21 @@ using System;
 using DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
     [DbContext(typeof(SlidesDbContext))]
-    partial class SlidesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230304134349_WordCloudAnswer")]
+    partial class WordCloudAnswer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.17");
-
-            modelBuilder.Entity("DAL.EntityModels.Answer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Message")
-                        .HasColumnType("longtext");
-
-                    b.Property<int?>("SlideId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SlideId");
-
-                    b.ToTable("Answer");
-                });
 
             modelBuilder.Entity("DAL.EntityModels.Presentation", b =>
                 {
@@ -294,13 +277,6 @@ namespace DAL.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("DAL.EntityModels.Answer", b =>
-                {
-                    b.HasOne("DAL.EntityModels.Slide", null)
-                        .WithMany("WordSlideAnswers")
-                        .HasForeignKey("SlideId");
-                });
-
             modelBuilder.Entity("DAL.EntityModels.Presentation", b =>
                 {
                     b.HasOne("DAL.EntityModels.User.SlidesUser", "User")
@@ -375,11 +351,6 @@ namespace DAL.Migrations
             modelBuilder.Entity("DAL.EntityModels.Presentation", b =>
                 {
                     b.Navigation("Slides");
-                });
-
-            modelBuilder.Entity("DAL.EntityModels.Slide", b =>
-                {
-                    b.Navigation("WordSlideAnswers");
                 });
 
             modelBuilder.Entity("DAL.EntityModels.User.SlidesUser", b =>

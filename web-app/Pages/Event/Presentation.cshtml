@@ -1,6 +1,9 @@
-﻿@using BAL.Models.Event
+﻿@using BAL.Interfaces;
+@using BAL.Models.Event
+@using BAL.Services;
 @model EventStartViewModel
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor contextAccessor
+@inject ISlideService slideService
 
 @{
     Layout = "~/Pages/Shared/_EventLayout.cshtml";
@@ -65,25 +68,23 @@
                         <h1>
                             @slide.Title
                         </h1>
-                        var slideIndex = Model.Presentation.Slides.ToList().FindIndex(s => s == slide);
-                        var id = Model.Presentation.Id.ToString() + " " + slide.Id.ToString() + " " + slideIndex.ToString();
+                 
                         <p>
-          
-                            <form asp-route-id="@id" asp-action="WordCloudSubmit" asp-controller="Event" method="get">
-                                <input class="form-control" type="text" name="message" maxlength="200" />
-                                <button type="submit" class="btn btn-primary" style="width:150px">Ok</button>
-                            </form>
+                            <input type="text" id="submit_answer" maxlength="200" />
+                            <button type="submit" id="answer-btn" style="width:150px">Oktest</button>
                         </p>
-
                     }
                     else
                     {
-                        if (slide.WordCloudAnswers.Count() != 0)
+                        
+                        var wordcloud = await slideService.GetById(slide.Id);
+                        
+                        if (wordcloud.WordSlideAnswers.Count() != 0)
                         {
                             foreach (var answer in slide.WordCloudAnswers)
                             {
                                 <h1>
-                                    @answer
+                                    @answer.Message
                                 </h1>
                             }
                         }

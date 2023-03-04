@@ -16,7 +16,6 @@ namespace DAL.EntityModels
         public SlideType Type { get; set; }
         public int PresentationId { get; set; }
         public Presentation Presentation { get; set; }
-        [NotMapped]
-        public ICollection<string> WordSlideAnswers { get; set; } = new List<string>();
+        public ICollection<Answer> WordSlideAnswers { get; set; } = new List<Answer>();
     }
 }

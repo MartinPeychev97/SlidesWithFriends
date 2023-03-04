@@ -40,7 +40,12 @@ namespace BAL.Services
                 .Where(p => p.Id == presentationId)
                 .Include(p => p.Slides)
                 .FirstOrDefaultAsync();
-
+       public async Task<Presentation> GetByIdWordCloud(int presentationId) =>
+       await this.db.Presentations
+           .Where(p => p.Id == presentationId)
+           .Include(p => p.Slides)
+           .ThenInclude(s=>s.WordSlideAnswers)
+           .FirstOrDefaultAsync();
         public async Task<bool> EditName(int id, string name)
         {
             var presentation = await this.GetById(id);
