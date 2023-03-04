@@ -1,4 +1,5 @@
 ﻿using BAL.Interfaces;
+using DAL.Enums;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Security.Claims;
@@ -35,29 +36,36 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddRating( SlideRatingViewModel viewModel)
+        public async Task<JsonResult> ClearVotes(int presentationId)
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var rating = await this.ratingService.AddRating(viewModel.PresentationId, viewModel.Rating, userId);
-            var resultRating = this.ratingService.CalculateAverageRating(viewModel.PresentationId);
-            await presentationHub.UpdateHostRating(viewModel.PresentationId, resultRating);
-
-            if (rating is null)
-            {
-                return new JsonResult(NotFound());
-            }
-            var ratingViewModel = new RatingViewModel
-            {
-                UserId = userId,
-                PresentationId = viewModel.PresentationId,
-                Rating = rating.value
-            };
-
-            return new JsonResult(ratingViewModel);
+            await this.ratingService.ClearVotes(presentationId);
+            
+            return new JsonResult(Ok());
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> EditRating([FromBody] SlideEditRatingViewModel viewModel)
+        [HttpPost]
+        public async Task<JsonResult> Vote(int presentationId, int rating)//[FromBody] RateRatingViewModel viewModel
+        {
+            //var result = await this.ratingService.EditRating(presentationId, rating);
+
+
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            /*var result =*/ await this.ratingService.AddRating(presentationId, rating, userId);
+            var resultRating = this.ratingService.CalculateAverageRating(presentationId);
+            await presentationHub.UpdateHostRating(presentationId, resultRating);
+
+
+            /*if (result is false)
+            {
+                return new JsonResult(NotFound());
+            }*/
+
+            return new JsonResult(Ok());
+        }
+
+
+        [HttpPut]
+        public async Task<JsonResult> EditRating([FromBody] SlideEditRatingViewModel viewModel)
         {
             var result = await this.ratingService.EditRating(viewModel.Id, viewModel.Rating);
 
@@ -70,7 +78,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRating(int id)
+        public async Task<JsonResult> DeleteRating(int id)
         {
             var rating = await this.ratingService.GetById(id);
 

@@ -32,6 +32,18 @@ namespace BAL.Services
             return db.Ratings.Where(e => e.PresentationId == presentationId && e.value >= 0).Select(e => e.value).Sum() / count;
         }
 
+        public async Task<bool> ClearVotes(int presentationId)
+        {
+
+            foreach (var item in  this.db.Ratings.Where(e => e.PresentationId == presentationId).ToList())
+            {
+                this.db.Ratings.Remove(item);
+            }
+            this.db.SaveChanges();
+
+            return true;
+        }
+
         public async Task<Rating> AddRating(int presentationId, int ratingValue, string userId)
         {
             Rating rating = new Rating

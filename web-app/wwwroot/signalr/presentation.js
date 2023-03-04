@@ -7,7 +7,10 @@ connection.on("UpdateSlide", function (indexh, indexv) {
 });
 
 connection.on("UpdateHostRating", function (newRating) {
-    //alert(newRating);
+    
+    for (var i = 1; i <= 5; i++) {
+        $('.star_' + i).css('color', 'white');
+    }
     for (var i = 1; i <= newRating; i++) {
         $('.star_' + i).css('color', 'yellow');
     }
@@ -50,37 +53,11 @@ window.addEventListener("beforeunload", function () {
 $('.starRatingEvent').click(function () {
     $.ajax({
         type: "POST",
-        url: "/rating/AddRating",
+        url: "/rating/Vote",
         data: { presentationId: presentationId, rating: $(this).data('starindex') }
 
     });
 
-    alert('Your message......' + $(this).data('starindex'));
+    alert('Thank you for your vote: ' + $(this).data('starindex'));
 });
 
-/*$("#star_1").click(function () {
-    const rating = $("#rating_1").val()
-    $.ajax({
-        type: "POST",
-        url: "/rating/AddRating",
-        data: { presentationId: presentationId, rating:rating}
-        
-    })
-    //connection.invoke("AddRating", rating)
-})
-
-$("#star_2").click(function () {
-    const rating = $("#rating_2").val()
-})
-
-$("#star_3").click(function () {
-    const rating = $("#rating_3").val()
-})
-
-$("#star_4").click(function () {
-    const rating = $("#rating_4").val()
-})
-
-$("#star_5").click(function () {
-    const rating = $("#rating_5").val()
-})*/

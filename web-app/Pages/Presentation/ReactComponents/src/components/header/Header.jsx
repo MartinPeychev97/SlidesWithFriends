@@ -58,7 +58,15 @@ const Header = () => {
     setIsAddNewSlideOpen(true);
   };
 
-  const startEventHandler = () => {
+    const startEventHandler = () => {
+
+        $.ajax({
+            type: "POST",
+            url: "/rating/ClearVotes",
+            data: { presentationId: presentationId }
+        });
+
+
     window.open(`/event/presentation/${presentationId}?isPresenter=true`);
   };
 

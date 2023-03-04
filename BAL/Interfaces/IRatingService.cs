@@ -14,5 +14,6 @@ namespace BAL.Interfaces
         Task<Rating> AddRating(int presentationId, int ratingValue, string userId);
         Task<bool> EditRating(int id, int ratingValue);
         Task<bool> Remove(int ratingId);
+        Task<bool> ClearVotes(int presentationId);
     }
 }
