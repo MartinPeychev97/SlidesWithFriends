@@ -151,7 +151,6 @@ namespace web_app.Controllers
 
             return new JsonResult(Ok());
         }
-
         [HttpPost]
         public async Task<JsonResult> AddRatingSlide([FromBody] SlideRatingViewModel viewModel)
         {
@@ -172,17 +171,5 @@ namespace web_app.Controllers
             return new JsonResult(slideViewModel);
         }
 
-        [HttpPut]
-        public async Task<JsonResult> EditRating([FromBody] SlideEditRatingViewModel viewModel)
-        {
-            var result = await this.slideService.EditRating(viewModel.Id, viewModel.Rating);
-
-            if (result is false)
-            {
-                return new JsonResult(NotFound());
-            }
-
-            return new JsonResult(Ok());
-        }
     }
 }

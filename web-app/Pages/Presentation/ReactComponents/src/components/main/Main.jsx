@@ -21,7 +21,7 @@ const Main = () => {
 
   const addRating = async (rating) => {
     if (rating !== activeSlide.rating) {
-      await post("slide/editRating", {
+      await post("rating/editRating", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -51,7 +51,7 @@ const Main = () => {
     const title = e.target.innerText;
 
     if (title !== activeSlide.title) {
-      await post(`slide/editTitle`, {
+        await post(`slide/editTitle`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -82,7 +82,7 @@ const Main = () => {
     const text = e.target.innerText;
 
     if (text !== activeSlide.text) {
-      await post(`slide/editText`, {
+        await post(`slide/editText`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

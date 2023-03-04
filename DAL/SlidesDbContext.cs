@@ -14,5 +14,7 @@ namespace DAL
         public DbSet<Presentation> Presentations { get; set; }
 
         public DbSet<Slide> Slides { get; set; }
+
+        public DbSet<Rating> Ratings { get; set; }
     }
 }

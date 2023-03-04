@@ -6,6 +6,18 @@ connection.on("UpdateSlide", function (indexh, indexv) {
     Reveal.slide(indexh, indexv);
 });
 
+connection.on("UpdateHostRating", function (newRating) {
+    
+    for (var i = 1; i <= 5; i++) {
+        $('.star_' + i).css('color', 'white');
+    }
+    for (var i = 1; i <= newRating; i++) {
+        $('.star_' + i).css('color', 'yellow');
+    }
+});
+
+
+
 connection.on("DisplayUsers", function (users) {
     $("#users-container").empty();
     $.each(users, function (index, user) {
@@ -55,43 +67,14 @@ window.addEventListener("beforeunload", function () {
     connection.invoke("Leave", username);
 });
 
-const reactionsBtn = document.getElementById("reactions-btn");
-const reactionsListEl = document.getElementById("reactions-list");
-const reactionsEl = document.getElementById("reactions");
-const like = document.getElementById("like");
-const wave = document.getElementById("wave");
-const love = document.getElementById("love");
-const clap = document.getElementById("clap");
-const laughter = document.getElementById("laughter");
+$('.starRatingEvent').click(function () {
+    $.ajax({
+        type: "POST",
+        url: "/rating/Vote",
+        data: { presentationId: presentationId, rating: $(this).data('starindex') }
 
-const reactions = {
-    like: "/images/reactions/like.png",
-    wave: "/images/reactions/wave.png",
-    love: "/images/reactions/love.png",
-    clap: "/images/reactions/clap.png",
-    laughter: "/images/reactions/laughter.png",
-};
+    });
 
-reactionsBtn.addEventListener("click", () => {
-    reactionsListEl.classList.toggle("show");
+    alert('Thank you for your vote: ' + $(this).data('starindex'));
 });
 
-like.addEventListener("click", () => {
-    connection.invoke("React", username, reactions.like);
-});
-
-wave.addEventListener("click", () => {
-    connection.invoke("React", username, reactions.wave);
-});
-
-love.addEventListener("click", () => {
-    connection.invoke("React", username, reactions.love);
-});
-
-clap.addEventListener("click", () => {
-    connection.invoke("React", username, reactions.clap);
-});
-
-laughter.addEventListener("click", () => {
-    connection.invoke("React", username, reactions.laughter);
-});

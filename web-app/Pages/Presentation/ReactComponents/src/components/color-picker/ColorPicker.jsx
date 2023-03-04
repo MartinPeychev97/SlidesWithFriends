@@ -11,7 +11,7 @@ const ColorPicker = () => {
     const [isVisible, setVisiblity] = useState(false);
     const { put } = useFetch();
 
-    //setTimeout(() => { setColor(activeSlide.background) },1000)
+    const [delayed, setDelayed] = useState(null);
 
     async function changeColor(updatedColor) {
         const color = updatedColor.hex;
@@ -21,6 +21,11 @@ const ColorPicker = () => {
             ...activeSlide,
             background: color
         })
+
+        if (delayed != null) clearTimeout(delayed);
+        setDelayed(setTimeout(function () {
+            put('presentation/editbackground', data);
+        }, 1000));
 
         setSlides(slides.map(s => {
             if (s.id === activeSlide.id) {
