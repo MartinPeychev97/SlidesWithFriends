@@ -19,7 +19,6 @@ connection.on("UpdateHostRating", function (newRating) {
 
 
 connection.on("DisplayUsers", function (users) {
-    console.log(users)
     $("#users-container").empty();
     $.each(users, function (index, user) {
         $("#users-container").append(`
@@ -29,6 +28,24 @@ connection.on("DisplayUsers", function (users) {
                     </div>
         `);
     });
+});
+
+connection.on("React", function (username, reaction) {
+    reactionsListEl.classList.remove("show");
+    const img = document.createElement("img");
+    const userName = document.createElement("p");
+    const div = document.createElement("div")
+
+    img.src = reaction;
+    userName.innerText = username;
+
+    div.appendChild(img);
+    div.appendChild(userName);
+    reactionsEl.appendChild(div);
+
+    setTimeout(() => {
+        reactionsEl.removeChild(div);
+    }, 5000);
 });
 
 connection.start().then(function () {

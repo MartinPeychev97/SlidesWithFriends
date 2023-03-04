@@ -43,26 +43,12 @@ namespace web_app.Controllers
         [Route("/[controller]/[action]/{id}")]
         public async Task<IActionResult> Presentation(int id, bool isPresenter)
         {
-            try
-            
-            {
-                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var user = await userManager.FindByIdAsync(userId);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await userManager.FindByIdAsync(userId);
 
-                var presentation = await this.presentationService.GetById(id);
-                var slides = presentation.Slides
-                    .Select(s => new SlideEventViewModel
-                    {
-                        Id = s.Id,
-                        Title = s.Title,
-                        Text = s.Text,
-                        Image = s.Image,
-                        Background = s.Background,
-                        Rating = s.Rating,
-                        Type = s.Type.ToString(),
-                    }).ToList();
-
-                var presentationViewModel = new PresentationEventViewModel()
+            var presentation = await this.presentationService.GetById(id);
+            var slides = presentation.Slides
+                .Select(s => new SlideEventViewModel
                 {
                     Id = presentation.Id,
                     Name = presentation.Name,
@@ -70,25 +56,20 @@ namespace web_app.Controllers
                     Slides = slides
                 };
 
-                var model = new EventStartViewModel
-                {
-                    Username = user.UserName,
-                    Image = user.Image,
-                    QRCodeViewModel = new QrCodeViewModel()
-                    {
-                        QRCode = GenerateQRCode(presentationViewModel.Id)
-                    },
-                    IsPresenter = isPresenter,
-                    Presentation = presentationViewModel,
-                };
-
-                return View(model);
-
-            }
-            catch (Exception)
+            var model = new EventStartViewModel
             {
-                return RedirectToAction("PresentationIndex", "Presentation");
-            }
+                Username = user.UserName,
+                Image = user.Image,
+                QRCodeViewModel = new QrCodeViewModel()
+                {
+                    QRCode = GenerateQRCode(presentationViewModel.Id)
+                },
+                IsPresenter = isPresenter,
+                Presentation = presentationViewModel,
+            };
+
+            return View(model);
+
         }
 
         private string GenerateQRCode(int presentationId)

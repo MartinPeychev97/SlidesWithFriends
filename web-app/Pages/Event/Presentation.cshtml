@@ -20,7 +20,9 @@
                 <div id="users-container" class="users-container">
                 </div>
             </div>
+          
         </section>
+       
         @foreach (var slide in Model.Presentation.Slides)
         {
             <section>
@@ -52,6 +54,22 @@
             </section>
         }
     </div>
+
+   
+</div>
+
+<div class="reactions-container">
+    <div id="reactions-list" class="reactions-list">
+        <img id="like" src="~/images/reactions/like.png" alt="">
+        <img id="wave" src="~/images/reactions/wave.png" alt="">
+        <img id="love" src="~/images/reactions/love.png" alt="">
+        <img id="clap" src="~/images/reactions/clap.png" alt="">
+        <img id="laughter" src="~/images/reactions/laughter.png" alt="">
+    </div>
+    <img id="reactions-btn" class="reactions-btn" src="~/images/reactions/reaction.png" alt="">
+</div>
+
+<div id="reactions" class="reactions">
 </div>
 
 <script src="~/revealjs/dist/reveal.js"></script>

@@ -41,6 +41,7 @@ deploy-job:
 
 analyse-job:
   stage: analyse
+  when: manual
   script:
     - echo "SonarQube analysing..."
     - "export PATH=\"$PATH:$HOME/.dotnet/tools\""

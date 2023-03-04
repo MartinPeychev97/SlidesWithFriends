@@ -5,6 +5,7 @@ using DAL.EntityModels.User;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
@@ -29,12 +30,12 @@ namespace web_app
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication()
+			services.AddAuthentication()
                 .AddGoogle(opts =>
                 {
-                    opts.ClientId = "350014667085-dj0la8tmuqvbcp2o72atcmc1deake5c8.apps.googleusercontent.com";
-                    opts.ClientSecret = "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";
-                    opts.SignInScheme = IdentityConstants.ExternalScheme;
+                    opts.ClientId = Configuration["Authentication:Google:ClientId"];
+					opts.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+					opts.SignInScheme = IdentityConstants.ExternalScheme;
                     opts.ClaimActions.MapJsonKey("image", "picture");
                 });
 
@@ -68,7 +69,7 @@ namespace web_app
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/User/Login";
-            });
+			});
 
             services.AddMvc()
                     .AddViewLocalization(
@@ -104,8 +105,12 @@ namespace web_app
             app.UseStaticFiles();
             app.UseRouting();
 
-            app.UseAuthentication();
+			app.UseCookiePolicy(new CookiePolicyOptions {
+				Secure = CookieSecurePolicy.Always
+			});
+			app.UseAuthentication();
             app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints =>
             {
