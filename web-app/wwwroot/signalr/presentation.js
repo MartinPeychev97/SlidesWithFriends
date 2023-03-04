@@ -6,8 +6,19 @@ connection.on("UpdateSlide", function (indexh, indexv) {
     Reveal.slide(indexh, indexv);
 });
 
+connection.on("UpdateHostRating", function (newRating) {
+    
+    for (var i = 1; i <= 5; i++) {
+        $('.star_' + i).css('color', 'white');
+    }
+    for (var i = 1; i <= newRating; i++) {
+        $('.star_' + i).css('color', 'yellow');
+    }
+});
+
+
+
 connection.on("DisplayUsers", function (users) {
-    console.log(users)
     $("#users-container").empty();
     $.each(users, function (index, user) {
         $("#users-container").append(`
@@ -17,6 +28,24 @@ connection.on("DisplayUsers", function (users) {
                     </div>
         `);
     });
+});
+
+connection.on("React", function (username, reaction) {
+    reactionsListEl.classList.remove("show");
+    const img = document.createElement("img");
+    const userName = document.createElement("p");
+    const div = document.createElement("div")
+
+    img.src = reaction;
+    userName.innerText = username;
+
+    div.appendChild(img);
+    div.appendChild(userName);
+    reactionsEl.appendChild(div);
+
+    setTimeout(() => {
+        reactionsEl.removeChild(div);
+    }, 5000);
 });
 
 connection.start().then(function () {
@@ -37,3 +66,15 @@ connection.start().then(function () {
 window.addEventListener("beforeunload", function () {
     connection.invoke("Leave", username);
 });
+
+$('.starRatingEvent').click(function () {
+    $.ajax({
+        type: "POST",
+        url: "/rating/Vote",
+        data: { presentationId: presentationId, rating: $(this).data('starindex') }
+
+    });
+
+    alert('Thank you for your vote: ' + $(this).data('starindex'));
+});
+

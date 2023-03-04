@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using DAL.EntityModels;
+using Microsoft.AspNetCore.SignalR;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,11 +19,15 @@ namespace web_app.Hubs
             {
                 connectedUsers.Add(presentationId, new List<UserJoinEventViewModel>());
             }
-            connectedUsers[presentationId].Add(new UserJoinEventViewModel
+
+            if (!connectedUsers[presentationId].Any(u => u.Username == username))
             {
-                Username = username,
-                Image = image
-            });
+                connectedUsers[presentationId].Add(new UserJoinEventViewModel
+                {
+                    Username = username,
+                    Image = image
+                });
+            }
 
             await Groups.AddToGroupAsync(Context.ConnectionId, presentationId);
             await Clients.Group(presentationId).SendAsync("DisplayUsers", connectedUsers[presentationId]);
@@ -40,6 +45,10 @@ namespace web_app.Hubs
         {
             var presentationId = GetPresentationId();
             await Clients.Group(presentationId).SendAsync("UpdateSlide", indexh, indexv);
+        }
+        public async Task UpdateHostRating(int presentationId, int newRating) 
+        {
+            await Clients.Group(presentationId.ToString()).SendAsync("UpdateHostRating", newRating);
         }
 
         private string GetPresentationId()

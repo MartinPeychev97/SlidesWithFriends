@@ -9,6 +9,8 @@ namespace web_app.ViewModels.Presentation
 
         public string Name { get; set; }
 
+        public string Image { get; set; }
+
         public IEnumerable<SlideViewModel> Slides { get; set; }
     }
 }

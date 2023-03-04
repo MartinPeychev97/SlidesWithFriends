@@ -137,7 +137,7 @@ namespace web_app.Controllers
             user.Subscription = subscriptionType;
             db.SaveChanges();
 
-            return RedirectToAction("Subscription", "User");
+            return RedirectToAction("PresentationIndex", "Presentation");
         }
     }
 }
