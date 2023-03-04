@@ -57,7 +57,7 @@ namespace API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateRating([FromBody] SlideEditRatingViewModel viewModel)
+        public async Task<IActionResult> EditRating([FromBody] SlideEditRatingViewModel viewModel)
         {
             var result = await this.ratingService.EditRating(viewModel.Id, viewModel.Rating);
 

@@ -152,37 +152,37 @@ namespace web_app.Controllers
             return new JsonResult(Ok());
         }
 
-        [HttpPost]
-        public async Task<JsonResult> AddRatingSlide([FromBody] SlideRatingViewModel viewModel)
-        {
-            var slide = await this.slideService.AddRatingSlide(viewModel.PresentationId, viewModel.Rating);
+        //[HttpPost]
+        //public async Task<JsonResult> AddRatingSlide([FromBody] SlideRatingViewModel viewModel)
+        //{
+        //    var slide = await this.slideService.AddRatingSlide(viewModel.PresentationId, viewModel.Rating);
 
-            if (slide is null)
-            {
-                return new JsonResult(NotFound());
-            }
+        //    if (slide is null)
+        //    {
+        //        return new JsonResult(NotFound());
+        //    }
 
-            var slideViewModel = new SlideViewModel
-            {
-                Id = slide.Id,
-                Rating = slide.Rating,
-                Type = slide.Type.ToString(),
-            };
+        //    var slideViewModel = new SlideViewModel
+        //    {
+        //        Id = slide.Id,
+        //        Rating = slide.Rating,
+        //        Type = slide.Type.ToString(),
+        //    };
 
-            return new JsonResult(slideViewModel);
-        }
+        //    return new JsonResult(slideViewModel);
+        //}
 
-        [HttpPut]
-        public async Task<JsonResult> EditRating([FromBody] SlideEditRatingViewModel viewModel)
-        {
-            var result = await this.slideService.EditRating(viewModel.Id, viewModel.Rating);
+        //[HttpPut]
+        //public async Task<JsonResult> EditRating([FromBody] SlideEditRatingViewModel viewModel)
+        //{
+        //    var result = await this.slideService.EditRating(viewModel.Id, viewModel.Rating);
 
-            if (result is false)
-            {
-                return new JsonResult(NotFound());
-            }
+        //    if (result is false)
+        //    {
+        //        return new JsonResult(NotFound());
+        //    }
 
-            return new JsonResult(Ok());
-        }
+        //    return new JsonResult(Ok());
+        //}
     }
 }

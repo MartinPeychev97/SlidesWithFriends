@@ -4,6 +4,5 @@
     {
         public int PresentationId { get; set; }
         public int Rating { get; set; }
-        public string UserId { get; set; }
     }
 }
