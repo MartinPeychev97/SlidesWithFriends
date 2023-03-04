@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using BAL.Models;
 using Microsoft.AspNetCore.Identity;
 using DAL.EntityModels.User;
+using DAL.Enums;
 
 namespace web_app.Controllers
 {
@@ -50,11 +51,14 @@ namespace web_app.Controllers
             var slides = presentation.Slides
                 .Select(s => new SlideEventViewModel
                 {
-                    Id = presentation.Id,
-                    Name = presentation.Name,
-                    Image = presentation.Image,
-                    Slides = slides
-                };
+                    Id = s.Id,
+                    Title = s.Title,
+                    Image = s.Image,
+                    Type = s.Type.ToString(), 
+                    Background = s.Background, 
+                    Rating= s.Rating, 
+                    Text= s.Text
+                });
 
             var model = new EventStartViewModel
             {
@@ -62,10 +66,16 @@ namespace web_app.Controllers
                 Image = user.Image,
                 QRCodeViewModel = new QrCodeViewModel()
                 {
-                    QRCode = GenerateQRCode(presentationViewModel.Id)
+                    QRCode = GenerateQRCode(presentation.Id)
                 },
                 IsPresenter = isPresenter,
-                Presentation = presentationViewModel,
+                Presentation = new PresentationEventViewModel()
+                {
+                    Id = presentation.Id,
+                    Image= presentation.Image,
+                    Name= presentation.Name,
+                    Slides = slides
+                },
             };
 
             return View(model);
