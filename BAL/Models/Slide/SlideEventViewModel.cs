@@ -20,6 +20,5 @@ namespace BAL.Models.Slide
         public int Rating { get; set; }
 
         public string Type { get; set; }
-        public ICollection<Answer> WordCloudAnswers { get; set; }
     }
 }

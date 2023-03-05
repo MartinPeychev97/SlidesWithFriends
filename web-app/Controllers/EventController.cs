@@ -64,7 +64,6 @@ namespace web_app.Controllers
                         Background = s.Background,
                         Rating = s.Rating,
                         Type = s.Type.ToString(),
-                        WordCloudAnswers = s.WordSlideAnswers
                     }).ToList();
 
                 var presentationViewModel = new PresentationEventViewModel()

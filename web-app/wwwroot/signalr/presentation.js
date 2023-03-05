@@ -36,8 +36,11 @@ connection.on("React", function (username, reaction) {
     }, 5000);
 });
 
+
+
 connection.start().then(function () {
     console.log("connected");
+
 
     Reveal.on('slidechanged', event => {
         connection.invoke("UpdateSlide", event.indexh, event.indexv)
@@ -45,7 +48,6 @@ connection.start().then(function () {
                 return console.error(err.toString());
             });
     });
-
     connection.invoke("Join", username, image);
 }).catch(function (err) {
     return console.error(err.toString());
@@ -99,12 +101,30 @@ laughter.addEventListener("click", () => {
 //Test
 const submitBtn = document.getElementById("answer-btn");
 
-submitBtn.addEventListener("click", () => {
-    var url = window.location.href;
-    var answer = document.getElementById("submit_answer").value;
-    connection.invoke("Submit", answer, url);
+if (submitBtn != null) {
+    submitBtn.addEventListener("click", () => {
+;
+        var answer = document.getElementById("submit_answer").value;
+        connection.invoke("Submit", answer);
+    });
+}
+
+connection.on("UpdateSelfAnswer", function (answer) {
+    var button = document.getElementById("submitForm");
+    button.style.display = "none";
+
+    var newText = document.getElementById("submitted-answers");
+    newText.innerText = "Your answer : \n" + answer;
+
+    connection.invoke("UpdateHostAnswers", answer);
 });
 
-connection.on("Update", function () {
-    window.location.reload
+connection.on("UpdateHostAnswers", function (answer) {
+    var oldText = document.getElementById("wordcloud-content");
+    oldText.innerText = "\n Answers:\n";
+
+    var newText = document.getElementById("submitted-answers");
+    var final = " " + answer;
+    newText.innerText += final
+
 });

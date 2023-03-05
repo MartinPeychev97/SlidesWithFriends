@@ -62,38 +62,16 @@
                 }
                 @if (slide.Type == "WordCloud")
                 {
-                    if (!isPresenterQuery.Contains("isPresenter"))
-                    {
-                        isPresenterQuery = "isPresenter";
-                        <h1>
+                        <h1 id = "wordcloud-content">
                             @slide.Title
                         </h1>
-                 
-                        <p>
-                            <input type="text" id="submit_answer" maxlength="200" />
-                            <button type="submit" id="answer-btn" style="width:150px">Oktest</button>
-                        </p>
-                    }
-                    else
+                        <h3 id ="submitted-answers"></h3>
+                    if (!isPresenterQuery.Contains("isPresenter"))
                     {
-                        
-                        var wordcloud = await slideService.GetById(slide.Id);
-                        
-                        if (wordcloud.WordSlideAnswers.Count() != 0)
-                        {
-                            foreach (var answer in slide.WordCloudAnswers)
-                            {
-                                <h1>
-                                    @answer.Message
-                                </h1>
-                            }
-                        }
-                        else
-                        {
-                            <h1>
-                                Waiting for answers
-                            </h1>
-                        }
+                        <p id="submitForm">
+                            <input  type="text" id="submit_answer" maxlength="200" />
+                            <button type="submit" id="answer-btn" style="width:150px">Ok</button>
+                        </p>
                     }
                 }
             </section>

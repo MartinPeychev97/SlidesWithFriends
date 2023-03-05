@@ -1,6 +1,7 @@
 ﻿using BAL.Interfaces;
 using BAL.Services;
 using DAL;
+using DAL.EntityModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
@@ -14,20 +15,20 @@ using web_app.ViewModels.User;
 
 namespace web_app.Hubs
 {
+
     public class PresentationHub : Hub
     {
+        private static List<string> hostId = new List<string>();
         private static Dictionary<string, List<UserJoinEventViewModel>> connectedUsers = new Dictionary<string, List<UserJoinEventViewModel>>();
         private ISlideService slideService;
         private IPresentationService presentationService;
-        private SlidesDbContext db;
-        public PresentationHub(ISlideService slideService,IPresentationService presentationService,SlidesDbContext db )
+        public PresentationHub(ISlideService slideService, IPresentationService presentationService)
         {
             this.slideService = slideService;
             this.presentationService = presentationService;
-            this.db = db;
 
         }
-        
+
         public async Task Join(string username, string image)
         {
             var presentationId = GetPresentationId();
@@ -44,6 +45,11 @@ namespace web_app.Hubs
                     Username = username,
                     Image = image
                 });
+            }
+            
+            if (hostId.Count() == 0)
+            {
+                hostId.Add(Context.ConnectionId);
             }
 
             await Groups.AddToGroupAsync(Context.ConnectionId, presentationId);
@@ -67,7 +73,7 @@ namespace web_app.Hubs
         public async Task React(string username, string reaction)
         {
             var presentationId = GetPresentationId();
-            await Clients.Group(presentationId).SendAsync("React" ,username, reaction);
+            await Clients.Group(presentationId).SendAsync("React", username, reaction);
         }
 
         private string GetPresentationId()
@@ -76,18 +82,16 @@ namespace web_app.Hubs
             var presentationId = httpContext.Request.Query["presentationId"];
             return presentationId;
         }
-        [HttpPost]
-        public async Task Submit(string answer , string url)
+
+        public async Task Submit(string answer)
         {
-            var presentationId = GetPresentationId();
-            var presentation = await presentationService.GetByIdWordCloud(int.Parse(presentationId));
+            await Clients.Caller.SendAsync("UpdateSelfAnswer", answer);
+        }
 
-            var slideId = int.Parse(url.Split("/").Last());
-            var slide = presentation.Slides.ToList()[slideId - 1];
-            await slideService.ClearAnswers();
-            await slideService.AddAnswerToWordCloud(answer, slide);
-
-            await Clients.Group(presentationId).SendAsync("Update");
+        public async Task UpdateHostAnswers(string answer)
+        {
+            var host = hostId[0];
+            await Clients.Client(host).SendAsync("UpdateHostAnswers", answer);
         }
     }
 }
