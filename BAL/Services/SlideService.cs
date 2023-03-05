@@ -172,9 +172,6 @@ namespace BAL.Services
             return slide;
         }
 
-
-
-
         public async Task<Slide> AddWordCloudSlide(int presentationId)
         {
             Slide slide = new Slide
@@ -190,5 +187,7 @@ namespace BAL.Services
 
             return slide;
         }
+
+
     }
 }

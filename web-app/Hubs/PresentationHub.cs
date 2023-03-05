@@ -14,14 +14,6 @@ namespace web_app.Hubs
     {
         private static List<string> hostId = new List<string>();
         private static Dictionary<string, List<UserJoinEventViewModel>> connectedUsers = new Dictionary<string, List<UserJoinEventViewModel>>();
-        private ISlideService slideService;
-        private IPresentationService presentationService;
-        public PresentationHub(ISlideService slideService, IPresentationService presentationService)
-        {
-            this.slideService = slideService;
-            this.presentationService = presentationService;
-
-        }
 
         public async Task Join(string username, string image)
         {
@@ -65,7 +57,7 @@ namespace web_app.Hubs
         }
         public async Task UpdateHostRating(int presentationId, int newRating) 
         {
-            await Clients.Group(presentationId).SendAsync("React" ,username, reaction);
+            await Clients.Group(presentationId.ToString()).SendAsync("UpdateHostRating", newRating);
         }
 
         private string GetPresentationId()
