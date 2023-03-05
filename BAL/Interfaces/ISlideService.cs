@@ -25,5 +25,7 @@ namespace BAL.Interfaces
 
         Task EditBackground(EditSlideBackgroundInputModel model);
         Task<Slide> AddRatingSlide(int presentationId, int rating);
+        Task<bool> EditRating(int id, int rating);
+        Task<Slide> AddWordCloudSlide(int presentationId);
     }
 }

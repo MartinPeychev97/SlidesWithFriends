@@ -1,4 +1,9 @@
-﻿namespace BAL.Models.Slide
+﻿using DAL.EntityModels;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace BAL.Models.Slide
 {
     public class SlideEventViewModel
     {

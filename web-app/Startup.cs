@@ -82,6 +82,8 @@ namespace web_app
 
             services.AddSignalR();
 
+            services.AddHttpContextAccessor();
+
             services.AddTransient<ISlideService, SlideService>();
             services.AddTransient<IPresentationService, PresentationService>();
 

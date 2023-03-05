@@ -434,3 +434,16 @@
     padding-right: 0;
     border-right: none;
 }
+
+.ContainerParent {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Container {
+    width: 50%;
+    height: 70%;
+}

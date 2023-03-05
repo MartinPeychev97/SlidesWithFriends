@@ -3,27 +3,29 @@
 @{
     ViewData["Title"] = "Create";
 }
-
-<div class="container">
-    <br/>
-    <div class="row justify-content-center">
-        <div class="col-md-8 text-center">
-            <form asp-action="Create" method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="border p-3 mt-4">
-                    <div class="row pb-2">
-                        <h2 class="text-primary pl-3">Create Presentation</h2>
-                        <hr />
+<link rel="stylesheet" href="~/css/style.css" type="text/css" />
+<div class="ContainerParent">
+    <div class="Container">
+        <br />
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="border p-3 mt-4">
+                        <div class="row pb-2">
+                            <h2 class="text-primary pl-3">Create Presentation</h2>
+                            <hr />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Name"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+                        <a asp-controller="Presentation" asp-action="PresentationIndex" class="btn btn-secondary" style="width:150px">Back to List</a>
                     </div>
-                    <div class="mb-3">
-                        <label asp-for="Name"></label>
-                        <input asp-for="Name" class="form-control" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
-                    <a asp-controller="Presentation" asp-action="PresentationIndex" class="btn btn-secondary" style="width:150px">Back to List</a>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>
