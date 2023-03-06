@@ -82,8 +82,8 @@ namespace web_app.Hubs
 
         public async Task UpdateHostAnswers(string answer)
         {
-            var host = hostId[0];
-            await Clients.Client(host).SendAsync("UpdateHostAnswers", answer);
+			var presentationId = GetPresentationId();
+			await Clients.Group(presentationId).SendAsync("UpdateHostAnswers", answer);
         }
     }
 }
