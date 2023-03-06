@@ -30,18 +30,40 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="wwwroot\images\home\business.png" />
-    <Content Include="wwwroot\images\home\personal.png" />
-    <Content Include="wwwroot\images\home\school.png" />
-    <Content Include="wwwroot\images\presentation\default.png" />
-    <Content Include="wwwroot\images\reactions\clap.png" />
-    <Content Include="wwwroot\images\reactions\laughter.png" />
-    <Content Include="wwwroot\images\reactions\like.png" />
-    <Content Include="wwwroot\images\reactions\love.png" />
-    <Content Include="wwwroot\images\reactions\reaction.png" />
-    <Content Include="wwwroot\images\reactions\wave.png" />
+    <Content Include="wwwroot\images\home\business.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\images\home\personal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\images\home\school.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\images\presentation\default.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\images\reactions\clap.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\images\reactions\laughter.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\images\reactions\like.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\images\reactions\love.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\images\reactions\reaction.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\images\reactions\wave.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="wwwroot\images\slides\default-background.jpg" />
-    <Content Include="wwwroot\images\users\avatar-default-icon.png" />
+    <Content Include="wwwroot\images\users\avatar-default-icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
