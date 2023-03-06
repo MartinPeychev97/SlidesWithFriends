@@ -276,3 +276,4 @@ web-app/wwwroot/img/ArticleImages/
 /DAL/Migrations
 /.gitignore
 /.gitignore
+/web-app/wwwroot/images/presentation

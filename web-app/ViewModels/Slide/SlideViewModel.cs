@@ -15,6 +15,5 @@
         public string Type { get; set; }
 
         public int Rating { get; set; }
-
     }
 }

@@ -9,5 +9,6 @@ namespace DAL.Enums
         Title = 1,
         Image = 2,
         Rating = 3,
+        WordCloud = 4
     }
 }

@@ -15,7 +15,6 @@ using System.Threading.Tasks;
 using BAL.Models;
 using Microsoft.AspNetCore.Identity;
 using DAL.EntityModels.User;
-using DAL.Enums;
 
 namespace web_app.Controllers
 {
@@ -24,15 +23,18 @@ namespace web_app.Controllers
         private readonly IUsernameGenerator _usernameGenerator;
         private readonly IPresentationService presentationService;
         private readonly UserManager<SlidesUser> userManager;
+        private readonly ISlideService slideService;
 
         public EventController(
             IUsernameGenerator usernameGenerator, 
             IPresentationService presentationService,
-            UserManager<SlidesUser> userManager)
+            UserManager<SlidesUser> userManager,
+            ISlideService slideservice)
         {
             this._usernameGenerator = usernameGenerator;
             this.presentationService = presentationService;
             this.userManager = userManager;
+            this.slideService = slideservice;
         }
 
         public IActionResult Index()
@@ -79,7 +81,6 @@ namespace web_app.Controllers
             };
 
             return View(model);
-
         }
 
         private string GenerateQRCode(int presentationId)

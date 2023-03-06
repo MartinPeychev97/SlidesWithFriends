@@ -1,8 +1,13 @@
-﻿@using BAL.Models.Event
+﻿@using BAL.Interfaces;
+@using BAL.Models.Event
+@using BAL.Services;
 @model EventStartViewModel
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor contextAccessor
+@inject ISlideService slideService
 
 @{
     Layout = "~/Pages/Shared/_EventLayout.cshtml";
+    var isPresenterQuery = contextAccessor.HttpContext.Request.QueryString.ToString();
 }
 
 <div class="reveal" style="background-image:url('@string.Join("\\\\", Model.Presentation.Image.Split("\\"))')">
@@ -20,9 +25,9 @@
                 <div id="users-container" class="users-container">
                 </div>
             </div>
-          
+
         </section>
-       
+
         @foreach (var slide in Model.Presentation.Slides)
         {
             <section>
@@ -48,14 +53,28 @@
                 {
                     for (int i = 1; i <= 5; i++)
                     {
-                        <span class="starRatingEvent star_@i" data-starindex="@i">&#9733;</span>
+                       <span class="starRatingEvent star_@i" data-starindex="@i">&#9733;</span>
+                    }
+                }
+                @if (slide.Type == "WordCloud")
+                {
+                        <h1 id = "wordcloud-content">
+                            @slide.Title
+                        </h1>
+                        <h3 id ="submitted-answers"></h3>
+                    if (!isPresenterQuery.Contains("isPresenter"))
+                    {
+                        <p id="submitForm">
+                            <input  type="text" id="submit_answer" maxlength="200" />
+                            <button type="submit" id="answer-btn" style="width:150px">Ok</button>
+                        </p>
                     }
                 }
             </section>
         }
     </div>
 
-   
+
 </div>
 
 <div class="reactions-container">

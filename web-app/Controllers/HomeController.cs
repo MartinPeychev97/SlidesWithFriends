@@ -1,15 +1,11 @@
-﻿using BAL.Interfaces;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace web_app.Controllers
 {
     [Authorize]
     public class HomeController : Controller
     {
-
         public HomeController()
         {
         }
@@ -21,6 +17,11 @@ namespace web_app.Controllers
         }
 
         public IActionResult Profile()
+        {
+            return View();
+        }
+
+        public IActionResult Privacy()
         {
             return View();
         }

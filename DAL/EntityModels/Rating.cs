@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace DAL.EntityModels
+﻿namespace DAL.EntityModels
 {
     public class Rating
     {

@@ -4,7 +4,6 @@ using DAL;
 using DAL.EntityModels;
 using DAL.Enums;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,7 +24,6 @@ namespace BAL.Services
 
         public async Task<Slide> GetById(int id) =>
             await this.db.Slides.Include(x => x.Presentation).FirstOrDefaultAsync(x => x.Id == id);
-
         public async Task<Slide> AddTitleSlide(int presentationId)
         {
             Slide slide = new Slide
@@ -165,6 +163,22 @@ namespace BAL.Services
                 Type = SlideType.Rating,
                 PresentationId = presentationId,
                 Rating = rating,
+            };
+
+            await this.db.Slides.AddAsync(slide);
+            await this.db.SaveChangesAsync();
+
+            return slide;
+        }
+
+        public async Task<Slide> AddWordCloudSlide(int presentationId)
+        {
+            Slide slide = new Slide
+            {
+                Title = "WordCloud",
+                Text = "Answer Box",
+                Type = SlideType.WordCloud,
+                PresentationId = presentationId
             };
 
             await this.db.Slides.AddAsync(slide);

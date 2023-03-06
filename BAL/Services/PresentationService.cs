@@ -40,7 +40,6 @@ namespace BAL.Services
                 .Where(p => p.Id == presentationId)
                 .Include(p => p.Slides)
                 .FirstOrDefaultAsync();
-
         public async Task<bool> EditName(int id, string name)
         {
             var presentation = await this.GetById(id);
@@ -74,7 +73,6 @@ namespace BAL.Services
 
             return true;
         }
-
 
         public async Task<bool> Remove(int presentationId)
         {

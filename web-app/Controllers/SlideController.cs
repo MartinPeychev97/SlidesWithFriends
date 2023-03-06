@@ -151,6 +151,7 @@ namespace web_app.Controllers
 
             return new JsonResult(Ok());
         }
+
         [HttpPost]
         public async Task<JsonResult> AddRatingSlide([FromBody] SlideRatingViewModel viewModel)
         {
@@ -165,6 +166,27 @@ namespace web_app.Controllers
             {
                 Id = slide.Id,
                 Rating = slide.Rating,
+                Type = slide.Type.ToString(),
+            };
+
+            return new JsonResult(slideViewModel);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> AddWordCloudSlide([FromQuery] int presentationId)
+        {
+            var slide = await this.slideService.AddWordCloudSlide(presentationId);
+
+            if (slide is null)
+            {
+                return new JsonResult(NotFound());
+            }
+
+            var slideViewModel = new SlideViewModel
+            {
+                Id = slide.Id,
+                Title = slide.Title,
+                Text = slide.Text,
                 Type = slide.Type.ToString(),
             };
 
