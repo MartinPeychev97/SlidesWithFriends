@@ -133,7 +133,7 @@ connection.on("UpdateSelfAnswer", function (answer) {
     var button = document.getElementById("submitForm");
     button.style.display = "none";
 
-    var newText = document.getElementById("submitted-answers");
+    var newText = document.getElementById("your-answer");
     newText.innerText = "Your answer : \n" + answer;
 
     connection.invoke("UpdateHostAnswers", answer);
