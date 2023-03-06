@@ -53,7 +53,7 @@ namespace web_app.Controllers
             {
                 string wwwroot = hostEnvironment.WebRootPath;
                 string fileName = Guid.NewGuid().ToString();
-                var uploads = Path.Combine(wwwroot, @"images\users");
+                var uploads = Path.Combine(wwwroot, @"images", "users");
                 var extension = Path.GetExtension(model.Image.FileName);
 
                 using (var fileStream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
