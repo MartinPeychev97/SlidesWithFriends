@@ -72,6 +72,8 @@ $('.starRatingEvent').click(function () {
         url: "/rating/Vote",
         data: { presentationId: presentationId, rating: $(this).data('starindex') }
     })
+
+    alert('Thank you for your vote: ' + $(this).data('starindex'));
 })
 
 
