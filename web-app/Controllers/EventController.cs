@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using BAL.Models;
 using Microsoft.AspNetCore.Identity;
 using DAL.EntityModels.User;
+using BAL.Services;
 
 namespace web_app.Controllers
 {
@@ -62,10 +63,11 @@ namespace web_app.Controllers
                     Text= s.Text
                 });
 
+            var rnd = await _usernameGenerator.GenerateUsername(id, Guid.NewGuid().ToString());
             var model = new EventStartViewModel
             {
-                Username = user.UserName,
-                Image = user.Image,
+                Username = user == null ? rnd.AsCountry : user.UserName,
+                Image = user == null ? rnd.CountryFlag : user.Image,
                 QRCodeViewModel = new QrCodeViewModel()
                 {
                     QRCode = GenerateQRCode(presentation.Id)
