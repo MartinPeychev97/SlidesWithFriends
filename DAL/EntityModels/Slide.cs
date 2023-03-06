@@ -1,7 +1,4 @@
 ﻿using DAL.Enums;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL.EntityModels
 {

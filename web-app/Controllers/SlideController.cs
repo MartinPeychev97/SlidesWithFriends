@@ -1,13 +1,9 @@
 ﻿using BAL.Interfaces;
 using BAL.Models.Slide;
-using DAL.EntityModels;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using web_app.ViewModels.Slide;
 
@@ -17,7 +13,6 @@ namespace web_app.Controllers
     {
         private readonly ISlideService slideService;
         private readonly IWebHostEnvironment hostEnvironment;
-
 
         public SlideController(ISlideService slideService, IWebHostEnvironment hostEnvironment)
         {
@@ -156,6 +151,7 @@ namespace web_app.Controllers
 
             return new JsonResult(Ok());
         }
+
         [HttpPost]
         public async Task<JsonResult> AddRatingSlide([FromBody] SlideRatingViewModel viewModel)
         {

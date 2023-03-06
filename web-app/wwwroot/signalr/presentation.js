@@ -16,8 +16,6 @@ connection.on("UpdateHostRating", function (newRating) {
     }
 });
 
-
-
 connection.on("DisplayUsers", function (users) {
     $("#users-container").empty();
     $.each(users, function (index, user) {
@@ -47,7 +45,6 @@ connection.on("React", function (username, reaction) {
         reactionsEl.removeChild(div);
     }, 5000);
 });
-
 
 
 connection.start().then(function () {
@@ -147,5 +144,4 @@ connection.on("UpdateHostAnswers", function (answer) {
     var newText = document.getElementById("submitted-answers");
     var final = " " + answer;
     newText.innerText += final
-
 });

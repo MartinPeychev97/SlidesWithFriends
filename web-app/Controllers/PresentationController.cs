@@ -128,7 +128,5 @@ namespace web_app.Controllers
 
             return RedirectToAction("PresentationIndex", "Presentation");
         }
-
-
     }
 }

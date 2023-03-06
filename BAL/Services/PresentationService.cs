@@ -74,7 +74,6 @@ namespace BAL.Services
             return true;
         }
 
-
         public async Task<bool> Remove(int presentationId)
         {
             var presentation = await this.db.Presentations.FindAsync(presentationId);

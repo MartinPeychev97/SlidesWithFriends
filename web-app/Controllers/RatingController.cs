@@ -1,11 +1,9 @@
 ﻿using BAL.Interfaces;
-using DAL.Enums;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using web_app.Hubs;
-using web_app.ViewModels.Rating;
 using web_app.ViewModels.Slide;
 
 namespace API.Controllers
@@ -44,21 +42,12 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> Vote(int presentationId, int rating)//[FromBody] RateRatingViewModel viewModel
+        public async Task<JsonResult> Vote(int presentationId, int rating)
         {
-            //var result = await this.ratingService.EditRating(presentationId, rating);
-
-
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            /*var result =*/ await this.ratingService.AddRating(presentationId, rating, userId);
+            await this.ratingService.AddRating(presentationId, rating, userId);
             var resultRating = this.ratingService.CalculateAverageRating(presentationId);
             await presentationHub.UpdateHostRating(presentationId, resultRating);
-
-
-            /*if (result is false)
-            {
-                return new JsonResult(NotFound());
-            }*/
 
             return new JsonResult(Ok());
         }

@@ -1,5 +1,4 @@
-﻿using BAL.Models;
-using DAL.EntityModels.User;
+﻿using DAL.EntityModels.User;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

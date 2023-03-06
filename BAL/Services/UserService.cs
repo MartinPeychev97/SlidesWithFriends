@@ -1,11 +1,8 @@
 ﻿using BAL.Interfaces;
-using BAL.Models;
 using DAL;
-using DAL.EntityModels;
 using DAL.EntityModels.User;
 using Microsoft.EntityFrameworkCore;
 using RandomNameGeneratorLibrary;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

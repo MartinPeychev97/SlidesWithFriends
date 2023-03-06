@@ -15,7 +15,6 @@ using System.Threading.Tasks;
 using BAL.Models;
 using Microsoft.AspNetCore.Identity;
 using DAL.EntityModels.User;
-using DAL.Enums;
 
 namespace web_app.Controllers
 {
@@ -82,7 +81,6 @@ namespace web_app.Controllers
             };
 
             return View(model);
-
         }
 
         private string GenerateQRCode(int presentationId)
